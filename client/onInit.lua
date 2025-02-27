@@ -4,7 +4,6 @@ local function loadControllers()
     -- handlers
     'client/controllers/handler/handleOpenMailbox',
     'client/controllers/handler/handleClaimReward',
-    'client/controllers/handler/hideMailbox',
 
     -- commands
     'client/controllers/cmd/toggleMailbox',
