@@ -21,3 +21,7 @@ files {
 	'web/build/index.html',
 	'web/build/**/*',
 }
+
+dependencies {
+    'oxmysql'
+}
