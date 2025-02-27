@@ -22,9 +22,9 @@ local function setToggleNuiFrame()
   })
 end
 
-RegisterCommand('toggleMailbox', function()
+RegisterCommand('toggle-mailbox', function()
   toggleNuiFrame()
-end, false)
+end)
 
 RegisterNUICallback('getClientData', function(data, cb)
   debugPrint('>> Data sent by React', json.encode(data))
@@ -63,4 +63,4 @@ RegisterNUICallback('handleOpenMailbox', function(data, cb)
 end)
 
 
-RegisterKeyMapping("toggleMailbox", "Toggle Mailbox", "keyboard", "F1")
+RegisterKeyMapping("setToggleNuiFrame", "Toggle Mailbox", "keyboard", "F1")
