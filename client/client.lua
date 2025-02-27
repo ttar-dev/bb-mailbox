@@ -62,6 +62,6 @@ return setToggleNuiFrame
 
 RegisterCommand('toggleMailbox', function()
   toggleNuiFrame()
-end, false)
+end)
 
 RegisterKeyMapping("toggleMailbox", "Toggle Mailbox", "keyboard", "F1")
