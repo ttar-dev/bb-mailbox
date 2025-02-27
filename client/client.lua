@@ -1,3 +1,6 @@
+-- local onInit = require('client/onInit')
+-- onInit()
+
 local function toggleNuiFrame(shouldShow)
   SetNuiFocus(shouldShow, shouldShow)
   SendReactMessage('setVisible', shouldShow)
