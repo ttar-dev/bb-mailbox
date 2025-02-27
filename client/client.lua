@@ -1,3 +1,3 @@
-local onInit = require('client/onInit')
+local onInit = require('./client/onInit')
 onInit()
 
