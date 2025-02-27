@@ -1,5 +1,5 @@
-local getAllMailboxMessagesSV = require('./client/services/getAllMailboxMessages')
-local setToggleNuiFrame = require('./client/services/setToggleNuiFrame')
+local getAllMailboxMessagesSV = require('.client.services.getAllMailboxMessages')
+local setToggleNuiFrame = require('.client.services.setToggleNuiFrame')
 
 RegisterNUICallback('handleOpenMailbox', function(data, cb)
   debugPrint('>> Data sent by React', json.encode(data))
