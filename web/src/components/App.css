@@ -1,0 +1,419 @@
+.nui-wrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+pre {
+  counter-reset: line-numbering;
+  background: #2c3e50;
+  padding: 12px 0px 14px 0;
+  color: #ecf0f1;
+  line-height: 140%;
+  /* background: linear-gradient(34deg, #A6F0FF, #1181ED); */
+}
+
+.popup-thing {
+  background: linear-gradient(160deg, #a6f0ff 0%, #1181ed 100%);
+  border-radius: 30px;
+  width: 942px;
+  height: 647px;
+  display: flex;
+  /* justify-content: center;
+  align-items: center; */
+  color: white;
+}
+
+/* soap-bubbles-vector-art-illustration-2 15 */
+.bubble {
+  position: absolute;
+  width: 261px;
+  height: 261px;
+  background: url(/src/assets/bubbles.png);
+  transform: matrix(1, 0, 0, 1, 190, -109);
+}
+
+.logo {
+  position: absolute;
+  width: 402px;
+  height: 418px;
+  background: url(/src/assets/logo.png);
+  transform: matrix(1, 0, 0, 1, 308, -150);
+  filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.25));
+}
+
+.container {
+  position: absolute;
+  top: 140px;
+  left: 480px;
+  width: 50%;
+  height: 664px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: url(/src/assets/background-mail.png) no-repeat;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+}
+
+.mailbox {
+  grid-column: 2;
+  grid-row: 1;
+  text-align: center;
+  width: 322px;
+  margin: 0 auto;
+  background: url(/src/assets/header.png) no-repeat;
+  padding-top: 10px;
+  margin-top: 18px;
+  margin-left: 8px;
+}
+
+.details {
+  grid-column: 1; /* อยู่ในคอลัมน์ที่ 1 */
+  grid-row: 2; /* อยู่ในแถวที่ 2 */
+  margin-left: 40px;
+  height: 470px;
+  margin-top: 17px;
+}
+.detail-list {
+  border-radius: 30px;
+  border-bottom-left-radius: 30px;
+  background-color: #1b1b1b;
+  height: 450px;
+  width: 530px;
+}
+
+.reward {
+  grid-column: 2; /* อยู่ในคอลัมน์ที่ 2 */
+  grid-row: 2; /* อยู่ในแถวที่ 2 */
+  margin-left: 11px;
+  border-radius: 30px;
+  border-bottom-left-radius: 30px;
+  background-color: #1b1b1b;
+  height: 490px;
+  width: 312px;
+  margin-top: 17px;
+}
+
+.mail {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  color: white;
+  border-radius: 12px;
+  padding: 10px 15px;
+  position: relative;
+  border: 1.5px solid white;
+  background: none; /* ปิดการกำหนดพื้นหลังของ button */
+  cursor: pointer; /* เพิ่ม cursor เป็น pointer เมื่อ hover */
+  width: 100%;
+  background: linear-gradient(270deg, #2b2b2b 0%, #101010 100%),
+    url("../assets/Maskgroup.png");
+  background-size: cover;
+  background-position: right;
+  background-blend-mode: color; /* ทำให้รูปภาพผสมกับ gradient */
+}
+
+.mail:focus {
+  outline: none; /* ปิดเส้นขอบเมื่อปุ่มได้รับ focus */
+}
+
+.active {
+  background: linear-gradient(270deg, #a6f0ff 0%, #1181ed 100%),
+    url("../assets/Maskgroup.png");
+  background-size: cover;
+  background-position: right;
+  background-blend-mode: color; /* ทำให้รูปภาพผสมกับ gradient */
+}
+
+.icon-box {
+  width: 71px;
+  height: 71px;
+  background: #1b1b1b;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.number {
+  color: white;
+}
+
+.content {
+  flex-grow: 1;
+  margin-left: 12px;
+}
+
+.title-box {
+  background-color: #1b1b1b;
+  border-radius: 30px;
+  text-align: center;
+  height: 27px;
+  width: 155px;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2px;
+}
+
+.title-text {
+  font-size: 20px;
+  font-family: "Noto Sans Thai", serif;
+  margin: 0;
+  font-weight: "medium";
+}
+
+.time {
+  font-family: "Noto Sans Thai", serif;
+  font-size: 12px;
+  margin: 5px 10px 0;
+  text-align: left;
+}
+
+.reward-icon {
+  background-color: white;
+  width: 71px;
+  height: 71px;
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.5); /* เงาภายใน */
+  display: flex; /* ใช้ flexbox เพื่อจัดการตำแหน่ง */
+  justify-content: center; /* จัดให้อยู่กลางแนวนอน */
+  align-items: center; /* จัดให้อยู่กลางแนวตั้ง */
+  position: relative; /* เพื่อให้จัดการตำแหน่งของ children ได้ดี */
+}
+
+.reward-icon img {
+  width: 61px;
+  height: 50px;
+}
+
+/* Detail */
+.bg-header {
+  justify-content: center;
+  align-items: center;
+  height: 36px;
+  background: linear-gradient(
+    90deg,
+    rgba(75, 170, 248, 0) 0%,
+    #4baaf8 50%,
+    rgba(75, 170, 248, 0) 100%
+  );
+}
+.reward-header {
+  text-align: center;
+  font-family: "Noto Sans Thai", serif;
+  font-size: 20px;
+}
+
+.detail-text {
+  text-align: center;
+}
+
+.detail-text img,
+.detail-text span {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.detail-label {
+  background-color: #1b1b1b;
+  border-radius: 30px;
+  text-align: center;
+  height: 35px;
+  width: 155px;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2px;
+  border: 1.5px solid white;
+  font-family: "Noto Sans Thai", serif;
+  font-size: 20px;
+}
+.detail-mail-text {
+  font-family: "Noto Sans Thai", serif;
+  font-size: 15px;
+  text-align: center;
+  height: 15vh;
+}
+
+.item-icon {
+  background: linear-gradient(180deg, #a6f0ff 0%, #1181ed 100%);
+  width: 71px;
+  height: 71px;
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.5); /* เงาภายใน */
+  display: flex; /* ใช้ flexbox เพื่อจัดการตำแหน่ง */
+  justify-content: center; /* จัดให้อยู่กลางแนวนอน */
+  align-items: center; /* จัดให้อยู่กลางแนวตั้ง */
+  position: relative; /* เพื่อให้จัดการตำแหน่งของ children ได้ดี */
+}
+
+.bg-item {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  color: white;
+  border-radius: 12px;
+  padding: 10px 15px;
+  position: relative;
+  border: 1.5px solid white;
+  background: none;
+  width: 80%;
+  background: linear-gradient(270deg, #2b2b2b 0%, #101010 100%),
+    url(/src/assets/Maskgroup.png);
+  background-size: cover;
+  background-position: right;
+  background-blend-mode: color;
+  margin-left: 16px;
+}
+
+.title-item {
+  background-color: #1b1b1b;
+  border-radius: 30px;
+  text-align: center;
+  height: 27px;
+  width: 155px;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2px;
+  border: 1.5px solid white;
+}
+
+.item-amount {
+  font-family: "Noto Sans Thai", serif;
+  font-size: 12px;
+  margin: 5px 10px 0;
+  text-align: left;
+  font-weight: bold;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center; /* จัดให้อยู่กลางในแนวนอน */
+  align-items: center; /* จัดให้อยู่กลางในแนวตั้ง */
+  grid-column: 1 / -1;
+  grid-row: 3;
+  width: 100%;
+  clear: both;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center; /* จัดให้อยู่ตรงกลาง */
+  align-items: center;
+  gap: 10px;
+}
+
+.bg-pagination {
+  height: 45px;
+  background-image: url(/src/assets/pagination-bg.png);
+  width: 449px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pagination button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.page-container {
+  background-color: #1b1b1b;
+  border-radius: 30px;
+  text-align: center;
+  height: 27px;
+  width: 70px; /* ความกว้างที่ต้องการ */
+  flex-shrink: 0; /* หลีกเลี่ยงการหดตัว */
+  flex-basis: 70px; /* กำหนดขนาดเริ่มต้น */
+  justify-content: center;
+  align-items: center;
+  padding-top: 2px;
+  border: 1.5px solid white;
+}
+
+.page-text {
+  font-size: 20px;
+  font-family: "Noto Sans Thai", serif;
+  margin: 0;
+  font-weight: medium;
+}
+
+.bg-pagination {
+  margin-top: 15px;
+  position: relative;
+  height: 45px;
+  background-image: url(/src/assets/pagination-bg.png);
+  width: 449px;
+  display: flex; /* ใช้ flex เพื่อจัดการ layout */
+  justify-content: center; /* จัดให้ปุ่มและ page-container อยู่ตรงกลาง */
+  align-items: center; /* จัดให้ปุ่มและ page-container อยู่ในแนวตั้งกลาง */
+  gap: 10px; /* เพิ่มระยะห่างระหว่างปุ่มและ page-container */
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-column: 1 / -1;
+  grid-row: 3;
+  width: 100%;
+  clear: both;
+  position: relative; /* เพิ่มตำแหน่ง relative */
+}
+
+.pagination button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.collet-container {
+  display: flex;
+  justify-content: flex-end; /* จัดตำแหน่งไปทางขวา */
+  margin-top: 20px; /* เพิ่มระยะห่างจาก pagination */
+}
+
+.collet-content {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.collet-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  position: absolute;
+  bottom: -32px;
+  right: 264px;
+  margin-top: 10px;
+}
+
+.collet-content {
+  font-size: 16px;
+  font-weight: bold;
+  background-image: url(/src/assets/collect-bg.png);
+  width: 183px;
+  height: 70px;
+}
