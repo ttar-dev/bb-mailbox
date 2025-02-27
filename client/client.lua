@@ -23,7 +23,7 @@ local function setToggleNuiFrame()
 end
 
 RegisterCommand('toggle-mailbox', function()
-  toggleNuiFrame()
+  setToggleNuiFrame()
 end)
 
 RegisterNUICallback('getClientData', function(data, cb)
@@ -56,7 +56,7 @@ RegisterNUICallback('handleOpenMailbox', function(data, cb)
       data = retData
     })
 
-    toggleNuiFrame()
+    setToggleNuiFrame()
 
     cb(retData)
   end)
