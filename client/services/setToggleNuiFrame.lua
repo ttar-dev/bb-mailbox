@@ -9,3 +9,5 @@ local function setToggleNuiFrame()
     status = isMailboxOpen
   })
 end
+
+return setToggleNuiFrame
