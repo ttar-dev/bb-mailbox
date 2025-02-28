@@ -12,7 +12,7 @@ import {debugData} from "../utils/debugData";
 
 debugData([
     {
-        action: "setVisible",
+        action: "setOpen",
         data: true
     }
 ]);

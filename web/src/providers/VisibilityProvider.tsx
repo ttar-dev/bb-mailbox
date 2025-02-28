@@ -12,7 +12,7 @@ import {isEnvBrowser} from "../utils/misc";
 const VisibilityCtx = createContext<VisibilityProviderValue | null>(null);
 
 interface VisibilityProviderValue {
-    setVisible: (visible: boolean) => void;
+    setOpen: (visible: boolean) => void;
     visible: boolean;
 }
 
@@ -21,16 +21,16 @@ interface VisibilityProviderValue {
 export const VisibilityProvider: React.FC<{children: React.ReactNode}> = ({
     children
 }) => {
-    const [visible, setVisible] = useState(false);
+    const [visible, setOpen] = useState(false);
 
-    useNuiEvent<boolean>("setVisible", setVisible);
+    useNuiEvent<boolean>("setOpen", setOpen);
 
     // Handle pressing escape/backspace
     useEffect(() => {
         const keyHandler = (e: KeyboardEvent) => {
             if (["Backspace", "Escape"].includes(e.code)) {
                 if (!isEnvBrowser()) fetchNui("onClose");
-                else setVisible(!visible);
+                else setOpen(!visible);
             }
         };
 
@@ -43,7 +43,7 @@ export const VisibilityProvider: React.FC<{children: React.ReactNode}> = ({
         <VisibilityCtx.Provider
             value={{
                 visible,
-                setVisible
+                setOpen
             }}
         >
             <div
