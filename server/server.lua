@@ -1,4 +1,4 @@
--- Function to get the Discord identifier of a player
+-- Functions
 local function getDiscordIdentifier(source)
     local identifiers = GetPlayerIdentifiers(source)
     for _, identifier in ipairs(identifiers) do
@@ -9,15 +9,29 @@ local function getDiscordIdentifier(source)
     return nil
 end
 
--- Add an event handler for a custom event
-AddEventHandler('getDiscordIdentifier', function()
+local function getMailboxMessagesService(playerId, cb)
+    MySQL.Async.fetchAll('SELECT * FROM mailbox WHERE identifier = @player_id', {
+        ['@player_id'] = playerId
+    }, function(result)
+        if result then
+            cb(result)
+        else
+            cb(nil)
+        end
+    end)
+end
+
+-- Handlers
+RegisterNetEvent('getMailboxMessages')
+AddEventHandler('getMailboxMessages', function()
     local source = source
     local discordIdentifier = getDiscordIdentifier(source)
+
     if discordIdentifier then
-        print("Discord Identifier: " .. discordIdentifier)
-        -- ส่ง Discord identifier กลับไปยัง client
-        TriggerClientEvent('receiveDiscordIdentifier', source, discordIdentifier)
+        getMailboxMessagesService(discordIdentifier, function(mailboxData)
+            TriggerClientEvent('receiveMailboxMessages', source, mailboxData)
+        end)
     else
-        TriggerClientEvent('receiveDiscordIdentifier', source, "No Discord Identifier found.")
+        TriggerClientEvent('receiveMailboxMessages', source, nil)
     end
 end)
