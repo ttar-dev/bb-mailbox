@@ -1,5 +1,3 @@
--- Ensure MySQL library is loaded
-MySQL = exports['oxmysql']
 
 -- functions
 local function getMailboxMessagesService(playerId, cb)
