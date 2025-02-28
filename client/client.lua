@@ -44,18 +44,17 @@ RegisterNUICallback('getMessages', function(data, cb)
   local curCoords = GetEntityCoords(PlayerPedId())
   local retData <const> = { x = curCoords.x, y = curCoords.y, z = curCoords.z }
 
-  MySQL.ready(function ()
-    getMailboxMessagesService(GetPlayerServerId(PlayerId()), function(mailboxData)
-      if mailboxData then
-        retData.mailboxData = mailboxData
-      end
 
-      SendNUIMessage({
-        type = "messages",
-        data = retData
-      })
+  getMailboxMessagesService(GetPlayerServerId(PlayerId()), function(mailboxData)
+    if mailboxData then
+      retData.mailboxData = mailboxData
+    end
 
-      cb(retData)
-    end)
-  end) -- Close MySQL.ready function
+    SendNUIMessage({
+      type = "messages",
+      data = retData
+    })
+
+    cb(retData)
+  end)
 end)
