@@ -21,5 +21,5 @@ body {
 }
 
 .popup-thing {
-    @apply bg-[url(/assets/bg.png)] bg-no-repeat bg-center w-screen h-screen flex justify-center items-center;
+    @apply bg-[url(/assets/bg.png)] bg-no-repeat bg-center w-screen h-screen;
 }
