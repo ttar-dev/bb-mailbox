@@ -29,7 +29,7 @@ export const VisibilityProvider: React.FC<{children: React.ReactNode}> = ({
     useEffect(() => {
         const keyHandler = (e: KeyboardEvent) => {
             if (["Backspace", "Escape"].includes(e.code)) {
-                if (!isEnvBrowser()) fetchNui("hideFrame");
+                if (!isEnvBrowser()) fetchNui("toggle-mailbox");
                 else setVisible(!visible);
             }
         };
