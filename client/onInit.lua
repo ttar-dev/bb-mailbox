@@ -1,4 +1,6 @@
 -- Loads all controllers
+print("onInit.lua Loaded")
+
 local function loadControllers()
   local files = {
     -- handlers
