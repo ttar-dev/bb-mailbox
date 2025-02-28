@@ -10,7 +10,7 @@ local function getMailboxMessagesService(playerId, cb)
       cb(result)
     else
       debugPrint('>> No mailbox data found for player_id: ' .. playerId)
-      cb(nil)
+      cb([])
     end
   end)
 end
