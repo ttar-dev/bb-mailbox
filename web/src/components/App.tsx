@@ -131,9 +131,9 @@ const App: React.FC = () => {
     return (
         <div className="nui-wrapper">
             <div className="popup-thing">
-                <div className="grid grid-cols-3 h-full p-8 pt-16">
-                    <div className="col-span-2 bg-green-300/10 h-full"></div>
-                    <div className="col-span-1 bg-red-300/10 h-full"></div>
+                <div className="grid grid-cols-3 p-8 pt-16 w-[78vw] h-[104vh] mx-auto">
+                    <div className="col-span-2 bg-green-300/20 h-full"></div>
+                    <div className="col-span-1 bg-red-300/20 h-full"></div>
                 </div>
             </div>
         </div>
