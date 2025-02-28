@@ -12,6 +12,10 @@ body {
   height: 100vh;
 }
 
+.font-noto {
+  font-family: "Noto Sans Thai", sans-serif;
+}
+
 #root {
   @apply h-full;
 }
