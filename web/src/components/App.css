@@ -30,18 +30,22 @@ body {
 
 .fade-enter {
     opacity: 0;
-    transition: opacity 0.25s ease-in;
+    transform: scale(0.9);
+    transition: opacity 0.25s ease-in, transform 0.25s ease-in;
 }
 
 .fade-enter-active {
     opacity: 1;
+    transform: scale(1);
 }
 
 .fade-exit {
     opacity: 1;
-    transition: opacity 0.25s ease-out;
+    transform: scale(1);
+    transition: opacity 0.25s ease-out, transform 0.25s ease-out;
 }
 
 .fade-exit-active {
     opacity: 0;
+    transform: scale(0.9);
 }
