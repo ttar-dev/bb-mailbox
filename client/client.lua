@@ -1,4 +1,4 @@
-local isMailboxOpen = false
+
 
 
 -- functions
@@ -15,7 +15,7 @@ local function getAllMailboxMessagesService(playerId, cb)
   end)
 end
 
-local function setToggleNuiFrame()
+local function setToggleNuiFrame(isMailboxOpen)
   isMailboxOpen = not isMailboxOpen
   SetNuiFocus(isMailboxOpen, isMailboxOpen)
   debugPrint('>> Mailbox' .. (isMailboxOpen and ' opened' or ' closed'))
@@ -47,7 +47,7 @@ RegisterNUICallback('handleOpenMailbox', function(data, cb)
       data = retData
     })
 
-    setToggleNuiFrame()
+    setToggleNuiFrame(true)
 
     cb(retData)
   end)
@@ -55,5 +55,5 @@ end)
 
 -- NUI Commands
 RegisterCommand('pm', function()
-  setToggleNuiFrame()
+  setToggleNuiFrame(true)
 end, false)
