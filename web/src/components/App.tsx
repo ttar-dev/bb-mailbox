@@ -131,7 +131,7 @@ const App: React.FC = () => {
     return (
         <div className="nui-wrapper">
             <div className="popup-thing">
-                <div className="grid grid-cols-3 p-8 w-[76.39vw] h-[87.42vh] mx-auto">
+                <div className="grid grid-cols-3 px-8 w-[76.39vw] h-screen mx-auto bg-[url(/assets/bg.png)] bg-cover bg-center bg-no-repeat">
                     <div className="col-span-2 bg-green-300/20 h-full"></div>
                     <div className="col-span-1 bg-red-300/20 h-full"></div>
                 </div>
