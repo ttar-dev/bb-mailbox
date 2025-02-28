@@ -1,5 +1,5 @@
 // filepath: /Users/nattawutk./bubbot.com/fivem-mailbox/web/src/components/App.tsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import { debugData } from "../utils/debugData";
 import mailboxImage from "../../public/assets/mailbox.png";
@@ -20,18 +20,20 @@ debugData([
   },
 ]);
 
-// interface ReturnClientDataCompProps {
-//     data: unknown;
-// }
+interface ReturnClientDataCompProps {
+  data: unknown;
+}
 
-// const ReturnClientDataComp: React.FC<ReturnClientDataCompProps> = ({data}) => (
-//     <>
-//         <h5>Returned Data:</h5>
-//         <pre>
-//             <code>{JSON.stringify(data, null)}</code>
-//         </pre>
-//     </>
-// );
+const ReturnClientDataComp: React.FC<ReturnClientDataCompProps> = ({
+  data,
+}) => (
+  <>
+    <h5>Returned Data:</h5>
+    <pre>
+      <code>{JSON.stringify(data, null)}</code>
+    </pre>
+  </>
+);
 
 // interface ReturnData {
 //     x: number;

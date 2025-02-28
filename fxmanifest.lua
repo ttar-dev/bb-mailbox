@@ -1,9 +1,9 @@
 fx_version "cerulean"
 
-description "Basic React (TypeScript) & Lua Game Scripts Boilerplate"
-author "Project Error"
+description 'Mailbox system for FiveM'
+author "@ttar-dev"
 version '1.0.0'
-repository 'https://github.com/project-error/fivem-react-boilerplate-lua'
+repository 'https://github.com/ttar-dev/fivem-mailbox'
 
 lua54 'yes'
 
@@ -14,8 +14,13 @@ games {
 
 ui_page 'web/build/index.html'
 
-client_script "client/**/*"
-server_script "server/**/*"
+client_scripts {
+   "client/**/*"
+}
+server_scripts {
+	'@oxmysql/lib/MySQL.lua',
+	"server/**/*"
+}
 
 files {
 	'web/build/index.html',

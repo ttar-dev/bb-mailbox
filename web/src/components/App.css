@@ -31,3 +31,25 @@ body {
 .bg-header-mail-box {
   @apply bg-[url(/assets/header.png)] bg-no-repeat w-full h-14 flex justify-center items-center;
 }
+
+.fade-enter {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.1s ease-in, transform 0.1s ease-in;
+}
+
+.fade-enter-active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.fade-exit {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.1s ease-out, transform 0.1s ease-out;
+}
+
+.fade-exit-active {
+    opacity: 0;
+    transform: scale(0.9);
+}

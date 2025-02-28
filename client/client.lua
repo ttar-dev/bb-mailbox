@@ -1,10 +1,11 @@
-
-local isMailboxOpen = false
 -- functions
-local function getAllMailboxMessagesService(playerId, cb)
+local function getMailboxMessagesService(playerId, cb)
+  debugPrint('>> Fetching mailbox data for player_id: ' .. playerId)
   MySQL.Async.fetchAll('SELECT * FROM mailbox WHERE identifier = @player_id', {
     ['@player_id'] = playerId
   }, function(result)
+    debugPrint('>> Mailbox data found for player_id: ' .. playerId)
+    debugPrint('>> Mailbox data found for result: ' .. result)
     if result then
       cb(result)
     else
@@ -16,18 +17,11 @@ end
 
 local function toggleNuiFrame(shouldShow)
   SetNuiFocus(shouldShow, shouldShow)
-  SendReactMessage('setVisible', shouldShow)
+  SendReactMessage('setOpen', shouldShow)
 end
 
 RegisterCommand('toggle-mailbox', function()
-    isMailboxOpen = not isMailboxOpen
-    toggleNuiFrame(isMailboxOpen)
-
-    if isMailboxOpen then
-        debugPrint('>> Show Mailbox')
-    else
-        debugPrint('>> Hide Mailbox')
-    end
+    toggleNuiFrame(true)
 end, false)
 
 RegisterNUICallback('onClose', function(_, cb)
@@ -38,30 +32,36 @@ end)
 
 RegisterKeyMapping('toggle-mailbox', 'Toggle Mailbox', 'keyboard', 'F5')
 
--- RegisterKeyMapping('pm', 'Toggle Mailbox', 'keyboard', '0')
 RegisterNUICallback('handleClaimReward', function(data, cb)
   debugPrint('>> Button was pressed on the NUI')
   -- Perform any action you want here
   cb({})
 end)
-RegisterNUICallback('handleOpenMailbox', function(data, cb)
+
+RegisterNUICallback('getMessages', function(data, cb)
   debugPrint('>> Data sent by React', json.encode(data))
 
-  local curCoords = GetEntityCoords(PlayerPedId())
-  local retData <const> = { x = curCoords.x, y = curCoords.y, z = curCoords.z }
+  -- Trigger the server event to get the Discord identifier
+  TriggerServerEvent('getDiscordIdentifier')
 
-  getAllMailboxMessagesSV(GetPlayerServerId(PlayerId()), function(mailboxData)
-    if mailboxData then
-      retData.mailboxData = mailboxData
-    end
+  -- Listen for the server response
+  RegisterNetEvent('receiveDiscordIdentifier')
+  AddEventHandler('receiveDiscordIdentifier', function(discordIdentifier)
+    debugPrint('>> Received Discord Identifier: ' .. discordIdentifier)
 
-    SendNUIMessage({
-      type = "renderMessages",
-      data = retData
-    })
+    local retData = { discordIdentifier = discordIdentifier }
 
-    toggleNuiFrame(true)
+    getMailboxMessagesService(discordIdentifier, function(mailboxData)
+      if mailboxData then
+        retData.mailboxData = mailboxData
+      end
 
-    cb(retData)
+      SendNUIMessage({
+        type = "messages",
+        data = retData
+      })
+
+      cb(retData)
+    end)
   end)
 end)
