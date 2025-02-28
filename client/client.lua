@@ -59,5 +59,5 @@ RegisterNUICallback('getMessages', function(data, cb)
 
       cb(retData)
     end)
-  )
+  end) -- Close MySQL.ready function
 end)
