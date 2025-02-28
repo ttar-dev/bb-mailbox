@@ -42,7 +42,7 @@ RegisterNUICallback('getMessages', function(data, cb)
   local curCoords = GetEntityCoords(PlayerPedId())
   local retData <const> = { x = curCoords.x, y = curCoords.y, z = curCoords.z }
 
-  getAllMailboxMessagesSV(GetPlayerServerId(PlayerId()), function(mailboxData)
+  getAllMailboxMessagesService(GetPlayerServerId(PlayerId()), function(mailboxData)
     if mailboxData then
       retData.mailboxData = mailboxData
     end
