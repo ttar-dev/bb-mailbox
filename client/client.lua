@@ -16,7 +16,6 @@ local function getAllMailboxMessagesService(playerId, cb)
 end
 
 local function setToggleNuiFrame(isMailboxOpen)
-  isMailboxOpen = not isMailboxOpen
   SetNuiFocus(isMailboxOpen, isMailboxOpen)
   debugPrint('>> Mailbox' .. (isMailboxOpen and ' opened' or ' closed'))
   SendNUIMessage({
