@@ -1,4 +1,4 @@
-local isOpen = false
+isOpen = false
 
 -- functions
 local function getAllMailboxMessagesService(playerId, cb)
