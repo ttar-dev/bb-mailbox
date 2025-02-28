@@ -131,7 +131,6 @@ const App: React.FC = () => {
     return (
         <div className="nui-wrapper">
             <div className="popup-thing">
-                <h1 className="text-4xl text-center font-noto">ทดสอบ</h1>
                 <div className="grid grid-cols-3 w-full h-full">
                     <div className="col-span-2 bg-green-300/20"></div>
                     <div className="col-span-1 bg-red-300/20 h-full"></div>

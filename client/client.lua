@@ -25,8 +25,10 @@ RegisterCommand('toggle-mailbox', function()
 
     if isMailboxOpen then
         debugPrint('>> Show Mailbox')
+        debugPrint('>> Mailbox state: ' .. tostring(isMailboxOpen))
     else
         debugPrint('>> Hide Mailbox')
+        debugPrint('>> Mailbox state: ' .. tostring(isMailboxOpen))
     end
 end, false)
 
