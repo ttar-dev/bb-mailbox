@@ -1,5 +1,5 @@
 -- Ensure MySQL library is loaded
-MySQL = exports['mysql-async']:getMySQL()
+
 
 -- functions
 local function getMailboxMessagesService(playerId, cb)
