@@ -36,7 +36,7 @@ RegisterNUICallback('handleClaimReward', function(data, cb)
   -- Perform any action you want here
   cb({})
 end)
-RegisterNUICallback('handleOpenMailbox', function(data, cb)
+RegisterNUICallback('getMessages', function(data, cb)
   debugPrint('>> Data sent by React', json.encode(data))
 
   local curCoords = GetEntityCoords(PlayerPedId())
@@ -48,11 +48,9 @@ RegisterNUICallback('handleOpenMailbox', function(data, cb)
     end
 
     SendNUIMessage({
-      type = "renderMessages",
+      type = "messages",
       data = retData
     })
-
-    toggleNuiFrame(true)
 
     cb(retData)
   end)
