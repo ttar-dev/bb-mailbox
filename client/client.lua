@@ -1,5 +1,5 @@
-isOpen = false
 
+local isMailboxOpen = false
 -- functions
 local function getAllMailboxMessagesService(playerId, cb)
   MySQL.Async.fetchAll('SELECT * FROM mailbox WHERE identifier = @player_id', {
@@ -19,12 +19,16 @@ local function toggleNuiFrame(shouldShow)
   SendReactMessage('setVisible', shouldShow)
 end
 
--- dev cmd to show the NUI frame
-RegisterCommand('mail', function()
-  isOpen = not isOpen
-  toggleNuiFrame(isOpen)
-  debugPrint('>> Show Mailbox')
-end)
+RegisterCommand('toggle-mailbox', function()
+    isMailboxOpen = not isMailboxOpen
+    toggleNuiFrame(isMailboxOpen)
+
+    if isMailboxOpen then
+        debugPrint('>> Show Mailbox')
+    else
+        debugPrint('>> Hide Mailbox')
+    end
+end, false)
 
 RegisterNUICallback('onClose', function(_, cb)
   toggleNuiFrame(false)
@@ -32,7 +36,7 @@ RegisterNUICallback('onClose', function(_, cb)
   cb({})
 end)
 
-RegisterKeyMapping('mail', 'Toggle Mailbox', 'keyboard', 'F5')
+RegisterKeyMapping('toggle-mailbox', 'Toggle Mailbox', 'keyboard', 'F5')
 
 -- RegisterKeyMapping('pm', 'Toggle Mailbox', 'keyboard', '0')
 RegisterNUICallback('handleClaimReward', function(data, cb)
