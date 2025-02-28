@@ -21,8 +21,12 @@ end
 
 -- dev cmd to show the NUI frame
 RegisterCommand('sm', function()
-  isOpen = not isOpen
-  toggleNuiFrame(isOpen)
+  toggleNuiFrame(true)
+  debugPrint('>> Show Mailbox')
+end)
+
+RegisterCommand('hm', function()
+  toggleNuiFrame(false)
   debugPrint('>> Show Mailbox')
 end)
 
