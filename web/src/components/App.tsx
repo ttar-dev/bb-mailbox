@@ -1,7 +1,8 @@
 // filepath: /Users/nattawutk./bubbot.com/fivem-mailbox/web/src/components/App.tsx
 import React from "react";
 import "./App.css";
-import {debugData} from "../utils/debugData";
+import { debugData } from "../utils/debugData";
+import mailboxImage from "../../public/assets/mailbox.png";
 // import {fetchNui} from "../utils/fetchNui";
 
 // import mailboxImage from "../assets/mailbox.png";
@@ -11,10 +12,10 @@ import {debugData} from "../utils/debugData";
 // import paginationNext from "../assets/pagination-next.png";
 
 debugData([
-    {
-        action: "setVisible",
-        data: true
-    }
+  {
+    action: "setVisible",
+    data: true,
+  },
 ]);
 
 // interface ReturnClientDataCompProps {
@@ -104,40 +105,71 @@ debugData([
 // ];
 
 const App: React.FC = () => {
-    // const [clientData, setClientData] = useState<ReturnData | null>(null);
-    // const [selectedMail, setSelectedMail] = useState<any>(null);
+  // const [clientData, setClientData] = useState<ReturnData | null>(null);
+  // const [selectedMail, setSelectedMail] = useState<any>(null);
 
-    // const handleGetClientData = () => {
-    //     fetchNui<ReturnData>("getClientData")
-    //         .then(retData => {
-    //             console.log("Got return data from client scripts:");
-    //             console.dir(retData);
-    //             setClientData(retData);
-    //         })
-    //         .catch(e => {
-    //             console.error("Setting mock data due to error", e);
-    //             setClientData({x: 500, y: 300, z: 200});
-    //         });
-    // };
+  // const handleGetClientData = () => {
+  //     fetchNui<ReturnData>("getClientData")
+  //         .then(retData => {
+  //             console.log("Got return data from client scripts:");
+  //             console.dir(retData);
+  //             setClientData(retData);
+  //         })
+  //         .catch(e => {
+  //             console.error("Setting mock data due to error", e);
+  //             setClientData({x: 500, y: 300, z: 200});
+  //         });
+  // };
 
-    // const [currentPage, setCurrentPage] = useState(1);
-    // const mailsPerPage = 4;
-    // const totalPages = Math.ceil(mockMails.length / mailsPerPage);
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const mailsPerPage = 4;
+  // const totalPages = Math.ceil(mockMails.length / mailsPerPage);
 
-    // const indexOfLastMail = currentPage * mailsPerPage;
-    // const indexOfFirstMail = indexOfLastMail - mailsPerPage;
-    // const currentMails = mockMails.slice(indexOfFirstMail, indexOfLastMail);
+  // const indexOfLastMail = currentPage * mailsPerPage;
+  // const indexOfFirstMail = indexOfLastMail - mailsPerPage;
+  // const currentMails = mockMails.slice(indexOfFirstMail, indexOfLastMail);
 
-    return (
-        <div className="nui-wrapper">
-            <div className="popup-thing">
-                <div className="grid grid-cols-3 p-8 pt-16 w-[1128px] h-[830px] mx-auto mt-[42px]">
-                    <div className="col-span-2 bg-green-300/20 h-full"></div>
-                    <div className="col-span-1 bg-red-300/20 h-full"></div>
+  return (
+    <div className="nui-wrapper">
+      <div className="popup-thing">
+        <div className="grid grid-cols-3 p-8 pt-16 w-[1128px] h-[830px] mx-auto mt-[42px]">
+          <div className="col-span-2 bg-green-300/20 h-full px-8 pt-14 pb-24">
+            <div className="bg-black w-full h-[512px] mt-10 rounded-[30px] p-5 pb-0">
+              <div className="item-List">
+                <div className="bg-[linear-gradient(270deg,#2b2b2b_0%,#101010_100%),url('../../public/assets/MaskGroup.png')] bg-cover bg-right bg-blend-color border-2 border-white w-full h-[88px] rounded-2xl mb-2 p-[6px] px-2 flex items-center">
+                  {/* Run number */}
+                  <div className="w-[71px] h-[71px] bg-[#1E1E1E] rounded-xl flex items-center justify-center">
+                    <p className="text-6xl text-white">1</p>
+                  </div>
+                  {/* Title */}
+                  <div className="ml-4">
+                    <div className="w-[155px] h-[27px] bg-[#1E1E1E] rounded-xl flex items-center justify-center">
+                      <p className="font-custom text-white">ของรางวัล</p>
+                    </div>
+                    <p className="mt-2 text-white">Today 23:00</p>
+                  </div>
+                  {/* Img */}
+                  <div className="w-[71px] h-[71px] bg-[#F4f5f6] rounded-xl flex items-center justify-center ml-auto">
+                    <p className="text-6xl text-white">1</p>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
+          <div className="col-span-1 bg-red-300/20 h-full">
+            <div className="bg-header-mail-box mt-5 text-white text-3xl">
+              <img
+                src={mailboxImage}
+                style={{ marginRight: "10px" }}
+                alt="Mailbox"
+              />
+              <p className="mt-1">MAILBOX</p>
+            </div>
+          </div>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default App;
