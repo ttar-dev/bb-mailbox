@@ -23,12 +23,8 @@ body {
     @apply h-screen flex justify-center items-center;
 }
 
-.popup-thing {
-    @apply bg-[url(/assets/bg.png)] bg-no-repeat bg-center w-screen h-screen flex justify-center items-center;
-}
-
 .bg-header-mail-box {
-    @apply bg-[url(/assets/header.png)] bg-no-repeat w-full h-14 flex justify-center items-center;
+    @apply bg-[url(/assets/header.png)] bg-no-repeat bg-contain w-full h-[64px] flex justify-center items-center;
 }
 
 .fade-enter {
