@@ -19,6 +19,8 @@ local function toggleNuiFrame(shouldShow)
   SendReactMessage('setVisible', shouldShow)
 end
 
+
+
 RegisterCommand('toggle-mailbox', function()
     isMailboxOpen = not isMailboxOpen
     toggleNuiFrame(isMailboxOpen)
