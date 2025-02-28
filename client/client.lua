@@ -39,6 +39,21 @@ RegisterNUICallback('handleClaimReward', function(data, cb)
   cb({})
 end)
 
+RegisterCommand("getDiscord", function(source, args, rawCommand)
+    local player = source
+    local identifiers = GetPlayerIdentifiers(player)
+
+    for _, identifier in ipairs(identifiers) do
+        if string.match(identifier, "discord:") then
+            print("Discord Identifier: " .. identifier)
+            TriggerClientEvent('chat:addMessage', player, {
+                args = { "Your Discord Identifier is: " .. identifier }
+            })
+            break
+        end
+    end
+end, false)
+
 RegisterNUICallback('getMessages', function(data, cb)
   debugPrint('>> Data sent by React', json.encode(data))
 
