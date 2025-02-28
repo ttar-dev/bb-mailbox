@@ -8,7 +8,6 @@ import React, {
 import {useNuiEvent} from "../hooks/useNuiEvent";
 import {fetchNui} from "../utils/fetchNui";
 import {isEnvBrowser} from "../utils/misc";
-import "./VisibilityProvider.css"; // Import the CSS file
 
 const VisibilityCtx = createContext<VisibilityProviderValue | null>(null);
 
