@@ -1,4 +1,4 @@
-local setToggleNuiFrame = require('client/services/setToggleNuiFrame')
+local setToggleNuiFrame = require('client.services.setToggleNuiFrame')
 
 RegisterCommand('pm', function()
   setToggleNuiFrame()
