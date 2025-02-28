@@ -61,7 +61,7 @@ const App: React.FC = () => {
                                             }) => (
                                                 <button
                                                     key={mail.id}
-                                                    className="bg-[linear-gradient(270deg,#2b2b2b_0%,#101010_100%),url('../../public/assets/MaskGroup.png')] bg-cover bg-right bg-blend-color border-2 border-white w-full h-[88px] rounded-2xl mb-2 p-[6px] px-2 flex items-center"
+                                                    className="bg-[linear-gradient(270deg,#2b2b2b_0%,#101010_100%),url(/assets/MaskGroup.png)] bg-cover bg-right bg-blend-color border-2 border-white w-full h-[88px] rounded-2xl mb-2 p-[6px] px-2 flex items-center"
                                                 >
                                                     {/* Run number */}
                                                     <div className="w-[71px] h-[71px] bg-[#1E1E1E] rounded-xl flex items-center justify-center">
@@ -163,7 +163,7 @@ const App: React.FC = () => {
                                             alt="Mailbox"
                                         />
                                     </div>
-                                    <div className="mt-4 bg-[linear-gradient(270deg,#2b2b2b_0%,#101010_100%),url('../../public/assets/MaskGroup.png')] bg-cover bg-right bg-blend-color border-2 border-white w-full h-[88px] rounded-[20px] mb-2 p-[6px] px-2 flex items-center">
+                                    <div className="mt-4 bg-[linear-gradient(270deg,#2b2b2b_0%,#101010_100%),url(/assets/MaskGroup.png)] bg-cover bg-right bg-blend-color border-2 border-white w-full h-[88px] rounded-[20px] mb-2 p-[6px] px-2 flex items-center">
                                         <div className="w-[71px] h-[71px] bg-gradient-to-b from-[#A6F0FF] to-[#1181ED] rounded-xl flex items-center justify-center ">
                                             <img
                                                 src={"/assets/Diamond.png"}
