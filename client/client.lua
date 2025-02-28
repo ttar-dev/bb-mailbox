@@ -20,13 +20,9 @@ local function toggleNuiFrame(shouldShow)
 end
 
 -- dev cmd to show the NUI frame
-RegisterCommand('sm', function()
-  toggleNuiFrame(true)
-  debugPrint('>> Show Mailbox')
-end)
-
-RegisterCommand('hm', function()
-  toggleNuiFrame(false)
+RegisterCommand('mail', function()
+  isOpen = not isOpen
+  toggleNuiFrame(isOpen)
   debugPrint('>> Show Mailbox')
 end)
 
@@ -35,6 +31,8 @@ RegisterNUICallback('onClose', function(_, cb)
   debugPrint('>> Hide Mailbox')
   cb({})
 end)
+
+RegisterKeyMapping('mail', 'Toggle Mailbox', 'keyboard', 'F5')
 
 -- RegisterKeyMapping('pm', 'Toggle Mailbox', 'keyboard', '0')
 RegisterNUICallback('handleClaimReward', function(data, cb)
