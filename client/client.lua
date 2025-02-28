@@ -1,4 +1,4 @@
-
+local isMailboxOpen = false
 
 
 -- functions
@@ -15,13 +15,16 @@ local function getAllMailboxMessagesService(playerId, cb)
   end)
 end
 
-local function setToggleNuiFrame(isMailboxOpen)
+local function setToggleNuiFrame()
+  isMailboxOpen = not isMailboxOpen
   SetNuiFocus(isMailboxOpen, isMailboxOpen)
+  SendReactMessage('setVisible', shouldShow)
   debugPrint('>> Mailbox' .. (isMailboxOpen and ' opened' or ' closed'))
   SendNUIMessage({
     type = "ui",
     status = isMailboxOpen
   })
+
 end
 
 RegisterKeyMapping('pm', 'Toggle Mailbox', 'keyboard', '0')
@@ -46,7 +49,7 @@ RegisterNUICallback('handleOpenMailbox', function(data, cb)
       data = retData
     })
 
-    setToggleNuiFrame(true)
+    setToggleNuiFrame()
 
     cb(retData)
   end)
@@ -54,5 +57,5 @@ end)
 
 -- NUI Commands
 RegisterCommand('pm', function()
-  setToggleNuiFrame(true)
+  setToggleNuiFrame()
 end, false)
