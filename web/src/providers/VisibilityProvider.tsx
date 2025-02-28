@@ -12,8 +12,8 @@ import {isEnvBrowser} from "../utils/misc";
 const VisibilityCtx = createContext<VisibilityProviderValue | null>(null);
 
 interface VisibilityProviderValue {
-    setOpen: (visible: boolean) => void;
-    visible: boolean;
+    setOpen: (isOpen: boolean) => void;
+    isOpen: boolean;
 }
 
 // This should be mounted at the top level of your application, it is currently set to
@@ -21,34 +21,32 @@ interface VisibilityProviderValue {
 export const VisibilityProvider: React.FC<{children: React.ReactNode}> = ({
     children
 }) => {
-    const [visible, setOpen] = useState(false);
+    const [isOpen, setOpen] = useState(false);
 
     useNuiEvent<boolean>("setOpen", setOpen);
 
-    // Handle pressing escape/backspace
     useEffect(() => {
         const keyHandler = (e: KeyboardEvent) => {
             if (["Backspace", "Escape"].includes(e.code)) {
                 if (!isEnvBrowser()) fetchNui("onClose");
-                else setOpen(!visible);
-            }
+            } else setOpen(!isOpen);
         };
 
         window.addEventListener("keydown", keyHandler);
 
         return () => window.removeEventListener("keydown", keyHandler);
-    }, [visible]);
+    }, [isOpen]);
 
     return (
         <VisibilityCtx.Provider
             value={{
-                visible,
+                isOpen,
                 setOpen
             }}
         >
             <div
                 style={{
-                    visibility: visible ? "visible" : "hidden",
+                    visibility: isOpen ? "visible" : "hidden",
                     height: "100%"
                 }}
             >
