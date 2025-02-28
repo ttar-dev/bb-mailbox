@@ -1,2 +1,2 @@
-local onInit = require('client.onInit')
+local onInit = require('onInit')
 onInit()

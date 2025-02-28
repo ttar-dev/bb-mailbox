@@ -2,12 +2,12 @@
 local function loadControllers()
   local files = {
     -- handlers
-    'client.controllers.handler.handleOpenMailbox',
-    'client.controllers.handler.handleClaimReward',
-    'client.controllers.handler.hideMailbox',
+    'controllers.handler.handleOpenMailbox',
+    'controllers.handler.handleClaimReward',
+    'controllers.handler.hideMailbox',
 
     -- commands
-    'client.controllers.cmd.toggleMailbox',
+    'controllers.cmd.toggleMailbox',
   }
 
   for _, file in ipairs(files) do
