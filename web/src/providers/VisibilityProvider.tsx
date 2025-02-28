@@ -8,6 +8,7 @@ import React, {
 import {useNuiEvent} from "../hooks/useNuiEvent";
 import {fetchNui} from "../utils/fetchNui";
 import {isEnvBrowser} from "../utils/misc";
+import "./VisibilityProvider.css"; // Import the CSS file
 
 const VisibilityCtx = createContext<VisibilityProviderValue | null>(null);
 
@@ -16,8 +17,6 @@ interface VisibilityProviderValue {
     isOpen: boolean;
 }
 
-// This should be mounted at the top level of your application, it is currently set to
-// apply a CSS visibility value. If this is non-performant, this should be customized.
 export const VisibilityProvider: React.FC<{children: React.ReactNode}> = ({
     children
 }) => {
@@ -46,8 +45,10 @@ export const VisibilityProvider: React.FC<{children: React.ReactNode}> = ({
             }}
         >
             <div
+                className={`fade-${isOpen ? "enter" : "exit"} ${
+                    isOpen ? "fade-enter-active" : "fade-exit-active"
+                }`}
                 style={{
-                    visibility: isOpen ? "visible" : "hidden",
                     height: "100%"
                 }}
             >
