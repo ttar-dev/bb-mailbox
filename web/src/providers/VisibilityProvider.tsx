@@ -27,9 +27,10 @@ export const VisibilityProvider: React.FC<{children: React.ReactNode}> = ({
 
     useEffect(() => {
         const keyHandler = (e: KeyboardEvent) => {
-            if (["Backspace", "Escape"].includes(e.code)) {
+            if (["Backspace", "Escape", "F5"].includes(e.code)) {
                 if (!isEnvBrowser()) fetchNui("onClose");
-            } else setOpen(!isOpen);
+                else setOpen(!isOpen);
+            }
         };
 
         window.addEventListener("keydown", keyHandler);

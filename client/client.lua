@@ -1,5 +1,4 @@
 
-local isMailboxOpen = false
 -- functions
 local function getAllMailboxMessagesService(playerId, cb)
   MySQL.Async.fetchAll('SELECT * FROM mailbox WHERE identifier = @player_id', {
@@ -20,16 +19,7 @@ local function toggleNuiFrame(shouldShow)
 end
 
 RegisterCommand('toggle-mailbox', function()
-    isMailboxOpen = not isMailboxOpen
-    toggleNuiFrame(isMailboxOpen)
-
-    if isMailboxOpen then
-        debugPrint('>> Show Mailbox')
-        debugPrint('>> Mailbox state: ' .. tostring(isMailboxOpen))
-    else
-        debugPrint('>> Hide Mailbox')
-        debugPrint('>> Mailbox state: ' .. tostring(isMailboxOpen))
-    end
+    toggleNuiFrame(true)
 end, false)
 
 RegisterNUICallback('onClose', function(_, cb)
