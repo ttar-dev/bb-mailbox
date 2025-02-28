@@ -1,6 +1,7 @@
 
 -- functions
 local function getMailboxMessagesService(playerId, cb)
+  debugPrint('>> Fetching mailbox data for player_id: ' .. playerId)
   MySQL.Async.fetchAll('SELECT * FROM mailbox WHERE identifier = @player_id', {
     ['@player_id'] = playerId
   }, function(result)
