@@ -1,4 +1,4 @@
-local success, onInit = pcall(require, 'client.onInit')
+local success, onInit = pcall(require, 'onInit')
 
 if not success then
     print("❌ Error loading onInit.lua:", onInit)
