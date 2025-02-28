@@ -51,7 +51,7 @@ RegisterNUICallback('getMessages', function(data, cb)
 
     local retData = { discordIdentifier = discordIdentifier }
 
-    getMailboxMessagesService(discordIdentifier), function(mailboxData)
+    getMailboxMessagesService(discordIdentifier, function(mailboxData)
       if mailboxData then
         retData.mailboxData = mailboxData
       end
