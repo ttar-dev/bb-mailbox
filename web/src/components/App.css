@@ -3,33 +3,32 @@
 @tailwind utilities;
 
 body {
-  @apply m-0 font-serif antialiased bg-transparent;
-  font-family: "Lilita One", "Noto", serif;
-  font-weight: 400;
-  font-style: normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  height: 100vh;
+    @apply m-0 font-serif antialiased bg-transparent min-h-screen;
+    font-family: "Lilita One", "Noto", serif;
+    font-weight: 400;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .font-noto {
-  font-family: "Noto Sans Thai", sans-serif;
+    font-family: "Noto Sans Thai", sans-serif;
 }
 
 #root {
-  @apply h-full;
+    @apply h-full;
 }
 
 .nui-wrapper {
-  @apply h-screen flex justify-center items-center;
+    @apply h-screen flex justify-center items-center;
 }
 
 .popup-thing {
-  @apply bg-[url(/assets/bg.png)] bg-no-repeat bg-center w-screen h-screen flex justify-center items-center;
+    @apply bg-[url(/assets/bg.png)] bg-no-repeat bg-center w-screen h-screen flex justify-center items-center;
 }
 
 .bg-header-mail-box {
-  @apply bg-[url(/assets/header.png)] bg-no-repeat w-full h-14 flex justify-center items-center;
+    @apply bg-[url(/assets/header.png)] bg-no-repeat w-full h-14 flex justify-center items-center;
 }
 
 .fade-enter {
