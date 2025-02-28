@@ -1,3 +1,5 @@
+local isOpen = false
+
 -- functions
 local function getAllMailboxMessagesService(playerId, cb)
   MySQL.Async.fetchAll('SELECT * FROM mailbox WHERE identifier = @player_id', {
@@ -19,11 +21,13 @@ end
 
 -- dev cmd to show the NUI frame
 RegisterCommand('sm', function()
+  isOpen = not isOpen
+  toggleNuiFrame(isOpen)
   toggleNuiFrame(true)
   debugPrint('>> Show Mailbox')
 end)
 
-RegisterNUICallback('hm', function(_, cb)
+RegisterNUICallback('onClose', function(_, cb)
   toggleNuiFrame(false)
   debugPrint('>> Hide Mailbox')
   cb({})
