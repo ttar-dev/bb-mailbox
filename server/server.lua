@@ -1,21 +1,23 @@
-RegisterCommand("getDiscord", function(source, args, rawCommand)
-    -- ตรวจสอบว่า source คือหมายเลขของผู้เล่น
-    if source == 0 then
-        print("Command can only be used by a player, not from console.")
-        return
-    end
-
-    -- ดึง identifiers ของผู้เล่น
+-- Function to get the Discord identifier of a player
+local function getDiscordIdentifier(source)
     local identifiers = GetPlayerIdentifiers(source)
-
     for _, identifier in ipairs(identifiers) do
         if string.match(identifier, "discord:") then
-            print("Discord Identifier: " .. identifier)
-            -- ส่งข้อความไปยังผู้เล่น
-            TriggerClientEvent('chat:addMessage', source, {
-                args = { "Your Discord Identifier is: " .. identifier }
-            })
-            break
+            return identifier
         end
     end
-end, false)
+    return nil
+end
+
+-- Add an event handler for a custom event
+AddEventHandler('getDiscordIdentifier', function()
+    local source = source
+    local discordIdentifier = getDiscordIdentifier(source)
+    if discordIdentifier then
+        print("Discord Identifier: " .. discordIdentifier)
+        -- ส่ง Discord identifier กลับไปยัง client
+        TriggerClientEvent('receiveDiscordIdentifier', source, discordIdentifier)
+    else
+        TriggerClientEvent('receiveDiscordIdentifier', source, "No Discord Identifier found.")
+    end
+end)

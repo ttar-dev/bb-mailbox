@@ -1,4 +1,3 @@
-
 -- functions
 local function getMailboxMessagesService(playerId, cb)
   debugPrint('>> Fetching mailbox data for player_id: ' .. playerId)
@@ -39,25 +38,30 @@ RegisterNUICallback('handleClaimReward', function(data, cb)
   cb({})
 end)
 
-
-
 RegisterNUICallback('getMessages', function(data, cb)
   debugPrint('>> Data sent by React', json.encode(data))
 
-  local curCoords = GetEntityCoords(PlayerPedId())
-  local retData <const> = { x = curCoords.x, y = curCoords.y, z = curCoords.z }
+  -- Trigger the server event to get the Discord identifier
+  TriggerServerEvent('getDiscordIdentifier')
 
+  -- Listen for the server response
+  RegisterNetEvent('receiveDiscordIdentifier')
+  AddEventHandler('receiveDiscordIdentifier', function(discordIdentifier)
+    debugPrint('>> Received Discord Identifier: ' .. discordIdentifier)
 
-  getMailboxMessagesService(GetPlayerServerId(PlayerId()), function(mailboxData)
-    if mailboxData then
-      retData.mailboxData = mailboxData
-    end
+    local retData = { discordIdentifier = discordIdentifier }
 
-    SendNUIMessage({
-      type = "messages",
-      data = retData
-    })
+    getMailboxMessagesService(discordIdentifier), function(mailboxData)
+      if mailboxData then
+        retData.mailboxData = mailboxData
+      end
 
-    cb(retData)
+      SendNUIMessage({
+        type = "messages",
+        data = retData
+      })
+
+      cb(retData)
+    end)
   end)
 end)
