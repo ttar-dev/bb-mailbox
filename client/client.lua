@@ -1,6 +1,6 @@
 local isMailboxOpen = false
 
-RegisterKeyMapping('toggleMailbox', 'Toggle Mailbox', 'keyboard', '=')
+RegisterKeyMapping('toggleMailbox', 'Toggle Mailbox', 'keyboard', '0')
 RegisterNUICallback('handleClaimReward', function(data, cb)
   debugPrint('>> Button was pressed on the NUI')
   -- Perform any action you want here
