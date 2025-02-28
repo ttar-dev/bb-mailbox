@@ -109,28 +109,15 @@ const App: React.FC = () => {
                                     <p className="py-1 mt-1 text-white font-noto text-2xl bg-gradient-to-r from-transparent via-[#4baaf8] to-transparent">
                                         ของรางวัลรายวัน
                                     </p>
-                                    <div className="mt-6 flex items-center">
-                                        <img
-                                            src={"/assets/line.png"}
-                                            style={{
-                                                marginRight: "10px",
-                                                width: "30px"
-                                            }}
-                                            alt="Mailbox"
-                                        />
-                                        <div className="w-[200px] h-[41px] bg-[#1E1E1E] border-2 border-white rounded-3xl flex items-center justify-center">
-                                            <p className="text-white font-noto text-xl">
+                                    <div className="mt-6 flex items-center gap-3">
+                                        {/* divide */}
+                                        <div className="border w-1/4 rounded-full"></div>
+                                        <div className="w-2/4 h-[41px] bg-[#1E1E1E] border-2 border-white rounded-3xl flex items-center justify-center">
+                                            <p className="text-white font-noto text-base">
                                                 รายละเอียดสินค้า
                                             </p>
                                         </div>
-                                        <img
-                                            src={"/assets/line.png"}
-                                            style={{
-                                                marginLeft: "10px",
-                                                width: "30px"
-                                            }}
-                                            alt="Mailbox"
-                                        />
+                                        <div className="border w-1/4 rounded-full"></div>
                                     </div>
 
                                     <p className="mt-3 h-40 text-left text-white font-noto line-clamp-5">
@@ -140,28 +127,14 @@ const App: React.FC = () => {
                                         quasi illum optio totam dolores placeat
                                     </p>
 
-                                    <div className="flex items-center">
-                                        <img
-                                            src={"/assets/line.png"}
-                                            style={{
-                                                marginRight: "10px",
-                                                width: "30px"
-                                            }}
-                                            alt="Mailbox"
-                                        />
-                                        <div className="w-[200px] h-[41px] bg-[#1E1E1E] border-2 border-white rounded-3xl flex items-center justify-center">
+                                    <div className="flex items-center gap-3">
+                                        <div className="border w-1/4 rounded-full"></div>
+                                        <div className="w-2/4 h-[41px] bg-[#1E1E1E] border-2 border-white rounded-3xl flex items-center justify-center">
                                             <p className="text-white font-noto text-xl">
                                                 ของรางวัล
                                             </p>
                                         </div>
-                                        <img
-                                            src={"/assets/line.png"}
-                                            style={{
-                                                marginLeft: "10px",
-                                                width: "30px"
-                                            }}
-                                            alt="Mailbox"
-                                        />
+                                        <div className="border w-1/4 rounded-full"></div>
                                     </div>
                                     <div className="mt-4 bg-[linear-gradient(270deg,#2b2b2b_0%,#101010_100%),url(/assets/MaskGroup.png)] bg-cover bg-right bg-blend-color border-2 border-white w-full h-[88px] rounded-[20px] mb-2 p-[6px] px-2 flex items-center">
                                         <div className="w-[71px] h-[71px] bg-gradient-to-b from-[#A6F0FF] to-[#1181ED] rounded-xl flex items-center justify-center ">
