@@ -61,7 +61,7 @@ RegisterNetEvent('addMailboxMessage')
 AddEventHandler('addMailboxMessage', function(data)
     local source = source
     local discordIdentifier = getDiscordIdentifier(source)
-    debugPrint('>> Req payload server', json.encode({
+    debugPrint('>> Req payload server', {
             identifier = GetPlayerIdentifiers(source)[1],
             discord_id = discordIdentifier,
             type = data.type,
@@ -70,7 +70,7 @@ AddEventHandler('addMailboxMessage', function(data)
             campaign_id = data.campaign_id,
             reward_name = data.reward_name,
             reward_qty = data.reward_qty,
-        }))
+        })
     
     if discordIdentifier then
         addMailboxMessageService({
