@@ -15,7 +15,7 @@ debugData([
 ]);
 
 const App: React.FC = () => {
-    const [messages] = useState([]);
+    const [messages, setMessages] = useState<MessageTypes[]>([]);
     const {isOpen} = useVisibility();
 
     const [isMailOpen, setIsMailOpen] = useState(false);
@@ -68,11 +68,8 @@ const App: React.FC = () => {
             reward_name: "stone",
             reward_qty: 1
         })
-            .then(retData => {
-                console.log("Got return data from client scripts:");
-                console.dir(retData);
+            .then(() => {
                 handleGetClientData();
-                // if (retData) setMessages(retData);
             })
             .catch(e => {
                 console.error("addMailboxMessageEvt error", e);
@@ -95,8 +92,7 @@ const App: React.FC = () => {
         fetchNui("getMessagesEvt")
             .then(retData => {
                 console.log("Got return data from client scripts:");
-                console.dir(retData);
-                // if (retData) setMessages(retData);
+                if (retData) setMessages(retData as MessageTypes[]);
             })
             .catch(e => {
                 console.error("getMessagesEvt error", e);
