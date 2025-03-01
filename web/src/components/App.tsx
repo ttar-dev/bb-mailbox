@@ -150,14 +150,26 @@ const App: React.FC = () => {
                                                 <div className="border w-1/4 rounded-full"></div>
                                             </div>
 
-                                            <p className="mt-3 h-40 text-left text-white font-noto line-clamp-5">
-                                                Lorem ipsum, dolor sit amet
-                                                consectetur adipisicing elit.
-                                                Animi quibusdam neque, vero
-                                                accusantium voluptatum
-                                                dignissimos quasi illum optio
-                                                totam dolores placeat
-                                            </p>
+                                            <div className="max-h-[12em] min-h-[8em] overflow-x-hidden overflow-y-auto">
+                                                <p className="mt-3 text-left text-white font-noto">
+                                                    Lorem ipsum, dolor sit amet
+                                                    consectetur adipisicing
+                                                    elit. Cum, doloremque. Error
+                                                    temporibus, ab ea illo non
+                                                    quasi eaque accusamus eius
+                                                    modi quaerat itaque deserunt
+                                                    odit harum alias eum?
+                                                    Laudantium, deleniti. Lorem,
+                                                    ipsum dolor sit amet
+                                                    consectetur adipisicing
+                                                    elit. Nam rem non
+                                                    consectetur, laborum vel
+                                                    ducimus eaque atque dicta
+                                                    quasi velit ipsum cum?
+                                                    Laborum quo minima ratione,
+                                                    omnis rem mollitia sint!
+                                                </p>
+                                            </div>
 
                                             <div className="flex items-center gap-3">
                                                 <div className="border w-1/4 rounded-full"></div>
