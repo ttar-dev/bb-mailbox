@@ -200,23 +200,6 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                             </p>
                                         </div>
                                     </div>
-                                    <div
-                                        className={`absolute top-0 left-0 w-full h-full bg-[#101010] bg-opacity-50 backdrop-blur-2xl rounded-[30px] transition-opacity duration-500 ease-in-out ${
-                                            loading.contentLoading
-                                                ? "opacity-100"
-                                                : "opacity-0 pointer-events-none"
-                                        }`}
-                                    >
-                                        <div className="flex justify-center items-center flex-col w-full h-full">
-                                            <img
-                                                src={LoadingIcon}
-                                                alt="loading"
-                                                width={96}
-                                                className="animate-bounce"
-                                            />
-                                            <VscLoading className="animate-spin text-white text-4xl" />
-                                        </div>
-                                    </div>
                                 </div>
                             ) : (
                                 // </PageWrapper>
@@ -229,6 +212,23 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                     </p>
                                 </div>
                             )}
+                            <div
+                                className={`absolute top-0 left-0 w-full h-full bg-[#101010] bg-opacity-50 backdrop-blur-2xl rounded-[30px] transition-opacity duration-500 ease-in-out ${
+                                    loading.contentLoading
+                                        ? "opacity-100"
+                                        : "opacity-0 pointer-events-none"
+                                }`}
+                            >
+                                <div className="flex justify-center items-center flex-col w-full h-full">
+                                    <img
+                                        src={LoadingIcon}
+                                        alt="loading"
+                                        width={96}
+                                        className="animate-bounce"
+                                    />
+                                    <VscLoading className="animate-spin text-white text-4xl" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </AnimatePresence>
