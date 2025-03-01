@@ -4,25 +4,25 @@ import iconNext from "/public/assets/pagination-next.png";
 
 interface PaginationBarProps {
     currentPage: number;
+    maxPage: number;
     onPageChange: (newPage: number) => void;
 }
 
 const PaginationBar: React.FC<PaginationBarProps> = ({
     currentPage,
+    maxPage,
     onPageChange
 }) => {
     const handlePrev = () => {
-        let _currentPage = currentPage;
-        if (_currentPage > 1) {
-            _currentPage -= 1;
-            onPageChange(_currentPage);
+        if (currentPage > 1) {
+            onPageChange(currentPage - 1);
         }
     };
 
     const handleNext = () => {
-        let _currentPage = currentPage;
-        _currentPage += 1;
-        onPageChange(_currentPage);
+        if (currentPage < maxPage) {
+            onPageChange(currentPage + 1);
+        }
     };
 
     return (
@@ -42,7 +42,10 @@ const PaginationBar: React.FC<PaginationBarProps> = ({
                 </div>
                 <button
                     onClick={handleNext}
-                    className="text-white opacity-80 hover:opacity-100 transition"
+                    className={`text-white opacity-80 hover:opacity-100 transition ${
+                        currentPage === maxPage ? "cursor-not-allowed" : ""
+                    }`}
+                    disabled={currentPage === maxPage}
                 >
                     <img src={iconNext} alt="Next" />
                 </button>

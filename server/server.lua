@@ -11,19 +11,25 @@ end
 
 local function getMailboxMessagesService(playerId, page, rowsPerPage, cb)
     local offset = (page - 1) * rowsPerPage
-    MySQL.Async.fetchAll('SELECT * FROM mailbox WHERE discord_id = @player_id LIMIT @rowsPerPage OFFSET @offset', {
-        ['@player_id'] = playerId,
-        ['@rowsPerPage'] = rowsPerPage,
-        ['@offset'] = offset
-    }, function(result)
-        if result then
-            cb(result)
-        else
-            cb({})
-        end
+    MySQL.Async.fetchAll('SELECT COUNT(*) as total FROM mailbox WHERE discord_id = @player_id', {
+        ['@player_id'] = playerId
+    }, function(countResult)
+        local totalMessages = countResult[1].total
+        local maxPage = math.ceil(totalMessages / rowsPerPage)
+
+        MySQL.Async.fetchAll('SELECT * FROM mailbox WHERE discord_id = @player_id LIMIT @rowsPerPage OFFSET @offset', {
+            ['@player_id'] = playerId,
+            ['@rowsPerPage'] = rowsPerPage,
+            ['@offset'] = offset
+        }, function(result)
+            if result then
+                cb(result, maxPage)
+            else
+                cb({}, maxPage)
+            end
+        end)
     end)
 end
-
 local function addMailboxMessageService(data, cb)
     MySQL.Async.execute('INSERT INTO mailbox (identifier, discord_id, type, title, content, campaign_id, reward_name, reward_qty, is_ack) VALUES (@identifier, @discord_id, @type, @title, @content, @campaign_id, @reward_name, @reward_qty, @is_ack)', {
         ['@identifier'] = data.identifier,
@@ -52,11 +58,11 @@ AddEventHandler('getMailboxMessages', function(page)
     local rowsPerPage = 4
 
     if discordIdentifier then
-        getMailboxMessagesService(discordIdentifier, page, rowsPerPage, function(mailboxData)
-            TriggerClientEvent('receiveMailboxMessages', source, mailboxData)
+        getMailboxMessagesService(discordIdentifier, page, rowsPerPage, function(mailboxData, maxPage)
+            TriggerClientEvent('receiveMailboxMessages', source, {mailboxData, maxPage})
         end)
     else
-        TriggerClientEvent('receiveMailboxMessages', source, nil)
+        TriggerClientEvent('receiveMailboxMessages', source, {{}, 0})
     end
 end)
 

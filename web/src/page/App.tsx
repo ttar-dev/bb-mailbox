@@ -16,6 +16,7 @@ debugData([
 
 interface FetchNuiResponse {
     mailboxData: MessageTypes[];
+    maxPage: number;
 }
 
 const App: React.FC = () => {
@@ -26,6 +27,7 @@ const App: React.FC = () => {
     const [isMailOpenAnimation, setIsMailOpenAnimation] = useState(false);
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
+    const [maxPage, setMaxPage] = useState(1);
 
     const getMessages = useMemo(() => {
         if (!messages) {
@@ -64,19 +66,20 @@ const App: React.FC = () => {
 
     const handleGetClientData = () => {
         setLoading(true);
-        fetchNui<FetchNuiResponse>("getMessagesEvt", {
-            page: currentPage
-        })
+        fetchNui<FetchNuiResponse>("getMessagesEvt", {page: currentPage})
             .then(retData => {
                 if (retData && Array.isArray(retData.mailboxData)) {
                     setMessages(retData.mailboxData);
+                    setMaxPage(retData.maxPage);
                 } else {
                     setMessages([]);
+                    setMaxPage(1);
                 }
             })
             .catch(e => {
                 console.error("getMessagesEvt error", e);
                 setMessages([]);
+                setMaxPage(1);
             })
             .finally(() => {
                 delay();
@@ -101,6 +104,11 @@ const App: React.FC = () => {
         }
     }, [isOpen, currentPage]);
 
+    const handlePageChange = (newPage: number) => {
+        setCurrentPage(newPage);
+        handleGetClientData();
+    };
+
     return (
         <div className="nui-wrapper">
             <div className="bg-[url(/assets/bg.png)] bg-no-repeat bg-center w-screen h-screen flex justify-center items-center flex-col -mt-16">
@@ -118,7 +126,8 @@ const App: React.FC = () => {
                     />
                     <PaginationBar
                         currentPage={currentPage}
-                        onPageChange={setCurrentPage}
+                        maxPage={maxPage}
+                        onPageChange={handlePageChange}
                     />
                     <button
                         onClick={handleAddMessage}

@@ -27,8 +27,8 @@ RegisterNUICallback('getMessagesEvt', function(data, cb)
   TriggerServerEvent('getMailboxMessages', page)
 
   RegisterNetEvent('receiveMailboxMessages')
-  AddEventHandler('receiveMailboxMessages', function(mailboxData)
-    local retData = { mailboxData = mailboxData or {} }
+  AddEventHandler('receiveMailboxMessages', function(mailboxData, maxPage)
+    local retData = { mailboxData = mailboxData or {}, maxPage = maxPage or 1 }
 
     SendNUIMessage({
       type = "messages",
