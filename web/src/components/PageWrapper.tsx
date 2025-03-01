@@ -2,9 +2,9 @@ import {motion} from "framer-motion";
 
 export default function PageWrapper({
     children,
-    animate = {opacity: 1, y: 0, x: 0},
-    initial = {opacity: 0, y: 0, x: -100},
-    exit = {opacity: 0, y: 0, x: -100},
+    animate = {opacity: 1, x: 0, y: 0},
+    initial = {opacity: 0, x: 0, y: -100},
+    exit = {opacity: 0, x: 0, y: -100},
     duration = 0.2, // default duration
     onAnimationComplete // callback function
 }: {
