@@ -45,7 +45,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                         className="bg-gradient-to-r hover:from-blue-400/80 hover:to-[#8bebff]/60 border-2 hover:border-[#8bebff] shadow hover:shadow-[#8bebff]/50 transition-all duration-300 ease-in-out rounded-3xl hover:scale-105 hover:bg-[#8bebff]/60"
                                     >
                                         <button
-                                            className="flex items-center justify-between w-full h-[115px] gap-3 rounded-3xl p-3 cursor-pointer bg-cover bg-right bg-[url('/assets/Maskgroup.png')]"
+                                            className="flex items-center justify-between w-full h-[115px] gap-3 rounded-3xl p-3 cursor-pointer bg-cover bg-right bg-[url('/assets/mask-group.png')]"
                                             onClick={() => {
                                                 handleMailClick();
                                             }}
