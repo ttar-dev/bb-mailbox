@@ -60,7 +60,7 @@ body {
 .fade-enter {
     opacity: 0;
     transform: scale(0.9);
-    transition: opacity 0.3s ease-in, transform 0.3s ease-in;
+    transition: opacity 0.1s ease-in, transform 0.1s ease-in;
 }
 
 .fade-enter-active {
@@ -86,23 +86,4 @@ body {
 
 ::-webkit-scrollbar-thumb {
     background-color: #56c0fb;
-}
-
-@keyframes gradientMove {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-.animated-gradient {
-    border-radius: 8px;
-    background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fad0c4, #ffdde1);
-    background-size: 300% 300%;
-    animation: gradientMove 3s ease infinite;
 }
