@@ -17,6 +17,7 @@ debugData([
 interface FetchNuiResponse {
     mailboxData: MessageTypes[];
     maxPage: number;
+    totalMessages: number;
 }
 
 const App: React.FC = () => {
@@ -28,6 +29,7 @@ const App: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [maxPage, setMaxPage] = useState(1);
+    const [totalMessages, setTotalMessages] = useState(0);
 
     const getMessages = useMemo(() => {
         if (!messages) {
@@ -71,6 +73,7 @@ const App: React.FC = () => {
                 if (retData && Array.isArray(retData.mailboxData)) {
                     setMessages(retData.mailboxData);
                     setMaxPage(retData.maxPage);
+                    setTotalMessages(retData.totalMessages);
                 } else {
                     setMessages([]);
                     setMaxPage(1);
@@ -111,6 +114,9 @@ const App: React.FC = () => {
                     <MailboxHeader />
                     <MailboxContent
                         getMessages={getMessages}
+                        totalMessages={totalMessages}
+                        currentPage={currentPage}
+                        messagesPerPage={4}
                         isMailOpen={isMailOpen}
                         isMailOpenAnimation={isMailOpenAnimation}
                         loading={loading}

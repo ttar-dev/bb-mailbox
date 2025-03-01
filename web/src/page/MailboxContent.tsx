@@ -13,6 +13,9 @@ interface MailboxContentProps {
     isMailOpen: boolean;
     isMailOpenAnimation: boolean;
     loading: boolean;
+    totalMessages: number;
+    currentPage: number;
+    messagesPerPage: number;
     handleMailClick: () => void;
     handleGetClientData: () => void;
     handleAnimationComplete: ({x}: {x: number}) => void;
@@ -24,6 +27,8 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
     isMailOpen,
     isMailOpenAnimation,
     loading,
+    currentPage,
+    messagesPerPage,
     handleMailClick,
     handleGetClientData,
     handleAnimationComplete
@@ -53,7 +58,10 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                             <div className="flex items-center gap-4">
                                                 <div className="min-w-[100px] p-4 bg-[#1e1e1e] rounded-3xl text-center">
                                                     <span className="text-6xl text-white">
-                                                        {i + 1}
+                                                        {i +
+                                                            1 +
+                                                            (currentPage - 1) *
+                                                                messagesPerPage}
                                                     </span>
                                                 </div>
                                                 <div className="flex flex-col">

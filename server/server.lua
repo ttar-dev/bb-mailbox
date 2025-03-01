@@ -23,13 +23,14 @@ local function getMailboxMessagesService(playerId, page, rowsPerPage, cb)
             ['@offset'] = offset
         }, function(result)
             if result then
-                cb(result, maxPage)
+                cb(result, maxPage, totalMessages)
             else
-                cb({}, maxPage)
+                cb({}, maxPage, totalMessages)
             end
         end)
     end)
 end
+
 local function addMailboxMessageService(data, cb)
     MySQL.Async.execute('INSERT INTO mailbox (identifier, discord_id, type, title, content, campaign_id, reward_name, reward_qty, is_ack) VALUES (@identifier, @discord_id, @type, @title, @content, @campaign_id, @reward_name, @reward_qty, @is_ack)', {
         ['@identifier'] = data.identifier,
@@ -58,11 +59,11 @@ AddEventHandler('getMailboxMessages', function(page)
     local rowsPerPage = 4
 
     if discordIdentifier then
-        getMailboxMessagesService(discordIdentifier, page, rowsPerPage, function(mailboxData, maxPage)
-            TriggerClientEvent('receiveMailboxMessages', source, mailboxData, maxPage)
+        getMailboxMessagesService(discordIdentifier, page, rowsPerPage, function(mailboxData, maxPage, totalMessages)
+            TriggerClientEvent('receiveMailboxMessages', source, mailboxData, maxPage, totalMessages)
         end)
     else
-        TriggerClientEvent('receiveMailboxMessages', source, nil, 0)
+        TriggerClientEvent('receiveMailboxMessages', source, nil, 0, 0)
     end
 end)
 
