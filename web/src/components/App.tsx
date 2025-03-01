@@ -77,9 +77,7 @@ const App: React.FC = () => {
                                             }) => (
                                                 <button
                                                     key={mail.id}
-                                                    onClick={() =>
-                                                        setSelectedMail(mail)
-                                                    }
+                                                    onClick={() => {}}
                                                     className="bg-[linear-gradient(270deg,#2b2b2b_0%,#101010_100%),url(/assets/MaskGroup.png)] bg-cover bg-right bg-blend-color border-2 border-white w-full h-[88px] rounded-2xl mb-2 p-[6px] px-2 flex items-center"
                                                 >
                                                     {/* Run number */}
