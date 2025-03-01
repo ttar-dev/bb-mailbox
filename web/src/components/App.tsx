@@ -177,6 +177,8 @@ const App: React.FC = () => {
                             {isMailOpen && (
                                 <div className="col-span-1 transition-all duration-300">
                                     <PageWrapper
+                                        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                                        // @ts-ignore
                                         onAnimationComplete={
                                             handleAnimationComplete
                                         }
