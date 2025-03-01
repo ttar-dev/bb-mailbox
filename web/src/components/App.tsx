@@ -35,7 +35,7 @@ const App: React.FC = () => {
 
     const delay = _.debounce(() => {
         setLoading(false);
-    }, 250);
+    }, 800);
 
     useEffect(() => {
         setLoading(true);
