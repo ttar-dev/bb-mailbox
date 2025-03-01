@@ -103,18 +103,18 @@ const App: React.FC = () => {
             });
     };
 
-    const handleMailClick = (m: MessageTypes) => {
+    const handleMailClick = async (m: MessageTypes) => {
         setIsMailOpen(true);
         setLoading({
             pageLoading: false,
             contentLoading: true
         });
 
-        delay()?.then(() => {
-            if (m.id === mailContent?.id) {
-                setMailContent(null);
-            }
-        });
+        if (m.id === mailContent?.id) {
+            setMailContent(null);
+        }
+
+        await delay();
     };
 
     useEffect(() => {
