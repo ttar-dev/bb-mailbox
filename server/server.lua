@@ -31,7 +31,7 @@ local function addMailboxMessageService(data, cb)
         ['@campaign_id'] = data.campaign_id,
         ['@reward_name'] = data.reward_name,
         ['@reward_qty'] = data.reward_qty,
-        ['@is_ack'] = data.is_ack
+        ['@is_ack'] = 0
     }, function(rowsChanged)
         if rowsChanged > 0 then
             cb(true)
