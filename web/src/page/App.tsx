@@ -94,6 +94,10 @@ const App: React.FC = () => {
 
     useEffect(() => {
         if (isOpen) handleGetClientData();
+        else {
+            setIsMailOpen(false);
+            setIsMailOpenAnimation(false);
+        }
     }, [isOpen]);
 
     return (

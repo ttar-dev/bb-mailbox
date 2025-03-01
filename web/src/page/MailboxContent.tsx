@@ -5,6 +5,7 @@ import {IoReload} from "react-icons/io5";
 import PageWrapper from "../components/PageWrapper";
 import {AnimatePresence} from "framer-motion";
 import {fromNow, time} from "../utils/transform";
+import LoadingIcon from "/public/assets/logo.png";
 
 interface MailboxContentProps {
     getMessages: MessageTypes[];
@@ -108,13 +109,19 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                         )}
                         <div
                             className={`absolute top-0 left-0 w-full h-full bg-[#101010] bg-opacity-50 backdrop-blur rounded-[30px] transition-opacity duration-500 ease-in-out ${
-                                loading
+                                loading && !isMailOpen
                                     ? "opacity-100"
                                     : "opacity-0 pointer-events-none"
                             }`}
                         >
-                            <div className="flex justify-center items-center w-full h-full">
-                                <IoReload className="animate-spin text-white text-6xl" />
+                            <div className="flex justify-center items-center w-full h-full flex-col">
+                                <img
+                                    src={LoadingIcon}
+                                    alt="loading"
+                                    width={96}
+                                    className="animate-bounce"
+                                />
+                                <span className="text-white">Loading...</span>
                             </div>
                         </div>
                     </div>
@@ -193,8 +200,16 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                                 : "opacity-0 pointer-events-none"
                                         }`}
                                     >
-                                        <div className="flex justify-center items-center w-full h-full">
-                                            <IoReload className="animate-spin text-white text-6xl" />
+                                        <div className="flex justify-center items-center flex-col w-full h-full">
+                                            <img
+                                                src={LoadingIcon}
+                                                alt="loading"
+                                                width={96}
+                                                className="animate-bounce"
+                                            />
+                                            <span className="text-white">
+                                                Loading...
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
