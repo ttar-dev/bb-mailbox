@@ -27,7 +27,7 @@ RegisterNUICallback('getMessagesEvt', function(data, cb)
 
   RegisterNetEvent('receiveMailboxMessages')
   AddEventHandler('receiveMailboxMessages', function(mailboxData)
-    local retData = { mailboxData = mailboxData }
+    local retData = { mailboxData = mailboxData or {} }
 
     SendNUIMessage({
       type = "messages",

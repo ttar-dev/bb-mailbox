@@ -16,7 +16,7 @@ local function getMailboxMessagesService(playerId, cb)
         if result then
             cb(result)
         else
-            cb(nil)
+            cb({})
         end
     end)
 end
