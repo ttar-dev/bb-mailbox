@@ -59,10 +59,10 @@ AddEventHandler('getMailboxMessages', function(page)
 
     if discordIdentifier then
         getMailboxMessagesService(discordIdentifier, page, rowsPerPage, function(mailboxData, maxPage)
-            TriggerClientEvent('receiveMailboxMessages', source, {mailboxData, maxPage})
+            TriggerClientEvent('receiveMailboxMessages', source, mailboxData, maxPage)
         end)
     else
-        TriggerClientEvent('receiveMailboxMessages', source, {{}, 0})
+        TriggerClientEvent('receiveMailboxMessages', source, nil, 0)
     end
 end)
 
