@@ -88,7 +88,7 @@ const App: React.FC = () => {
                             }`}
                         >
                             <div className=" px-8 pt-14">
-                                <div className="bg-[#1b1b1b] relative w-full h-[560px] mt-10 rounded-[30px] p-5 pb-0">
+                                <div className="bg-[#252525] relative w-full h-[560px] mt-10 rounded-[30px] p-5 pb-0">
                                     <div className="item-List">
                                         {getMessages.map(
                                             (mail: {
@@ -159,7 +159,7 @@ const App: React.FC = () => {
                                         </div>
                                     )}
                                     <div
-                                        className={`absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 backdrop-blur-2xl rounded-[30px] transition-opacity duration-500 ease-in-out ${
+                                        className={`absolute top-0 left-0 w-full h-full bg-[#252525] bg-opacity-50 backdrop-blur-2xl rounded-[30px] transition-opacity duration-500 ease-in-out ${
                                             loading
                                                 ? "opacity-100"
                                                 : "opacity-0 pointer-events-none"
@@ -184,7 +184,7 @@ const App: React.FC = () => {
                                         }
                                     >
                                         <div className="pr-8 -mt-1 -ml-2 pt-[5em]">
-                                            <div className="bg-[#1b1b1b] w-full h-[560px] mt-5 rounded-[30px] p-5 pb-0 text-center">
+                                            <div className="bg-[#333333] w-full h-[560px] mt-5 rounded-[30px] p-5 pb-0 text-center">
                                                 <p className="py-1 mt-1 text-white font-noto text-2xl bg-gradient-to-r from-transparent via-[#4baaf8] to-transparent">
                                                     ของรางวัลรายวัน
                                                 </p>
