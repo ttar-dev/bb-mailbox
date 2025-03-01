@@ -105,12 +105,12 @@ const App: React.FC = () => {
 
     const handleMailClick = async (m: MessageTypes) => {
         setIsMailOpen(true);
-        setLoading({
-            pageLoading: false,
-            contentLoading: true
-        });
 
         if (m.id === mailContent?.id) {
+            setLoading({
+                pageLoading: false,
+                contentLoading: true
+            });
             setMailContent(null);
         }
 
