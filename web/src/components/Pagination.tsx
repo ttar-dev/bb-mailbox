@@ -1,5 +1,6 @@
 import React, {useState} from "react";
-
+import iconBack from "/public/assets/pagination-back.png";
+import iconNext from "/public/assets/pagination-next.png";
 const PaginationBar: React.FC = () => {
     const [page, setPage] = useState(1);
 
@@ -19,7 +20,7 @@ const PaginationBar: React.FC = () => {
                     className="text-white opacity-80 hover:opacity-100 transition cursor-not-allowed"
                     disabled
                 >
-                    <img src="/assets/pagination-back.png" alt="Next" />
+                    <img src={iconBack} alt="Next" />
                 </button>
                 <div className="bg-black text-white px-10 py-1 rounded-full text-lg font-semibold">
                     {page}
@@ -29,7 +30,7 @@ const PaginationBar: React.FC = () => {
                     className="text-white opacity-80 hover:opacity-100 transition cursor-not-allowed"
                     disabled
                 >
-                    <img src="/assets/pagination-next.png" alt="Next" />
+                    <img src={iconNext} alt="Next" />
                 </button>
             </div>
         </div>
