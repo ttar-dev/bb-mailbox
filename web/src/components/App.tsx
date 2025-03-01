@@ -51,7 +51,7 @@ const App: React.FC = () => {
 
     return (
         <div className="nui-wrapper">
-            <div className="bg-[url(/assets/bg.png)] bg-no-repeat bg-center w-screen h-screen flex justify-center items-center flex-col">
+            <div className="bg-[url(/assets/bg.png)] bg-no-repeat bg-center w-screen h-screen flex justify-center items-center flex-col -mt-16">
                 <div className="w-[1128px] h-[830px]">
                     <div className="grid grid-cols-3 p-6 pt-10 mx-auto mt-[42px]">
                         <div className="col-span-2">
