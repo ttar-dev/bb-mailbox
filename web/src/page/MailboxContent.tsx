@@ -11,7 +11,6 @@ import DiamondIcon from "/public/assets/Diamond.png";
 interface MailboxContentProps {
     getMessages: MessageTypes[];
     isMailOpen: boolean;
-    isMailOpenAnimation: boolean;
     loading: boolean;
     totalMessages: number;
     currentPage: number;
@@ -20,28 +19,26 @@ interface MailboxContentProps {
     setMailContent: (mail: MessageTypes) => void;
     handleMailClick: () => void;
     handleGetClientData: () => void;
-    handleAnimationComplete: ({x}: {x: number}) => void;
     setLoading: (loading: boolean) => void;
 }
 
 const MailboxContent: React.FC<MailboxContentProps> = ({
     getMessages,
     isMailOpen,
-    isMailOpenAnimation,
     loading,
     currentPage,
     messagesPerPage,
     mailContent,
+    totalMessages,
     setMailContent,
     handleMailClick,
-    handleGetClientData,
-    handleAnimationComplete
+    handleGetClientData
 }) => {
     return (
         <div className="grid grid-cols-3 p-6 pt-10 mx-auto mt-[42px]">
             <div
                 className={`transition-all duration-300 ${
-                    isMailOpenAnimation ? "col-span-2" : "col-span-3"
+                    totalMessages > 0 ? "col-span-2" : "col-span-3"
                 }`}
             >
                 <div className=" px-8 pt-14">
@@ -144,13 +141,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                     <div className="pr-8 -mt-1 -ml-2 pt-[5em]">
                         <div className="bg-[#101010] relative w-full h-[560px] mt-5 rounded-[30px] p-5 pb-0 text-center">
                             {isMailOpen ? (
-                                <PageWrapper
-                                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                                    // @ts-ignore
-                                    onAnimationComplete={
-                                        handleAnimationComplete
-                                    }
-                                >
+                                <PageWrapper>
                                     <div>
                                         <p className="py-1 mt-1 text-white font-noto text-2xl bg-gradient-to-r from-transparent via-[#4baaf8] to-transparent">
                                             ของรางวัลรายวัน

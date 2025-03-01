@@ -25,7 +25,6 @@ const App: React.FC = () => {
     const {isOpen} = useVisibility();
     const [mailContent, setMailContent] = useState<MessageTypes | null>(null);
     const [isMailOpen, setIsMailOpen] = useState(false);
-    const [isMailOpenAnimation, setIsMailOpenAnimation] = useState(false);
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [maxPage, setMaxPage] = useState(2);
@@ -92,26 +91,17 @@ const App: React.FC = () => {
     const handleMailClick = () => {
         setIsMailOpen(true);
         handleGetClientData();
-        setIsMailOpenAnimation(true);
     };
-
-    const handleAnimationComplete = () =>
-        // {x}: {x: number}
-        {
-            // if (x < 0) setIsMailOpenAnimation(false);
-        };
 
     useEffect(() => {
         if (isOpen) handleGetClientData();
         else {
             setIsMailOpen(false);
-            // setIsMailOpenAnimation(false);
         }
     }, [isOpen, currentPage]);
 
     useEffect(() => {
         setIsMailOpen(false);
-        // setIsMailOpenAnimation(false);
         setLoading(true);
         setMailContent(null);
     }, [currentPage]);
@@ -127,13 +117,11 @@ const App: React.FC = () => {
                         currentPage={currentPage}
                         messagesPerPage={4}
                         isMailOpen={isMailOpen}
-                        isMailOpenAnimation={isMailOpenAnimation}
                         loading={loading}
                         setMailContent={setMailContent}
                         mailContent={mailContent}
                         handleMailClick={handleMailClick}
                         handleGetClientData={handleGetClientData}
-                        handleAnimationComplete={handleAnimationComplete}
                         setLoading={setLoading}
                     />
                     <PaginationBar
