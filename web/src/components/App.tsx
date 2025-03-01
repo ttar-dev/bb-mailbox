@@ -21,7 +21,7 @@ debugData([
 const App: React.FC = () => {
     const [messages] = useState([]);
     const {isOpen} = useVisibility();
-    const [selectedMail, setSelectedMail] = useState<any>(null);
+
     const [isMailOpen, setIsMailOpen] = useState(false);
     const [isMailOpenAnimation, setIsMailOpenAnimation] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -57,9 +57,7 @@ const App: React.FC = () => {
             });
     };
 
-    const handleMailClick = (mail: any) => {
-        setSelectedMail(mail);
-
+    const handleMailClick = () => {
         setIsMailOpen(true);
     };
 
@@ -105,7 +103,7 @@ const App: React.FC = () => {
                                                     key={mail.id}
                                                     onClick={() => {
                                                         setLoading(true);
-                                                        handleMailClick(mail);
+                                                        handleMailClick();
                                                     }}
                                                     className="bg-[linear-gradient(270deg,#2b2b2b_0%,#101010_100%),url(/assets/MaskGroup.png)] bg-cover bg-right bg-blend-color border-2 border-white w-full h-[88px] rounded-2xl mb-2 p-[6px] px-2 flex items-center"
                                                 >
