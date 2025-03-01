@@ -66,7 +66,7 @@ const App: React.FC = () => {
     }, [isOpen]);
 
     return (
-        <div className="nui-wrapper">
+        <div className="h-screen flex justify-center items-center overflow-hidden">
             <div className="bg-[url(/assets/bg.png)] bg-no-repeat bg-center w-screen h-screen flex justify-center items-center flex-col -mt-16">
                 <div className="relative w-[1128px] h-[830px]">
                     <MailboxHeader />

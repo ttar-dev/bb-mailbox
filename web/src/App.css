@@ -47,10 +47,6 @@ body {
     @apply h-full;
 }
 
-.nui-wrapper {
-    @apply h-screen flex justify-center items-center;
-}
-
 .bg-header-mail-box {
     @apply bg-[url(/assets/header.png)] bg-no-repeat bg-contain w-full h-[66px] flex justify-center items-center;
 }
