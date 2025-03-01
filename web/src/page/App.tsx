@@ -28,12 +28,12 @@ const App: React.FC = () => {
     const [isMailOpenAnimation, setIsMailOpenAnimation] = useState(false);
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
-    const [maxPage, setMaxPage] = useState(1);
-    const [totalMessages, setTotalMessages] = useState(0);
+    const [maxPage, setMaxPage] = useState(2);
+    const [totalMessages, setTotalMessages] = useState(5);
 
     const getMessages = useMemo(() => {
         if (!messages) {
-            return [];
+            return [] as MessageTypes[];
         }
         return messages;
     }, [messages]);

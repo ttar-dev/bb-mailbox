@@ -11,7 +11,7 @@ end
 
 local function getMailboxMessagesService(playerId, page, rowsPerPage, cb)
     local offset = (page - 1) * rowsPerPage
-    MySQL.Async.fetchAll('SELECT COUNT(*) as total FROM mailbox WHERE discord_id = @player_id', {
+    MySQL.Async.fetchAll('SELECT COUNT(*) as total FROM mailbox WHERE discord_id = @player_id AND is_ack = 0', {
         ['@player_id'] = playerId
     }, function(countResult)
         local totalMessages = countResult[1].total
