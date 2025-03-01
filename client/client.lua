@@ -46,8 +46,10 @@ RegisterNUICallback('addMailboxMessageEvt', function(data, cb)
 
   RegisterNetEvent('mailboxMessageResp')
   AddEventHandler('mailboxMessageResp', function(success)
-    local retData = { success = success }
+    debugPrint('>> Res payload', json.encode(success))
     debugPrint('>> Resp', success)
+    local retData = { success = success }
+  
     SendNUIMessage({
       type = "messageResp",
       data = retData

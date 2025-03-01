@@ -61,7 +61,6 @@ RegisterNetEvent('addMailboxMessage')
 AddEventHandler('addMailboxMessage', function(data)
     local source = source
     local discordIdentifier = getDiscordIdentifier(source)
-    debugPrint('>> Req payload server', discordIdentifier)
     
     if discordIdentifier then
         addMailboxMessageService({
