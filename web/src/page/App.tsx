@@ -64,9 +64,12 @@ const App: React.FC = () => {
     };
 
     const delay = _.debounce(() => {
-        setLoading({
-            pageLoading: false,
-            contentLoading: false
+        return new Promise<void>(resolve => {
+            setLoading({
+                pageLoading: false,
+                contentLoading: false
+            });
+            resolve();
         });
     }, 800);
 
@@ -106,10 +109,12 @@ const App: React.FC = () => {
             pageLoading: false,
             contentLoading: true
         });
-        if (m.id === mailContent?.id) {
-            setMailContent(null);
-        }
-        delay();
+
+        delay()?.then(() => {
+            if (m.id === mailContent?.id) {
+                setMailContent(null);
+            }
+        });
     };
 
     useEffect(() => {
