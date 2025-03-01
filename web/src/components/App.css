@@ -15,6 +15,30 @@ body {
     -ms-user-select: none;
 }
 
+/* For Webkit-based browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+    width: 10px; /* width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background: transparent; /* no background */
+}
+
+::-webkit-scrollbar-thumb {
+    background: blue; /* blue scrollbar */
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: darkblue; /* darker blue on hover */
+}
+
+/* For Firefox */
+* {
+    scrollbar-width: thin; /* 'auto' or 'thin' */
+    scrollbar-color: #56c0fb transparent; /* thumb color and no track background */
+}
+
 .font-noto {
     font-family: "Noto Sans Thai", sans-serif;
 }
