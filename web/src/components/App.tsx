@@ -92,7 +92,7 @@ const App: React.FC = () => {
                             }`}
                         >
                             <div className=" px-8 pt-14">
-                                <div className="bg-[#252525] relative w-full h-[560px] mt-10 rounded-[30px] p-5 pb-0">
+                                <div className="bg-[#101010] relative w-full h-[560px] mt-10 rounded-[30px] p-5 pb-0">
                                     <div className="item-List">
                                         {getMessages.map(
                                             (mail: {
@@ -166,7 +166,7 @@ const App: React.FC = () => {
                                         </div>
                                     )}
                                     <div
-                                        className={`absolute top-0 left-0 w-full h-full bg-[#252525] bg-opacity-50 backdrop-blur-2xl rounded-[30px] transition-opacity duration-500 ease-in-out ${
+                                        className={`absolute top-0 left-0 w-full h-full bg-[#101010] bg-opacity-50 backdrop-blur-2xl rounded-[30px] transition-opacity duration-500 ease-in-out ${
                                             loading
                                                 ? "opacity-100"
                                                 : "opacity-0 pointer-events-none"
@@ -260,7 +260,7 @@ const App: React.FC = () => {
                                                     </div>
                                                 </div>
                                                 <div
-                                                    className={`absolute top-0 left-0 w-full h-full bg-[#252525] bg-opacity-50 backdrop-blur-2xl rounded-[30px] transition-opacity duration-500 ease-in-out ${
+                                                    className={`absolute top-0 left-0 w-full h-full bg-[#101010] bg-opacity-50 backdrop-blur-2xl rounded-[30px] transition-opacity duration-500 ease-in-out ${
                                                         loading
                                                             ? "opacity-100"
                                                             : "opacity-0 pointer-events-none"
