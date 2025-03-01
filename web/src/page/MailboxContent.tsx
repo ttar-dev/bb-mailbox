@@ -6,6 +6,7 @@ import PageWrapper from "../components/PageWrapper";
 import {AnimatePresence} from "framer-motion";
 import {fromNow, time} from "../utils/transform";
 import LoadingIcon from "/public/assets/logo.png";
+import DiamondIcon from "/public/assets/Diamond.png";
 
 interface MailboxContentProps {
     getMessages: MessageTypes[];
@@ -80,7 +81,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                             </div>
                                             <div className="min-w-[100px] h-full p-4 bg-white/80 backdrop-blur-md rounded-3xl text-center flex justify-center items-center">
                                                 <img
-                                                    src="/assets/Diamond.png"
+                                                    src={DiamondIcon}
                                                     alt="item"
                                                     className="!grayscale-0"
                                                 />
@@ -178,7 +179,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                     <div className="mt-4 bg-[linear-gradient(270deg,#2b2b2b_0%,#101010_100%),url(/assets/MaskGroup.png)] bg-cover bg-right bg-blend-color border-2 border-white w-full h-[88px] rounded-[20px] mb-2 p-[6px] px-2 flex items-center">
                                         <div className="w-[71px] h-[71px] bg-gradient-to-b from-[#A6F0FF] to-[#1181ED] rounded-xl flex items-center justify-center ">
                                             <img
-                                                src={"/assets/Diamond.png"}
+                                                src={DiamondIcon}
                                                 className="max-w-full max-h-full"
                                             />
                                         </div>
