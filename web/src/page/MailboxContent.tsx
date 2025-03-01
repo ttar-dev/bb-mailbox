@@ -1,7 +1,7 @@
 import React from "react";
 import {HiOutlineEnvelopeOpen} from "react-icons/hi2";
 import {TfiReload} from "react-icons/tfi";
-import {IoReload} from "react-icons/io5";
+import {VscLoading} from "react-icons/vsc";
 import PageWrapper from "../components/PageWrapper";
 import {AnimatePresence} from "framer-motion";
 import {fromNow, time} from "../utils/transform";
@@ -121,7 +121,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                     width={96}
                                     className="animate-bounce"
                                 />
-                                <span className="text-white">Loading...</span>
+                                <VscLoading className="animate-spin text-white text-4xl" />
                             </div>
                         </div>
                     </div>
@@ -207,9 +207,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                                 width={96}
                                                 className="animate-bounce"
                                             />
-                                            <span className="text-white">
-                                                Loading...
-                                            </span>
+                                            <VscLoading className="animate-spin text-white text-4xl" />
                                         </div>
                                     </div>
                                 </div>
