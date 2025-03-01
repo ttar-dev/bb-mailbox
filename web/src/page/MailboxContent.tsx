@@ -141,14 +141,14 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
 
             <div className="col-span-1 transition-all duration-300">
                 <AnimatePresence>
-                    <div className="pr-8 -mt-1 -ml-2 pt-[5em]">
+                    <div className="pr-8 bg-[#101010] relative w-full h-[560px] mt-5 -ml-2 pt-[5em]">
                         {isMailOpen && (
                             <PageWrapper
                                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                                 // @ts-ignore
                                 onAnimationComplete={handleAnimationComplete}
                             >
-                                <div className="bg-[#101010] relative w-full h-[560px] mt-5 rounded-[30px] p-5 pb-0 text-center">
+                                <div className="rounded-[30px] p-5 pb-0 text-center">
                                     <p className="py-1 mt-1 text-white font-noto text-2xl bg-gradient-to-r from-transparent via-[#4baaf8] to-transparent">
                                         ของรางวัลรายวัน
                                     </p>

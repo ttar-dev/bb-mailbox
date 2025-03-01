@@ -95,21 +95,23 @@ const App: React.FC = () => {
         setIsMailOpenAnimation(true);
     };
 
-    const handleAnimationComplete = ({x}: {x: number}) => {
-        if (x < 0) setIsMailOpenAnimation(false);
-    };
+    const handleAnimationComplete = () =>
+        // {x}: {x: number}
+        {
+            // if (x < 0) setIsMailOpenAnimation(false);
+        };
 
     useEffect(() => {
         if (isOpen) handleGetClientData();
         else {
             setIsMailOpen(false);
-            setIsMailOpenAnimation(false);
+            // setIsMailOpenAnimation(false);
         }
     }, [isOpen, currentPage]);
 
     useEffect(() => {
         setIsMailOpen(false);
-        setIsMailOpenAnimation(false);
+        // setIsMailOpenAnimation(false);
         setLoading(true);
         setMailContent(null);
     }, [currentPage]);
