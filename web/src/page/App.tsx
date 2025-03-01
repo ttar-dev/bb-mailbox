@@ -1,16 +1,15 @@
 import React, {useEffect, useMemo, useState} from "react";
-import "./App.css";
 import {debugData} from "../utils/debugData";
 import {HiOutlineEnvelopeOpen} from "react-icons/hi2";
 import {fetchNui} from "../utils/fetchNui";
 import {useVisibility} from "../providers/VisibilityProvider";
-import {PiMailboxDuotone} from "react-icons/pi";
 import {TfiReload} from "react-icons/tfi";
-import PageWrapper from "./page-wrapper";
+import PageWrapper from "../components/PageWrapper";
 import {AnimatePresence} from "framer-motion";
 
 import {IoReload} from "react-icons/io5";
 import _ from "lodash";
+import MailboxHeader from "../components/MailboxHeader";
 debugData([
     {
         action: "setVisible",
@@ -73,14 +72,7 @@ const App: React.FC = () => {
         <div className="nui-wrapper">
             <div className="bg-[url(/assets/bg.png)] bg-no-repeat bg-center w-screen h-screen flex justify-center items-center flex-col -mt-16">
                 <div className="relative w-[1128px] h-[830px]">
-                    <div className="absolute top-[2.7em] right-[.8em] bg-header-mail-box gap-2 items-center justify-center mt-[20px] text-white text-3xl max-w-[380px]">
-                        <span className="text-4xl text-[#56c0fb]">
-                            <PiMailboxDuotone />
-                        </span>
-                        <p className="mt-1 bg-gradient-to-r from-[#56c0fb] to-[#80ddff] bg-clip-text text-transparent">
-                            MAILBOX
-                        </p>
-                    </div>
+                    <MailboxHeader />
                     <div className="grid grid-cols-3 p-6 pt-10 mx-auto mt-[42px]">
                         <div
                             className={`transition-all duration-300 ${
@@ -189,7 +181,7 @@ const App: React.FC = () => {
                                         }
                                     >
                                         <div className="pr-8 -mt-1 -ml-2 pt-[5em]">
-                                            <div className="bg-[#333333] relative w-full h-[560px] mt-5 rounded-[30px] p-5 pb-0 text-center">
+                                            <div className="bg-[#101010] relative w-full h-[560px] mt-5 rounded-[30px] p-5 pb-0 text-center">
                                                 <p className="py-1 mt-1 text-white font-noto text-2xl bg-gradient-to-r from-transparent via-[#4baaf8] to-transparent">
                                                     ของรางวัลรายวัน
                                                 </p>
