@@ -104,11 +104,6 @@ const App: React.FC = () => {
         }
     }, [isOpen, currentPage]);
 
-    const handlePageChange = (newPage: number) => {
-        setCurrentPage(newPage);
-        handleGetClientData();
-    };
-
     return (
         <div className="nui-wrapper">
             <div className="bg-[url(/assets/bg.png)] bg-no-repeat bg-center w-screen h-screen flex justify-center items-center flex-col -mt-16">
@@ -127,7 +122,7 @@ const App: React.FC = () => {
                     <PaginationBar
                         currentPage={currentPage}
                         maxPage={maxPage}
-                        onPageChange={handlePageChange}
+                        onPageChange={setCurrentPage}
                     />
                     <button
                         onClick={handleAddMessage}
