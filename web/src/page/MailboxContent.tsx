@@ -40,36 +40,49 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                 (mail: MessageTypes, i: number) => (
                                     <div
                                         key={mail.id}
-                                        className="bg-gradient-to-r hover:from-blue-400/80 hover:to-[#8bebff]/60 border-2 hover:border-[#8bebff] shadow hover:shadow-[#8bebff]/50 transition-all duration-300 ease-in-out rounded-3xl hover:-translate-y-1 hover:scale-105 hover:bg-[#8bebff]/60"
+                                        className="bg-gradient-to-r hover:from-blue-400/80 hover:to-[#8bebff]/60 border-2 hover:border-[#8bebff] shadow hover:shadow-[#8bebff]/50 transition-all duration-300 ease-in-out rounded-3xl hover:scale-105 hover:bg-[#8bebff]/60"
                                     >
                                         <button
-                                            className="flex items-center w-full h-[115px] gap-3 rounded-3xl p-3 cursor-pointer bg-cover bg-right bg-[url('/assets/Maskgroup.png')]"
+                                            className="flex items-center justify-between w-full h-[115px] gap-3 rounded-3xl p-3 cursor-pointer bg-cover bg-right bg-[url('/assets/Maskgroup.png')]"
                                             onClick={() => {
                                                 handleMailClick();
                                             }}
                                         >
-                                            <div className="min-w-[100px] p-4 bg-[#1e1e1e] rounded-3xl text-center">
-                                                <span className="text-6xl text-white">
-                                                    {i + 1}
-                                                </span>
-                                            </div>
-                                            <div className="flex flex-col">
-                                                <div className="max-w-[20em] w-fit px-3 pt-1 bg-[#1E1E1E] rounded-xl text-left flex items-center">
-                                                    <p className="text-white font-noto text-lg font-bold">
-                                                        {mail.title}
-                                                    </p>
+                                            <div className="flex items-center gap-4">
+                                                <div className="min-w-[100px] p-4 bg-[#1e1e1e] rounded-3xl text-center">
+                                                    <span className="text-6xl text-white">
+                                                        {i + 1}
+                                                    </span>
                                                 </div>
-                                                <div className="max-w-[20em] w-fit px-3 pt-1 rounded-xl text-left flex items-center">
-                                                    <div className="space-x-2">
-                                                        <span className="text-white font-noto text-lg font-bold">
-                                                            {fromNow(mail.date)}
-                                                            ,
-                                                        </span>
-                                                        <span className="text-white font-noto text-lg font-bold">
-                                                            {time(mail.date)}
-                                                        </span>
+                                                <div className="flex flex-col">
+                                                    <div className="max-w-[20em] w-fit px-3 pt-1 bg-[#1E1E1E] rounded-xl text-left flex items-center">
+                                                        <p className="text-white font-noto text-lg font-bold">
+                                                            {mail.title}
+                                                        </p>
+                                                    </div>
+                                                    <div className="max-w-[20em] w-fit px-3 pt-1 rounded-xl text-left flex items-center">
+                                                        <div className="space-x-2">
+                                                            <span className="text-white font-noto text-lg font-bold">
+                                                                {fromNow(
+                                                                    mail.date
+                                                                )}
+                                                                ,
+                                                            </span>
+                                                            <span className="text-white font-noto text-lg font-bold">
+                                                                {time(
+                                                                    mail.date
+                                                                )}
+                                                            </span>
+                                                        </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div className="min-w-[100px] h-full p-4 bg-white/80 backdrop-blur-md rounded-3xl text-center flex justify-center items-center">
+                                                <img
+                                                    src="/assets/Diamond.png"
+                                                    alt="item"
+                                                    className="!grayscale-0"
+                                                />
                                             </div>
                                         </button>
                                     </div>
