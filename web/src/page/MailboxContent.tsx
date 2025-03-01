@@ -4,11 +4,8 @@ import {TfiReload} from "react-icons/tfi";
 import {IoReload} from "react-icons/io5";
 import PageWrapper from "../components/PageWrapper";
 import {AnimatePresence} from "framer-motion";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-import buddhistEra from "dayjs/plugin/buddhistEra";
-dayjs.extend(relativeTime);
-dayjs.extend(buddhistEra);
+import {fromNow, time} from "../utils/transform";
+
 interface MailboxContentProps {
     getMessages: MessageTypes[];
     isMailOpen: boolean;
@@ -43,38 +40,38 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                 (mail: MessageTypes, i: number) => (
                                     <div
                                         key={mail.id}
-                                        className="flex items-center gap-3 h-[117px] bg-[#101010] border-2 border-white rounded-3xl p-4 cursor-pointer"
-                                        onClick={() => {
-                                            handleMailClick();
-                                        }}
+                                        className=" bg-cover bg-right bg-[url(/assets/Maskgroup.png)] bg-[#101010] border-2 border-white rounded-3xl"
                                     >
-                                        <div className="min-w-[100px] p-4 bg-[#1e1e1e] rounded-xl text-center">
-                                            <span className="text-6xl text-white">
-                                                {i + 1}
-                                            </span>
-                                        </div>
-                                        <div className="flex flex-col">
-                                            <div className="max-w-[20em] w-fit px-3 pt-1 bg-[#1E1E1E] rounded-xl text-left flex items-center">
-                                                <p className="text-white font-noto text-lg font-bold">
-                                                    {mail.title}
-                                                </p>
+                                        <button
+                                            className="flex items-center w-full h-[115px] gap-3 rounded-3xl p-3 cursor-pointer hover:bg-gradient-to-r hover:from-blue-500 hover:to-[#8bebff]/60"
+                                            onClick={() => {
+                                                handleMailClick();
+                                            }}
+                                        >
+                                            <div className="min-w-[100px] p-4 bg-[#1e1e1e] rounded-3xl text-center">
+                                                <span className="text-6xl text-white">
+                                                    {i + 1}
+                                                </span>
                                             </div>
-                                            <div className="max-w-[20em] w-fit px-3 pt-1 rounded-xl text-left flex items-center">
-                                                <div className="space-x-2">
-                                                    <span className="text-white font-noto text-lg font-bold">
-                                                        {dayjs(
-                                                            mail.date
-                                                        ).fromNow()}
-                                                        ,
-                                                    </span>
-                                                    <span className="text-white font-noto text-lg font-bold">
-                                                        {dayjs(
-                                                            mail.date
-                                                        ).format("HH:mm")}
-                                                    </span>
+                                            <div className="flex flex-col">
+                                                <div className="max-w-[20em] w-fit px-3 pt-1 bg-[#1E1E1E] rounded-xl text-left flex items-center">
+                                                    <p className="text-white font-noto text-lg font-bold">
+                                                        {mail.title}
+                                                    </p>
+                                                </div>
+                                                <div className="max-w-[20em] w-fit px-3 pt-1 rounded-xl text-left flex items-center">
+                                                    <div className="space-x-2">
+                                                        <span className="text-white font-noto text-lg font-bold">
+                                                            {fromNow(mail.date)}
+                                                            ,
+                                                        </span>
+                                                        <span className="text-white font-noto text-lg font-bold">
+                                                            {time(mail.date)}
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </button>
                                     </div>
                                     // <button
                                     //     key={mail.id}
