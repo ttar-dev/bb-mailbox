@@ -138,7 +138,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
 
             <div
                 className={`${
-                    totalMessages > 0 ? "hidden" : "hidden"
+                    totalMessages > 0 ? "" : "hidden"
                 } col-span-1 transition-all duration-300`}
             >
                 <AnimatePresence>
