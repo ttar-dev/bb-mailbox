@@ -10,6 +10,7 @@ import {AnimatePresence} from "framer-motion";
 import {IoReload} from "react-icons/io5";
 import _ from "lodash";
 import MailboxHeader from "../components/MailboxHeader";
+import PaginationBar from "../components/Pagination";
 debugData([
     {
         action: "setVisible",
@@ -267,6 +268,8 @@ const App: React.FC = () => {
                             )}
                         </AnimatePresence>
                     </div>
+
+                    <PaginationBar />
                 </div>
             </div>
         </div>
