@@ -1,8 +1,8 @@
-// filepath: /Users/nattawutk./bubbot.com/fivem-mailbox/web/src/components/App.tsx
-import React, {useEffect} from "react";
+"use strict";
+import React, {useEffect, useMemo, useState} from "react";
 import "./App.css";
 import {debugData} from "../utils/debugData";
-
+import {HiOutlineEnvelopeOpen} from "react-icons/hi2";
 import {fetchNui} from "../utils/fetchNui";
 import {useVisibility} from "../providers/VisibilityProvider";
 
@@ -14,16 +14,22 @@ debugData([
 ]);
 
 const App: React.FC = () => {
-    // const [clientData, setClientData] = useState();
+    const [messages] = useState([]);
     const {isOpen} = useVisibility();
     // const [selectedMail, setSelectedMail] = useState<any>(null);
+    const getMessages = useMemo(() => {
+        if (!messages) {
+            return [];
+        }
+        return messages;
+    }, [messages]);
 
     const handleGetClientData = () => {
         fetchNui("getMessages")
             .then(retData => {
                 console.log("Got return data from client scripts:");
                 console.dir(retData);
-                // if (retData) setClientData(retData);
+                // if (retData) setMessages(retData);
             })
             .catch(e => {
                 console.error("Setting mock data due to error", e);
@@ -51,8 +57,7 @@ const App: React.FC = () => {
                             <div className="px-8 pt-14">
                                 <div className="bg-[#1b1b1b] w-full h-[560px] mt-10 rounded-[30px] p-5 pb-0">
                                     <div className="item-List">
-                                        {/* วนลูป mockMails และแสดงปุ่มสำหรับแต่ละอีเมล */}
-                                        {[].map(
+                                        {getMessages.map(
                                             (mail: {
                                                 id: number;
                                                 title: string;
@@ -92,6 +97,17 @@ const App: React.FC = () => {
                                             )
                                         )}
                                     </div>
+                                    {getMessages?.length === 0 && (
+                                        <div className="flex justify-center flex-col gap-3 items-center h-full opacity-50">
+                                            <span className="text-white text-[4em]">
+                                                <HiOutlineEnvelopeOpen />
+                                            </span>
+
+                                            <p className="text-white font-noto text-2xl font-bold">
+                                                ไม่มีข้อความ
+                                            </p>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
