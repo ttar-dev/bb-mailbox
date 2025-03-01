@@ -23,10 +23,39 @@ const App: React.FC = () => {
     const [loading, setLoading] = useState(false);
 
     const getMessages = useMemo(() => {
-        if (!messages) {
-            return [];
-        }
-        return messages;
+        // if (!messages) {
+        return [
+            {
+                id: 1,
+                from: "John Doe",
+                title: "Hello",
+                content: "Hello, how are you?",
+                date: "2021-09-01T12:00:00Z"
+            },
+            {
+                id: 2,
+                from: "Jane Doe",
+                title: "Re: Hello",
+                content: "I'm good, thank you!",
+                date: "2021-09-01T12:05:00Z"
+            },
+            {
+                id: 3,
+                from: "John Doe",
+                title: "Re: Re: Hello",
+                content: "That's great to hear!",
+                date: "2021-09-01T12:10:00Z"
+            },
+            {
+                id: 4,
+                from: "Jane Doe",
+                title: "Re: Re: Re: Hello",
+                content: "Yes, it is!",
+                date: "2021-09-01T12:15:00Z"
+            }
+        ];
+        // }
+        // return messages;
     }, [messages]);
 
     const delay = _.debounce(() => {

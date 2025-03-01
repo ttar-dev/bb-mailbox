@@ -6,7 +6,7 @@ import PageWrapper from "../components/PageWrapper";
 import {AnimatePresence} from "framer-motion";
 
 interface MailboxContentProps {
-    getMessages: Array<{id: number; title: string; time: string; icon: string}>;
+    getMessages: MessageTypes[];
     isMailOpen: boolean;
     isMailOpenAnimation: boolean;
     loading: boolean;
@@ -35,38 +35,42 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
             >
                 <div className=" px-8 pt-14">
                     <div className="bg-[#101010] relative w-full h-[560px] mt-10 rounded-[30px] p-5 pb-0">
-                        <div className="item-List">
-                            {getMessages.map(mail => (
-                                <button
-                                    key={mail.id}
-                                    onClick={() => {
-                                        setLoading(true);
-                                        handleMailClick();
-                                    }}
-                                    className="bg-[linear-gradient(270deg,#2b2b2b_0%,#101010_100%),url(/assets/MaskGroup.png)] bg-cover bg-right bg-blend-color border-2 border-white w-full h-[88px] rounded-2xl mb-2 p-[6px] px-2 flex items-center"
-                                >
-                                    <div className="w-[71px] h-[71px] bg-[#1E1E1E] rounded-xl flex items-center justify-center">
-                                        <p className="text-6xl text-white">1</p>
-                                    </div>
-                                    <div className="ml-4">
-                                        <div className="w-[155px] h-[27px] bg-[#1E1E1E] rounded-xl flex items-center justify-center">
-                                            <p className="text-white font-noto">
-                                                {mail.title}
+                        <div className="item-List flex flex-col gap-4">
+                            {getMessages?.map(
+                                (mail: MessageTypes, i: number) => (
+                                    <button
+                                        key={mail.id}
+                                        onClick={() => {
+                                            setLoading(true);
+                                            handleMailClick();
+                                        }}
+                                        className="bg-[linear-gradient(270deg,#2b2b2b_0%,#101010_100%),url(/assets/MaskGroup.png)] bg-cover bg-right bg-blend-color border-2 border-white w-full h-[calc(118px)] rounded-2xl p-[6px] px-2 flex items-center"
+                                    >
+                                        <div className="w-[71px] h-[71px] bg-[#1E1E1E] rounded-xl flex items-center justify-center">
+                                            <p className="text-6xl text-white">
+                                                {i + 1}
                                             </p>
                                         </div>
-                                        <p className="mt-2 text-white text-left">
-                                            {mail.time}
-                                        </p>
-                                    </div>
-                                    <div className="w-[71px] h-[71px] bg-[#F4f5f6] rounded-xl flex items-center justify-center ml-auto">
-                                        <img
+                                        <div className="ml-4">
+                                            <div className="w-[155px] h-[27px] bg-[#1E1E1E] rounded-xl flex items-center justify-center">
+                                                <p className="text-white font-noto">
+                                                    {mail.title}
+                                                </p>
+                                            </div>
+                                            <p className="mt-2 text-white text-left">
+                                                {mail.date}
+                                            </p>
+                                        </div>
+                                        <div className="w-[71px] h-[71px] bg-[#F4f5f6] rounded-xl flex items-center justify-center ml-auto">
+                                            {/* <img
                                             src={mail.icon}
                                             alt={mail.title}
                                             className="max-w-full max-h-full"
-                                        />
-                                    </div>
-                                </button>
-                            ))}
+                                        /> */}
+                                        </div>
+                                    </button>
+                                )
+                            )}
                         </div>
                         {getMessages?.length === 0 && (
                             <div className="flex justify-center flex-col gap-3 items-center h-full">
