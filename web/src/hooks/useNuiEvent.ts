@@ -14,7 +14,7 @@ type NuiHandlerSignature<T> = (data: T) => void;
  * @param handler The callback function that will handle data relayed by this hook
  *
  * @example
- * useNuiEvent<{visibility: true, wasisOpen: 'something'}>('setOpen', (data) => {
+ * useNuiEvent<{visibility: true, wasisOpen: 'something'}>('setMailboxOpen', (data) => {
  *   // whatever logic you want
  * })
  *

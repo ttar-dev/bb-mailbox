@@ -26,7 +26,7 @@ export const VisibilityProvider: React.FC<{children: React.ReactNode}> = ({
     useEffect(() => {
         const keyHandler = (e: KeyboardEvent) => {
             if (["Backspace", "Escape", "F5"].includes(e.code)) {
-                if (!isEnvBrowser()) fetchNui("onClose");
+                if (!isEnvBrowser()) fetchNui("onCloseMailbox");
                 else setOpen(!isOpen);
             }
         };
