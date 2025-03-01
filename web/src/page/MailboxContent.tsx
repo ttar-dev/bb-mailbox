@@ -117,7 +117,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                             </div>
                         )}
                         <div
-                            className={`absolute top-0 left-0 w-full h-full bg-[#101010] bg-opacity-50 backdrop-blur rounded-[30px] transition-opacity duration-500 ease-in-out ${
+                            className={`absolute top-0 left-0 w-full h-full bg-[#101010] bg-opacity-50 backdrop-blur-2xl rounded-[30px] transition-opacity duration-500 ease-in-out ${
                                 loading && !isMailOpen
                                     ? "opacity-100"
                                     : "opacity-0 pointer-events-none"
@@ -203,7 +203,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                         </div>
                                     </div>
                                     <div
-                                        className={`absolute top-0 left-0 w-full h-full bg-[#101010] bg-opacity-50 backdrop-blur rounded-[30px] transition-opacity duration-500 ease-in-out ${
+                                        className={`absolute top-0 left-0 w-full h-full bg-[#101010] bg-opacity-50 backdrop-blur-2xl rounded-[30px] transition-opacity duration-500 ease-in-out ${
                                             loading
                                                 ? "opacity-100"
                                                 : "opacity-0 pointer-events-none"
