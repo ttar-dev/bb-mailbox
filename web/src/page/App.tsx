@@ -62,10 +62,10 @@ const App: React.FC = () => {
         delay();
     }, [isMailOpen]);
 
-    const handleGetClientData = (page?: number) => {
+    const handleGetClientData = () => {
         setLoading(true);
         fetchNui<FetchNuiResponse>("getMessagesEvt", {
-            page: page ? page : currentPage
+            page: currentPage
         })
             .then(retData => {
                 if (retData && Array.isArray(retData.mailboxData)) {
@@ -99,12 +99,7 @@ const App: React.FC = () => {
             setIsMailOpen(false);
             setIsMailOpenAnimation(false);
         }
-    }, [isOpen]);
-
-    const handlePageChange = (newPage: number) => {
-        setCurrentPage(newPage);
-        handleGetClientData(newPage);
-    };
+    }, [isOpen, currentPage]);
 
     return (
         <div className="nui-wrapper">
@@ -123,7 +118,7 @@ const App: React.FC = () => {
                     />
                     <PaginationBar
                         currentPage={currentPage}
-                        onPageChange={handlePageChange}
+                        onPageChange={setCurrentPage}
                     />
                     <button
                         onClick={handleAddMessage}
