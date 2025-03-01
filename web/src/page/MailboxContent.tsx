@@ -46,7 +46,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
     return (
         <div className="grid grid-cols-3 p-6 pt-10 mx-auto mt-[42px]">
             <div
-                className={`transition-all duration-300 ${
+                className={`transition-all duration-100 ${
                     totalMessages > 0 ? "col-span-2" : "col-span-3"
                 }`}
             >
@@ -56,7 +56,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                             {getMessages?.map((m: MessageTypes, i: number) => (
                                 <div
                                     key={m.id}
-                                    className={`bg-gradient-to-r hover:from-blue-400/80 hover:to-[#8bebff]/60 border-2 hover:border-[#8bebff] shadow hover:shadow-[#8bebff]/50 transition-all duration-300 ease-in-out rounded-3xl hover:scale-105 hover:bg-[#8bebff]/60 ${
+                                    className={`bg-gradient-to-r hover:from-blue-400/80 hover:to-[#8bebff]/60 border-2 hover:border-[#8bebff] shadow hover:shadow-[#8bebff]/50 transition-all duration-100 ease-in-out rounded-3xl hover:scale-105 hover:bg-[#8bebff]/60 ${
                                         mailContent?.id === m.id
                                             ? "bg-gradient-to-r from-blue-400/80 to-[#8bebff]/60 border-2 border-[#8bebff] shadow-[#8bebff]/50"
                                             : ""
@@ -148,7 +148,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
             <div
                 className={`${
                     totalMessages > 0 ? "" : "hidden"
-                } col-span-1 transition-all duration-300`}
+                } col-span-1 transition-all duration-100`}
             >
                 <AnimatePresence>
                     <div className="pr-8 -mt-1 -ml-2 pt-[5em]">
