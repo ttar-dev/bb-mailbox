@@ -143,7 +143,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                 <AnimatePresence>
                     <div className="pr-8 -mt-1 -ml-2 pt-[5em]">
                         <div className="bg-[#101010] relative w-full h-[560px] mt-5 rounded-[30px] p-5 pb-0 text-center">
-                            {isMailOpen && (
+                            {isMailOpen ? (
                                 <PageWrapper
                                     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                                     // @ts-ignore
@@ -217,6 +217,15 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                         </div>
                                     </div>
                                 </PageWrapper>
+                            ) : (
+                                <div className="flex justify-center items-center w-full h-full flex-col">
+                                    <span className="text-white text-[4em] opacity-50">
+                                        <HiOutlineEnvelopeOpen />
+                                    </span>
+                                    <p className="text-white font-noto text-2xl font-bold opacity-50">
+                                        ยังไม่ได้เปิดข้อความ
+                                    </p>
+                                </div>
                             )}
                         </div>
                     </div>
