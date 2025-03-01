@@ -40,10 +40,10 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                 (mail: MessageTypes, i: number) => (
                                     <div
                                         key={mail.id}
-                                        className=" bg-cover bg-right bg-[url(/assets/Maskgroup.png)] bg-[#101010] border-2 border-white rounded-3xl"
+                                        className="bg-gradient-to-r hover:from-blue-400/80 hover:to-[#8bebff]/60 border-2 hover:border-[#8bebff] shadow hover:shadow-[#8bebff]/50 transition-all duration-300 ease-in-out rounded-3xl hover:-translate-y-1 hover:scale-105 hover:bg-[#8bebff]/60"
                                     >
                                         <button
-                                            className="flex items-center w-full h-[115px] gap-3 rounded-3xl p-3 cursor-pointer hover:bg-gradient-to-r hover:from-blue-500 hover:to-[#8bebff]/60"
+                                            className="flex items-center w-full h-[115px] gap-3 rounded-3xl p-3 cursor-pointer bg-cover bg-right bg-[url('/assets/Maskgroup.png')]"
                                             onClick={() => {
                                                 handleMailClick();
                                             }}
@@ -73,38 +73,6 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                             </div>
                                         </button>
                                     </div>
-                                    // <button
-                                    //     key={mail.id}
-                                    //     onClick={() => {
-                                    //         handleMailClick();
-                                    //     }}
-                                    //     className="relative border-2 border-white w-full h-[118px] rounded-2xl overflow-hidden bg-cover bg-right bg-[url('/assets/Maskgroup.png')]"
-                                    // >
-                                    //     {/* Gradient Overlay (Appears on Hover) */}
-                                    //     <div className="bg-gradient-to-r from-blue-400/80 to-[#8bebff]/60 bg-opacity-0 hover:bg-opacity-100 transition-opacity duration-300">
-                                    //         {/* Content */}
-                                    //         <div className="relative flex p-4 items-center justify-center rounded-2xl h-full">
-                                    //             <div className="w-[90px] h-[90px] bg-[#1E1E1E] rounded-xl flex items-center justify-center transition-all duration-300">
-                                    //                 <p className="text-6xl text-white">
-                                    //                     {i + 1}
-                                    //                 </p>
-                                    //             </div>
-                                    //             <div className="ml-4">
-                                    //                 <div className="w-[155px] h-[27px] bg-[#1E1E1E] rounded-xl flex items-center justify-center transition-all duration-300">
-                                    //                     <p className="text-white font-noto">
-                                    //                         {mail.title}
-                                    //                     </p>
-                                    //                 </div>
-                                    //                 <p className="mt-2 text-white text-left">
-                                    //                     {mail.date}
-                                    //                 </p>
-                                    //             </div>
-                                    //             <div className="w-[90px] h-[90px] bg-[#F4F5F6] rounded-xl flex items-center justify-center ml-auto transition-all duration-300">
-                                    //                 {/* Image placeholder */}
-                                    //             </div>
-                                    //         </div>
-                                    //     </div>
-                                    // </button>
                                 )
                             )}
                         </div>
