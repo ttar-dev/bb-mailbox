@@ -84,6 +84,7 @@ const App: React.FC = () => {
 
     const handleMailClick = () => {
         setIsMailOpen(true);
+        setIsMailOpenAnimation(true);
     };
 
     const handleAnimationComplete = ({x}: {x: number}) => {
