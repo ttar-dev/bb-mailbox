@@ -106,6 +106,7 @@ const App: React.FC = () => {
             pageLoading: false,
             contentLoading: true
         });
+        delay();
     };
 
     useEffect(() => {
