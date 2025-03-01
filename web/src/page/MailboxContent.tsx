@@ -46,62 +46,59 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                 <div className=" px-8 pt-14">
                     <div className="bg-[#101010] relative w-full h-[560px] mt-10 rounded-[30px] p-5 pb-0">
                         <div className="item-List flex flex-col gap-4">
-                            {getMessages?.map(
-                                (mailContent: MessageTypes, i: number) => (
-                                    <div
-                                        key={mailContent.id}
-                                        className="bg-gradient-to-r hover:from-blue-400/80 hover:to-[#8bebff]/60 border-2 hover:border-[#8bebff] shadow hover:shadow-[#8bebff]/50 transition-all duration-300 ease-in-out rounded-3xl hover:scale-105 hover:bg-[#8bebff]/60"
+                            {getMessages?.map((m: MessageTypes, i: number) => (
+                                <div
+                                    key={m.id}
+                                    className={`bg-gradient-to-r hover:from-blue-400/80 hover:to-[#8bebff]/60 border-2 hover:border-[#8bebff] shadow hover:shadow-[#8bebff]/50 transition-all duration-300 ease-in-out rounded-3xl hover:scale-105 hover:bg-[#8bebff]/60 ${
+                                        mailContent?.id === m.id
+                                            ? "from-blue-400/80 to-[#8bebff]/60 border-2 border-[#8bebff] shadow-[#8bebff]/50"
+                                            : ""
+                                    }`}
+                                >
+                                    <button
+                                        className="flex items-center justify-between w-full h-[115px] gap-3 rounded-3xl p-3 cursor-pointer bg-cover bg-right bg-[url('/assets/item-cover.png')]"
+                                        onClick={() => {
+                                            setMailContent(m);
+                                            handleMailClick();
+                                        }}
                                     >
-                                        <button
-                                            className="flex items-center justify-between w-full h-[115px] gap-3 rounded-3xl p-3 cursor-pointer bg-cover bg-right bg-[url('/assets/item-cover.png')]"
-                                            onClick={() => {
-                                                setMailContent(mailContent);
-                                                handleMailClick();
-                                            }}
-                                        >
-                                            <div className="flex items-center gap-4">
-                                                <div className="min-w-[100px] p-4 bg-[#1e1e1e] rounded-3xl text-center">
-                                                    <span className="text-6xl text-white">
-                                                        {i +
-                                                            1 +
-                                                            (currentPage - 1) *
-                                                                messagesPerPage}
-                                                    </span>
+                                        <div className="flex items-center gap-4">
+                                            <div className="min-w-[100px] p-4 bg-[#1e1e1e] rounded-3xl text-center">
+                                                <span className="text-6xl text-white">
+                                                    {i +
+                                                        1 +
+                                                        (currentPage - 1) *
+                                                            messagesPerPage}
+                                                </span>
+                                            </div>
+                                            <div className="flex flex-col">
+                                                <div className="max-w-[20em] w-fit px-3 pt-1 bg-[#1E1E1E] rounded-xl text-left flex items-center">
+                                                    <p className="text-white font-noto text-lg font-bold">
+                                                        {m.title}
+                                                    </p>
                                                 </div>
-                                                <div className="flex flex-col">
-                                                    <div className="max-w-[20em] w-fit px-3 pt-1 bg-[#1E1E1E] rounded-xl text-left flex items-center">
-                                                        <p className="text-white font-noto text-lg font-bold">
-                                                            {mailContent.title}
-                                                        </p>
-                                                    </div>
-                                                    <div className="max-w-[20em] w-fit px-3 pt-1 rounded-xl text-left flex items-center">
-                                                        <div className="space-x-2">
-                                                            <span className="text-white font-noto text-lg font-bold">
-                                                                {fromNow(
-                                                                    mailContent.date
-                                                                )}
-                                                                ,
-                                                            </span>
-                                                            <span className="text-white font-noto text-lg font-bold">
-                                                                {time(
-                                                                    mailContent.date
-                                                                )}
-                                                            </span>
-                                                        </div>
+                                                <div className="max-w-[20em] w-fit px-3 pt-1 rounded-xl text-left flex items-center">
+                                                    <div className="space-x-2">
+                                                        <span className="text-white font-noto text-lg font-bold">
+                                                            {fromNow(m.date)},
+                                                        </span>
+                                                        <span className="text-white font-noto text-lg font-bold">
+                                                            {time(m.date)}
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="min-w-[100px] h-full p-4 bg-white/80 backdrop-blur-md rounded-3xl text-center flex justify-center items-center">
-                                                <img
-                                                    src={DiamondIcon}
-                                                    alt="item"
-                                                    className="!grayscale-0"
-                                                />
-                                            </div>
-                                        </button>
-                                    </div>
-                                )
-                            )}
+                                        </div>
+                                        <div className="min-w-[100px] h-full p-4 bg-white/80 backdrop-blur-md rounded-3xl text-center flex justify-center items-center">
+                                            <img
+                                                src={DiamondIcon}
+                                                alt="item"
+                                                className="!grayscale-0"
+                                            />
+                                        </div>
+                                    </button>
+                                </div>
+                            ))}
                         </div>
                         {getMessages?.length === 0 && (
                             <div className="flex justify-center flex-col gap-3 items-center h-full">
