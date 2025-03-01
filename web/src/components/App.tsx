@@ -53,7 +53,7 @@ const App: React.FC = () => {
                 console.error("Setting mock data due to error", e);
             })
             .finally(() => {
-                setLoading(false);
+                delay();
             });
     };
 
