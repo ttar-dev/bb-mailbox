@@ -1,11 +1,8 @@
--- Functions
 local function toggleNuiFrame(shouldShow)
   SetNuiFocus(shouldShow, shouldShow)
-  SendReactMessage('getMessagesEvt', shouldShow)
+  SendReactMessage('setMailboxOpen', shouldShow)
 end
 
--- Handlers
--- Toggle mailbox
 RegisterCommand('handleOpenMailbox', function()
     toggleNuiFrame(true)
 end, false)
@@ -18,13 +15,11 @@ end)
 
 -- RegisterKeyMapping('handleOpenMailbox', 'Toggle Mailbox', 'keyboard', 'F5')
 
--- Claim reward
 RegisterNUICallback('handleClaimReward', function(data, cb)
   debugPrint('>> Button was pressed on the NUI')
   cb({})
 end)
 
--- Get messages
 RegisterNUICallback('getMessagesEvt', function(data, cb)
   debugPrint('>> Data sent by React', json.encode(data))
 
@@ -43,7 +38,7 @@ RegisterNUICallback('getMessagesEvt', function(data, cb)
   end)
 end)
 
--- Add message
+-- add message to mailbox
 RegisterNUICallback('addMailboxMessageEvt', function(data, cb)
   debugPrint('>> Req payload', json.encode(data))
 
