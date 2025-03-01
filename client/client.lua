@@ -1,11 +1,7 @@
 -- Functions
-local function getMessages()
-  SendReactMessage('getMessagesEvt', true)
-end
-
 local function toggleNuiFrame(shouldShow)
   SetNuiFocus(shouldShow, shouldShow)
-  getMessages()
+  SendReactMessage('getMessagesEvt', shouldShow)
 end
 
 -- Handlers
@@ -63,8 +59,6 @@ RegisterNUICallback('addMailboxMessageEvt', function(data, cb)
       type = "messageResp",
       data = retData
     })
-
-    getMessages()
 
     cb(retData)
   end)

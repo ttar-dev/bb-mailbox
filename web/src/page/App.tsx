@@ -71,6 +71,7 @@ const App: React.FC = () => {
             .then(retData => {
                 console.log("Got return data from client scripts:");
                 console.dir(retData);
+                handleGetClientData();
                 // if (retData) setMessages(retData);
             })
             .catch(e => {
