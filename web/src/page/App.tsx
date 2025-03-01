@@ -62,11 +62,12 @@ const App: React.FC = () => {
         delay();
     }, [isMailOpen]);
 
-    const handleGetClientData = () => {
+    const handleGetClientData = (page?: number) => {
         setLoading(true);
-        fetchNui<FetchNuiResponse>("getMessagesEvt", {page: currentPage})
+        fetchNui<FetchNuiResponse>("getMessagesEvt", {
+            page: page ? page : currentPage
+        })
             .then(retData => {
-                console.log("Got return data from client scripts:");
                 if (retData && Array.isArray(retData.mailboxData)) {
                     setMessages(retData.mailboxData);
                 } else {
@@ -102,7 +103,7 @@ const App: React.FC = () => {
 
     const handlePageChange = (newPage: number) => {
         setCurrentPage(newPage);
-        handleGetClientData();
+        handleGetClientData(newPage);
     };
 
     return (
