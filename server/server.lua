@@ -9,16 +9,18 @@ local function getDiscordIdentifier(source)
     return nil
 end
 
-local function getMailboxMessagesService(playerId, page, rowsPerPage, cb)
+local function getMailboxMessagesService(identifier, discord_id, page, rowsPerPage, cb)
     local offset = (page - 1) * rowsPerPage
-    MySQL.Async.fetchAll('SELECT COUNT(*) as total FROM mailbox WHERE discord_id = @player_id AND is_ack = 0', {
-        ['@player_id'] = playerId
+    MySQL.Async.fetchAll('SELECT COUNT(*) as total FROM mailbox WHERE identifier = @identifier AND discord_id = @discord_id AND is_ack = 0', {
+        ['@discord_id'] = discord_id,
+        ['@identifier'] = identifier
     }, function(countResult)
         local totalMessages = countResult[1].total
         local maxPage = math.ceil(totalMessages / rowsPerPage)
 
-        MySQL.Async.fetchAll('SELECT * FROM mailbox WHERE discord_id = @player_id ORDER BY date DESC LIMIT @rowsPerPage OFFSET @offset', {
-            ['@player_id'] = playerId,
+        MySQL.Async.fetchAll('SELECT * FROM mailbox WHERE identifier = @identifier AND discord_id = @discord_id ORDER BY date DESC LIMIT @rowsPerPage OFFSET @offset', {
+            ['@discord_id'] = discord_id,
+            ['@identifier'] = identifier,
             ['@rowsPerPage'] = rowsPerPage,
             ['@offset'] = offset
         }, function(result)
@@ -36,10 +38,11 @@ RegisterNetEvent('getMailboxMessages')
 AddEventHandler('getMailboxMessages', function(page)
     local source = source
     local discordIdentifier = getDiscordIdentifier(source)
+    local identifier = GetPlayerIdentifiers(source)[1]
     local rowsPerPage = 4
 
     if discordIdentifier then
-        getMailboxMessagesService(discordIdentifier, page, rowsPerPage, function(mailboxData, maxPage, totalMessages)
+        getMailboxMessagesService(identifier, discordIdentifier, page, rowsPerPage, function(mailboxData, maxPage, totalMessages)
             TriggerClientEvent('receiveMailboxMessages', source, mailboxData, maxPage, totalMessages)
         end)
     else
