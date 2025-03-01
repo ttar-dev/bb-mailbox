@@ -23,7 +23,7 @@ interface FetchNuiResponse {
 const App: React.FC = () => {
     const [messages, setMessages] = useState<MessageTypes[]>([]);
     const {isOpen} = useVisibility();
-
+    const [mailContent, setMailContent] = useState<MessageTypes | null>(null);
     const [isMailOpen, setIsMailOpen] = useState(false);
     const [isMailOpenAnimation, setIsMailOpenAnimation] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -68,6 +68,7 @@ const App: React.FC = () => {
 
     const handleGetClientData = () => {
         setLoading(true);
+        setIsMailOpen(false);
         fetchNui<FetchNuiResponse>("getMessagesEvt", {page: currentPage})
             .then(retData => {
                 if (retData && Array.isArray(retData.mailboxData)) {
@@ -120,6 +121,8 @@ const App: React.FC = () => {
                         isMailOpen={isMailOpen}
                         isMailOpenAnimation={isMailOpenAnimation}
                         loading={loading}
+                        setMailContent={setMailContent}
+                        mailContent={mailContent}
                         handleMailClick={handleMailClick}
                         handleGetClientData={handleGetClientData}
                         handleAnimationComplete={handleAnimationComplete}

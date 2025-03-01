@@ -16,6 +16,8 @@ interface MailboxContentProps {
     totalMessages: number;
     currentPage: number;
     messagesPerPage: number;
+    mailContent: MessageTypes | null;
+    setMailContent: (mail: MessageTypes) => void;
     handleMailClick: () => void;
     handleGetClientData: () => void;
     handleAnimationComplete: ({x}: {x: number}) => void;
@@ -29,13 +31,12 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
     loading,
     currentPage,
     messagesPerPage,
+    mailContent,
+    setMailContent,
     handleMailClick,
     handleGetClientData,
     handleAnimationComplete
 }) => {
-    const [mailContent, setMailContent] = React.useState<MessageTypes | null>(
-        null
-    );
     return (
         <div className="grid grid-cols-3 p-6 pt-10 mx-auto mt-[42px]">
             <div
