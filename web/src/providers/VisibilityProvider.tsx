@@ -19,7 +19,7 @@ interface VisibilityProviderValue {
 export const VisibilityProvider: React.FC<{children: React.ReactNode}> = ({
     children
 }) => {
-    const [isOpen, setOpen] = useState(false);
+    const [isOpen, setOpen] = useState(true);
 
     useNuiEvent<boolean>("setMailboxOpen", setOpen);
 

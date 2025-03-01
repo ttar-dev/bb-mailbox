@@ -106,6 +106,7 @@ const App: React.FC = () => {
     const handleMailClick = async (m: MessageTypes) => {
         setIsMailOpen(true);
 
+        await delay();
         if (m.id === mailContent?.id) {
             setLoading({
                 pageLoading: false,
@@ -113,8 +114,6 @@ const App: React.FC = () => {
             });
             setMailContent(null);
         }
-
-        await delay();
     };
 
     useEffect(() => {
