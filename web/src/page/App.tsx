@@ -101,7 +101,6 @@ const App: React.FC = () => {
     }, [isOpen, currentPage]);
 
     useEffect(() => {
-        setIsMailOpen(false);
         setLoading(true);
     }, [currentPage]);
 
