@@ -136,7 +136,11 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                 </div>
             </div>
 
-            <div className="col-span-1 transition-all duration-300">
+            <div
+                className={`${
+                    totalMessages > 0 ? "hidden" : "hidden"
+                } col-span-1 transition-all duration-300`}
+            >
                 <AnimatePresence>
                     <div className="pr-8 -mt-1 -ml-2 pt-[5em]">
                         <div className="bg-[#101010] relative w-full h-[560px] mt-5 rounded-[30px] p-5 pb-0 text-center">
@@ -209,7 +213,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                     </div>
                                 </PageWrapper>
                             ) : (
-                                <div className="flex justify-center items-center w-full h-full flex-col">
+                                <div className="flex justify-center items-center w-full gap-4 h-full flex-col rounded-[30px]">
                                     <span className="text-white text-[4em] opacity-50">
                                         <HiOutlineEnvelopeOpen />
                                     </span>

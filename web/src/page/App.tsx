@@ -27,8 +27,8 @@ const App: React.FC = () => {
     const [isMailOpen, setIsMailOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
-    const [maxPage, setMaxPage] = useState(2);
-    const [totalMessages, setTotalMessages] = useState(5);
+    const [maxPage, setMaxPage] = useState(1);
+    const [totalMessages, setTotalMessages] = useState(0);
 
     const getMessages = useMemo(() => {
         if (!messages) {
@@ -103,7 +103,6 @@ const App: React.FC = () => {
     useEffect(() => {
         setIsMailOpen(false);
         setLoading(true);
-        setMailContent(null);
     }, [currentPage]);
 
     return (
