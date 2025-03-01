@@ -68,7 +68,6 @@ const App: React.FC = () => {
 
     const handleGetClientData = () => {
         setLoading(true);
-        setIsMailOpen(false);
         fetchNui<FetchNuiResponse>("getMessagesEvt", {page: currentPage})
             .then(retData => {
                 if (retData && Array.isArray(retData.mailboxData)) {
@@ -107,6 +106,11 @@ const App: React.FC = () => {
             setIsMailOpenAnimation(false);
         }
     }, [isOpen, currentPage]);
+
+    useEffect(() => {
+        setIsMailOpen(false);
+        setMailContent(null);
+    }, [currentPage]);
 
     return (
         <div className="nui-wrapper">
