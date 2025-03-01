@@ -20,7 +20,7 @@ RegisterNUICallback('handleClaimReward', function(data, cb)
   cb({})
 end)
 
-RegisterNUICallback('getMessages', function(data, cb)
+RegisterNUICallback('getMessagesEvt', function(data, cb)
   debugPrint('>> Data sent by React', json.encode(data))
 
   TriggerServerEvent('getMailboxMessages')
@@ -31,6 +31,25 @@ RegisterNUICallback('getMessages', function(data, cb)
 
     SendNUIMessage({
       type = "messages",
+      data = retData
+    })
+
+    cb(retData)
+  end)
+end)
+
+-- add message to mailbox
+RegisterNUICallback('addMailboxMessageEvt', function(data, cb)
+  debugPrint('>> Data sent by React', json.encode(data))
+
+  TriggerServerEvent('addMailboxMessage', data)
+
+  RegisterNetEvent('mailboxMessageResp')
+  AddEventHandler('mailboxMessageResp', function(success)
+    local retData = { success = success }
+
+    SendNUIMessage({
+      type = "messageResp",
       data = retData
     })
 

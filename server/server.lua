@@ -72,7 +72,6 @@ AddEventHandler('addMailboxMessage', function(data)
             campaign_id = data.campaign_id,
             reward_name = data.reward_name,
             reward_qty = data.reward_qty,
-            is_ack = data.is_ack
         }, function(success)
             if success then
                 TriggerClientEvent('mailboxMessageResp', source, true)

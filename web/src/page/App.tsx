@@ -59,6 +59,28 @@ const App: React.FC = () => {
         return messages;
     }, [messages]);
 
+    const handleAddMessage = () => {
+        setLoading(true);
+        fetchNui("addMailboxMessageEvt", {
+            type: "reward",
+            title: "New Message",
+            content: "This is a new message",
+            reward_name: "stone",
+            reward_qty: 1
+        })
+            .then(retData => {
+                console.log("Got return data from client scripts:");
+                console.dir(retData);
+                // if (retData) setMessages(retData);
+            })
+            .catch(e => {
+                console.error("addMailboxMessageEvt error", e);
+            })
+            .finally(() => {
+                delay();
+            });
+    };
+
     const delay = _.debounce(() => {
         setLoading(false);
     }, 800);
@@ -69,14 +91,14 @@ const App: React.FC = () => {
 
     const handleGetClientData = () => {
         setLoading(true);
-        fetchNui("getMessages")
+        fetchNui("getMessagesEvt")
             .then(retData => {
                 console.log("Got return data from client scripts:");
                 console.dir(retData);
                 // if (retData) setMessages(retData);
             })
             .catch(e => {
-                console.error("Setting mock data due to error", e);
+                console.error("getMessagesEvt error", e);
             })
             .finally(() => {
                 delay();
@@ -117,6 +139,12 @@ const App: React.FC = () => {
                         setLoading={setLoading}
                     />
                     <PaginationBar />
+                    <button
+                        onClick={handleAddMessage}
+                        className="absolute bottom-0 right-0 bg-gray-800 text-white p-2 rounded-md"
+                    >
+                        test add message
+                    </button>
                 </div>
             </div>
         </div>
