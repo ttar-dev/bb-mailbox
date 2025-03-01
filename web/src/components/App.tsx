@@ -42,6 +42,7 @@ const App: React.FC = () => {
     }, [isMailOpen]);
 
     const handleGetClientData = () => {
+        setLoading(true);
         fetchNui("getMessages")
             .then(retData => {
                 console.log("Got return data from client scripts:");
@@ -50,6 +51,9 @@ const App: React.FC = () => {
             })
             .catch(e => {
                 console.error("Setting mock data due to error", e);
+            })
+            .finally(() => {
+                setLoading(false);
             });
     };
 
@@ -146,13 +150,14 @@ const App: React.FC = () => {
                                             <button
                                                 className="flex items-center gap-3 bg-[#56c0fb] text-white font-noto text-xl px-4 py-2 rounded-3xl"
                                                 onClick={() => {
-                                                    setLoading(true);
-                                                    if (!isMailOpen) {
-                                                        setIsMailOpenAnimation(
-                                                            true
-                                                        );
-                                                    }
-                                                    setIsMailOpen(!isMailOpen);
+                                                    // setLoading(true);
+                                                    // if (!isMailOpen) {
+                                                    //     setIsMailOpenAnimation(
+                                                    //         true
+                                                    //     );
+                                                    // }
+                                                    // setIsMailOpen(!isMailOpen);
+                                                    handleGetClientData();
                                                 }}
                                             >
                                                 <TfiReload />
