@@ -12,13 +12,13 @@ const PaginationBar: React.FC<PaginationBarProps> = ({
     onPageChange
 }) => {
     const handlePrev = () => {
-        if (currentPage > 1) {
-            onPageChange(currentPage - 1);
+        if (+currentPage > 1) {
+            onPageChange(+currentPage - 1);
         }
     };
 
     const handleNext = () => {
-        onPageChange(currentPage + 1);
+        onPageChange(+currentPage + 1);
     };
 
     return (
