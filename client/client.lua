@@ -40,14 +40,14 @@ end)
 
 -- add message to mailbox
 RegisterNUICallback('addMailboxMessageEvt', function(data, cb)
-  debugPrint('>> Data sent by React', json.encode(data))
+  debugPrint('>> Req payload', json.encode(data))
 
   TriggerServerEvent('addMailboxMessage', data)
 
   RegisterNetEvent('mailboxMessageResp')
   AddEventHandler('mailboxMessageResp', function(success)
     local retData = { success = success }
-
+    debugPrint('>> Resp', success)
     SendNUIMessage({
       type = "messageResp",
       data = retData
@@ -55,4 +55,5 @@ RegisterNUICallback('addMailboxMessageEvt', function(data, cb)
 
     cb(retData)
   end)
+  
 end)
