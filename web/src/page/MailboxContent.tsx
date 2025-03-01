@@ -2,7 +2,7 @@ import React from "react";
 import {HiOutlineEnvelopeOpen} from "react-icons/hi2";
 import {TfiReload} from "react-icons/tfi";
 import {VscLoading} from "react-icons/vsc";
-// import PageWrapper from "../components/PageWrapper";
+import PageWrapper from "../components/PageWrapper";
 import {AnimatePresence} from "framer-motion";
 import {fromNow, time} from "../utils/transform";
 import LoadingIcon from "/public/assets/logo.png";
@@ -154,63 +154,67 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                     <div className="pr-8 -mt-1 -ml-2 pt-[5em]">
                         <div className="bg-[#101010] relative w-full h-[560px] mt-5 rounded-[30px] p-5 pb-0 text-center">
                             {isMailOpen && !!mailContent ? (
-                                // <PageWrapper>
-                                <div>
-                                    <p className="py-1 mt-1 text-white font-noto text-2xl bg-gradient-to-r from-transparent via-[#4baaf8] to-transparent">
-                                        ของรางวัลรายวัน
-                                    </p>
-                                    <div className="mt-6 flex items-center gap-3">
-                                        <div className="border w-1/4 rounded-full"></div>
-                                        <div className="w-2/4 h-[41px] bg-[#1E1E1E] border-2 border-white rounded-3xl flex items-center justify-center">
-                                            <p className="text-white font-noto text-base">
-                                                รายละเอียด
-                                            </p>
-                                        </div>
-                                        <div className="border w-1/4 rounded-full"></div>
-                                    </div>
-                                    <div className="max-h-[12em] min-h-[12em] overflow-x-hidden overflow-y-auto">
-                                        <p className="mt-3 text-left text-white font-noto">
-                                            {mailContent?.content}
+                                <PageWrapper>
+                                    <div>
+                                        <p className="py-1 mt-1 text-white font-noto text-2xl bg-gradient-to-r from-transparent via-[#4baaf8] to-transparent">
+                                            ของรางวัลรายวัน
                                         </p>
-                                    </div>
-                                    <div className="flex items-center gap-3">
-                                        <div className="border w-1/4 rounded-full"></div>
-                                        <div className="w-2/4 h-[41px] bg-[#1E1E1E] border-2 border-white rounded-3xl flex items-center justify-center">
-                                            <p className="text-white font-noto text-xl">
-                                                ของรางวัล
-                                            </p>
-                                        </div>
-                                        <div className="border w-1/4 rounded-full"></div>
-                                    </div>
-                                    <div className="mt-4 bg-[linear-gradient(270deg,#2b2b2b_0%,#101010_100%),url(/assets/item-cover.png)] bg-cover bg-right bg-blend-color border-2 border-white w-full h-[88px] rounded-[20px] mb-2 p-[6px] px-2 flex items-center">
-                                        <div className="w-[71px] h-[71px] bg-gradient-to-b from-[#A6F0FF] to-[#1181ED] rounded-xl flex items-center justify-center ">
-                                            <img
-                                                src={DiamondIcon}
-                                                className="max-w-full max-h-full"
-                                            />
-                                        </div>
-                                        <div className="ml-4">
-                                            <div className="w-[120px] h-[27px] border-2 border-white bg-[#1E1E1E] rounded-xl flex items-center justify-center">
-                                                <p className="text-white font-noto uppercase">
-                                                    {mailContent?.reward_name}
+                                        <div className="mt-6 flex items-center gap-3">
+                                            <div className="border w-1/4 rounded-full"></div>
+                                            <div className="w-2/4 h-[41px] bg-[#1E1E1E] border-2 border-white rounded-3xl flex items-center justify-center">
+                                                <p className="text-white font-noto text-base">
+                                                    รายละเอียด
                                                 </p>
                                             </div>
-                                            <p className="mt-2 text-white text-left">
-                                                X{mailContent?.reward_qty}
+                                            <div className="border w-1/4 rounded-full"></div>
+                                        </div>
+                                        <div className="max-h-[12em] min-h-[12em] overflow-x-hidden overflow-y-auto">
+                                            <p className="mt-3 text-left text-white font-noto">
+                                                {mailContent?.content}
                                             </p>
                                         </div>
+                                        <div className="flex items-center gap-3">
+                                            <div className="border w-1/4 rounded-full"></div>
+                                            <div className="w-2/4 h-[41px] bg-[#1E1E1E] border-2 border-white rounded-3xl flex items-center justify-center">
+                                                <p className="text-white font-noto text-xl">
+                                                    ของรางวัล
+                                                </p>
+                                            </div>
+                                            <div className="border w-1/4 rounded-full"></div>
+                                        </div>
+                                        <div className="mt-4 bg-[linear-gradient(270deg,#2b2b2b_0%,#101010_100%),url(/assets/item-cover.png)] bg-cover bg-right bg-blend-color border-2 border-white w-full h-[88px] rounded-[20px] mb-2 p-[6px] px-2 flex items-center">
+                                            <div className="w-[71px] h-[71px] bg-gradient-to-b from-[#A6F0FF] to-[#1181ED] rounded-xl flex items-center justify-center ">
+                                                <img
+                                                    src={DiamondIcon}
+                                                    className="max-w-full max-h-full"
+                                                />
+                                            </div>
+                                            <div className="ml-4">
+                                                <div className="w-[120px] h-[27px] border-2 border-white bg-[#1E1E1E] rounded-xl flex items-center justify-center">
+                                                    <p className="text-white font-noto uppercase">
+                                                        {
+                                                            mailContent?.reward_name
+                                                        }
+                                                    </p>
+                                                </div>
+                                                <p className="mt-2 text-white text-left">
+                                                    X{mailContent?.reward_qty}
+                                                </p>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                </PageWrapper>
                             ) : (
-                                // </PageWrapper>
-                                <div className="flex justify-center items-center w-full gap-4 h-full flex-col rounded-[30px]">
-                                    <span className="text-white text-[4em] opacity-50">
-                                        <HiOutlineEnvelopeOpen />
-                                    </span>
-                                    <p className="text-white font-noto text-2xl font-bold opacity-50">
-                                        ยังไม่ได้เปิดข้อความ
-                                    </p>
-                                </div>
+                                <PageWrapper>
+                                    <div className="flex justify-center items-center w-full gap-4 h-full flex-col rounded-[30px]">
+                                        <span className="text-white text-[4em] opacity-50">
+                                            <HiOutlineEnvelopeOpen />
+                                        </span>
+                                        <p className="text-white font-noto text-2xl font-bold opacity-50">
+                                            ยังไม่ได้เปิดข้อความ
+                                        </p>
+                                    </div>
+                                </PageWrapper>
                             )}
                             <div
                                 className={`absolute top-0 left-0 w-full h-full bg-[#101010] bg-opacity-50 backdrop-blur-2xl rounded-[30px] transition-opacity duration-500 ease-in-out ${
