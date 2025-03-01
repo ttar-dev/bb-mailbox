@@ -51,7 +51,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                     key={m.id}
                                     className={`bg-gradient-to-r hover:from-blue-400/80 hover:to-[#8bebff]/60 border-2 hover:border-[#8bebff] shadow hover:shadow-[#8bebff]/50 transition-all duration-300 ease-in-out rounded-3xl hover:scale-105 hover:bg-[#8bebff]/60 ${
                                         mailContent?.id === m.id
-                                            ? "from-blue-400/80 to-[#8bebff]/60 border-2 border-[#8bebff] shadow-[#8bebff]/50"
+                                            ? "bg-gradient-to-r from-blue-400/80 to-[#8bebff]/60 border-2 border-[#8bebff] shadow-[#8bebff]/50"
                                             : ""
                                     }`}
                                 >
@@ -160,7 +160,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                         </div>
                                         <div className="border w-1/4 rounded-full"></div>
                                     </div>
-                                    <div className="max-h-[12em] min-h-[8em] overflow-x-hidden overflow-y-auto">
+                                    <div className="max-h-[12em] min-h-[12em] overflow-x-hidden overflow-y-auto">
                                         <p className="mt-3 text-left text-white font-noto">
                                             {mailContent?.content}
                                         </p>
