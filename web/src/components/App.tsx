@@ -38,7 +38,6 @@ const App: React.FC = () => {
     }, 800);
 
     useEffect(() => {
-        setLoading(true);
         delay();
     }, [isMailOpen]);
 
@@ -56,6 +55,7 @@ const App: React.FC = () => {
 
     const handleMailClick = (mail: any) => {
         setSelectedMail(mail);
+
         setIsMailOpen(true);
     };
 
@@ -99,9 +99,10 @@ const App: React.FC = () => {
                                             }) => (
                                                 <button
                                                     key={mail.id}
-                                                    onClick={() =>
-                                                        handleMailClick(mail)
-                                                    }
+                                                    onClick={() => {
+                                                        setLoading(true);
+                                                        handleMailClick(mail);
+                                                    }}
                                                     className="bg-[linear-gradient(270deg,#2b2b2b_0%,#101010_100%),url(/assets/MaskGroup.png)] bg-cover bg-right bg-blend-color border-2 border-white w-full h-[88px] rounded-2xl mb-2 p-[6px] px-2 flex items-center"
                                                 >
                                                     {/* Run number */}
@@ -145,6 +146,7 @@ const App: React.FC = () => {
                                             <button
                                                 className="flex items-center gap-3 bg-[#56c0fb] text-white font-noto text-xl px-4 py-2 rounded-3xl"
                                                 onClick={() => {
+                                                    setLoading(true);
                                                     if (!isMailOpen) {
                                                         setIsMailOpenAnimation(
                                                             true
@@ -184,7 +186,7 @@ const App: React.FC = () => {
                                         }
                                     >
                                         <div className="pr-8 -mt-1 -ml-2 pt-[5em]">
-                                            <div className="bg-[#333333] w-full h-[560px] mt-5 rounded-[30px] p-5 pb-0 text-center">
+                                            <div className="bg-[#333333] relative w-full h-[560px] mt-5 rounded-[30px] p-5 pb-0 text-center">
                                                 <p className="py-1 mt-1 text-white font-noto text-2xl bg-gradient-to-r from-transparent via-[#4baaf8] to-transparent">
                                                     ของรางวัลรายวัน
                                                 </p>
@@ -250,6 +252,17 @@ const App: React.FC = () => {
                                                         <p className="mt-2 text-white text-left">
                                                             X100
                                                         </p>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    className={`absolute top-0 left-0 w-full h-full bg-[#252525] bg-opacity-50 backdrop-blur-2xl rounded-[30px] transition-opacity duration-500 ease-in-out ${
+                                                        loading
+                                                            ? "opacity-100"
+                                                            : "opacity-0 pointer-events-none"
+                                                    }`}
+                                                >
+                                                    <div className="flex justify-center items-center w-full h-full">
+                                                        <IoReload className="animate-spin text-white text-6xl" />
                                                     </div>
                                                 </div>
                                             </div>
