@@ -86,6 +86,6 @@ AddEventHandler('addMailboxMessage', function(data)
 end)
 
 -- Exports
-exports('getMailboxMessagesService', getMailboxMessagesService)
-exports('getDiscordIdentifier', getDiscordIdentifier)
-exports('addMailboxMessageService', addMailboxMessageService)
+exports('getMailboxMsgSv', getMailboxMessagesService)
+exports('getDiscordIdSv', getDiscordIdentifier)
+exports('addMailboxMdgSv', addMailboxMessageService)
