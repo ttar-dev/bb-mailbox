@@ -100,12 +100,15 @@ const App: React.FC = () => {
             });
     };
 
-    const handleMailClick = () => {
+    const handleMailClick = (m: MessageTypes) => {
         setIsMailOpen(true);
         setLoading({
             pageLoading: false,
             contentLoading: true
         });
+        if (m.id === mailContent?.id) {
+            setMailContent(null);
+        }
         delay();
     };
 

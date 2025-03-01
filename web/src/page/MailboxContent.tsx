@@ -20,7 +20,7 @@ interface MailboxContentProps {
     messagesPerPage: number;
     mailContent: MessageTypes | null;
     setMailContent: (mail: MessageTypes) => void;
-    handleMailClick: () => void;
+    handleMailClick: (m: MessageTypes) => void;
     handleGetClientData: () => void;
     setLoading: ({
         contentLoading,
@@ -66,7 +66,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                         className="flex items-center justify-between w-full h-[115px] gap-3 rounded-3xl p-3 cursor-pointer bg-cover bg-right bg-[url('/assets/item-cover.png')]"
                                         onClick={() => {
                                             setMailContent(m);
-                                            handleMailClick();
+                                            handleMailClick(m);
                                         }}
                                     >
                                         <div className="flex items-center gap-4">
