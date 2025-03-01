@@ -4,7 +4,11 @@ import {TfiReload} from "react-icons/tfi";
 import {IoReload} from "react-icons/io5";
 import PageWrapper from "../components/PageWrapper";
 import {AnimatePresence} from "framer-motion";
-
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import buddhistEra from "dayjs/plugin/buddhistEra";
+dayjs.extend(relativeTime);
+dayjs.extend(buddhistEra);
 interface MailboxContentProps {
     getMessages: MessageTypes[];
     isMailOpen: boolean;
@@ -23,8 +27,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
     loading,
     handleMailClick,
     handleGetClientData,
-    handleAnimationComplete,
-    setLoading
+    handleAnimationComplete
 }) => {
     return (
         <div className="grid grid-cols-3 p-6 pt-10 mx-auto mt-[42px]">
@@ -38,37 +41,73 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                         <div className="item-List flex flex-col gap-4">
                             {getMessages?.map(
                                 (mail: MessageTypes, i: number) => (
-                                    <button
+                                    <div
                                         key={mail.id}
+                                        className="flex items-center gap-3 h-[117px] bg-[#101010] border-2 border-white rounded-3xl p-4 cursor-pointer"
                                         onClick={() => {
-                                            setLoading(true);
                                             handleMailClick();
                                         }}
-                                        className="bg-[linear-gradient(270deg,#2b2b2b_0%,#101010_100%),url(/assets/MaskGroup.png)] bg-cover bg-right bg-blend-color border-2 border-white w-full h-[calc(118px)] rounded-2xl p-[6px] px-2 flex items-center"
                                     >
-                                        <div className="w-[71px] h-[71px] bg-[#1E1E1E] rounded-xl flex items-center justify-center">
-                                            <p className="text-6xl text-white">
+                                        <div className="min-w-[100px] p-4 bg-[#1e1e1e] rounded-xl text-center">
+                                            <span className="text-6xl text-white">
                                                 {i + 1}
-                                            </p>
+                                            </span>
                                         </div>
-                                        <div className="ml-4">
-                                            <div className="w-[155px] h-[27px] bg-[#1E1E1E] rounded-xl flex items-center justify-center">
-                                                <p className="text-white font-noto">
+                                        <div className="flex flex-col">
+                                            <div className="max-w-[20em] w-fit px-3 pt-1 bg-[#1E1E1E] rounded-xl text-left flex items-center">
+                                                <p className="text-white font-noto text-lg font-bold">
                                                     {mail.title}
                                                 </p>
                                             </div>
-                                            <p className="mt-2 text-white text-left">
-                                                {mail.date}
-                                            </p>
+                                            <div className="max-w-[20em] w-fit px-3 pt-1 rounded-xl text-left flex items-center">
+                                                <div className="space-x-2">
+                                                    <span className="text-white font-noto text-lg font-bold">
+                                                        {dayjs(
+                                                            mail.date
+                                                        ).fromNow()}
+                                                        ,
+                                                    </span>
+                                                    <span className="text-white font-noto text-lg font-bold">
+                                                        {dayjs(
+                                                            mail.date
+                                                        ).format("HH:mm")}
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className="w-[71px] h-[71px] bg-[#F4f5f6] rounded-xl flex items-center justify-center ml-auto">
-                                            {/* <img
-                                            src={mail.icon}
-                                            alt={mail.title}
-                                            className="max-w-full max-h-full"
-                                        /> */}
-                                        </div>
-                                    </button>
+                                    </div>
+                                    // <button
+                                    //     key={mail.id}
+                                    //     onClick={() => {
+                                    //         handleMailClick();
+                                    //     }}
+                                    //     className="relative border-2 border-white w-full h-[118px] rounded-2xl overflow-hidden bg-cover bg-right bg-[url('/assets/Maskgroup.png')]"
+                                    // >
+                                    //     {/* Gradient Overlay (Appears on Hover) */}
+                                    //     <div className="bg-gradient-to-r from-blue-400/80 to-[#8bebff]/60 bg-opacity-0 hover:bg-opacity-100 transition-opacity duration-300">
+                                    //         {/* Content */}
+                                    //         <div className="relative flex p-4 items-center justify-center rounded-2xl h-full">
+                                    //             <div className="w-[90px] h-[90px] bg-[#1E1E1E] rounded-xl flex items-center justify-center transition-all duration-300">
+                                    //                 <p className="text-6xl text-white">
+                                    //                     {i + 1}
+                                    //                 </p>
+                                    //             </div>
+                                    //             <div className="ml-4">
+                                    //                 <div className="w-[155px] h-[27px] bg-[#1E1E1E] rounded-xl flex items-center justify-center transition-all duration-300">
+                                    //                     <p className="text-white font-noto">
+                                    //                         {mail.title}
+                                    //                     </p>
+                                    //                 </div>
+                                    //                 <p className="mt-2 text-white text-left">
+                                    //                     {mail.date}
+                                    //                 </p>
+                                    //             </div>
+                                    //             <div className="w-[90px] h-[90px] bg-[#F4F5F6] rounded-xl flex items-center justify-center ml-auto transition-all duration-300">
+                                    //                 {/* Image placeholder */}
+                                    //             </div>
+                                    //         </div>
+                                    //     </div>
+                                    // </button>
                                 )
                             )}
                         </div>
