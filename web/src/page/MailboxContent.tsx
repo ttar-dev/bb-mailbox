@@ -11,7 +11,10 @@ import DiamondIcon from "/public/assets/Diamond.png";
 interface MailboxContentProps {
     getMessages: MessageTypes[];
     isMailOpen: boolean;
-    loading: boolean;
+    loading: {
+        contentLoading: boolean;
+        pageLoading: boolean;
+    };
     totalMessages: number;
     currentPage: number;
     messagesPerPage: number;
@@ -19,7 +22,13 @@ interface MailboxContentProps {
     setMailContent: (mail: MessageTypes) => void;
     handleMailClick: () => void;
     handleGetClientData: () => void;
-    setLoading: (loading: boolean) => void;
+    setLoading: ({
+        contentLoading,
+        pageLoading
+    }: {
+        contentLoading: boolean;
+        pageLoading: boolean;
+    }) => void;
 }
 
 const MailboxContent: React.FC<MailboxContentProps> = ({
@@ -117,7 +126,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                         )}
                         <div
                             className={`absolute top-0 left-0 w-full h-full bg-[#101010] bg-opacity-50 backdrop-blur-2xl rounded-[30px] transition-opacity duration-500 ease-in-out ${
-                                loading
+                                loading.pageLoading
                                     ? "opacity-100"
                                     : "opacity-0 pointer-events-none"
                             }`}
@@ -195,7 +204,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                         </div>
                                         <div
                                             className={`absolute top-0 left-0 w-full h-full bg-[#101010] bg-opacity-50 backdrop-blur-2xl rounded-[30px] transition-opacity duration-500 ease-in-out ${
-                                                loading
+                                                loading.contentLoading
                                                     ? "opacity-100"
                                                     : "opacity-0 pointer-events-none"
                                             }`}

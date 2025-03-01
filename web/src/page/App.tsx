@@ -25,7 +25,10 @@ const App: React.FC = () => {
     const {isOpen} = useVisibility();
     const [mailContent, setMailContent] = useState<MessageTypes | null>(null);
     const [isMailOpen, setIsMailOpen] = useState(false);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState({
+        contentLoading: false,
+        pageLoading: false
+    });
     const [currentPage, setCurrentPage] = useState(1);
     const [maxPage, setMaxPage] = useState(1);
     const [totalMessages, setTotalMessages] = useState(0);
@@ -38,7 +41,10 @@ const App: React.FC = () => {
     }, [messages]);
 
     const handleAddMessage = () => {
-        setLoading(true);
+        setLoading({
+            pageLoading: true,
+            contentLoading: false
+        });
         fetchNui("addMailboxMessageEvt", {
             type: "reward",
             title: "New Message",
@@ -58,7 +64,10 @@ const App: React.FC = () => {
     };
 
     const delay = _.debounce(() => {
-        setLoading(false);
+        setLoading({
+            pageLoading: false,
+            contentLoading: false
+        });
     }, 800);
 
     useEffect(() => {
@@ -66,7 +75,10 @@ const App: React.FC = () => {
     }, [isMailOpen]);
 
     const handleGetClientData = () => {
-        setLoading(true);
+        setLoading({
+            pageLoading: true,
+            contentLoading: false
+        });
         fetchNui<FetchNuiResponse>("getMessagesEvt", {page: currentPage})
             .then(retData => {
                 if (retData && Array.isArray(retData.mailboxData)) {
@@ -101,7 +113,10 @@ const App: React.FC = () => {
     }, [isOpen, currentPage]);
 
     useEffect(() => {
-        setLoading(true);
+        setLoading({
+            pageLoading: true,
+            contentLoading: false
+        });
     }, [currentPage]);
 
     return (
