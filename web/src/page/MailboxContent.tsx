@@ -33,6 +33,9 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
     handleGetClientData,
     handleAnimationComplete
 }) => {
+    const [mailContent, setMailContent] = React.useState<MessageTypes | null>(
+        null
+    );
     return (
         <div className="grid grid-cols-3 p-6 pt-10 mx-auto mt-[42px]">
             <div
@@ -44,14 +47,15 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                     <div className="bg-[#101010] relative w-full h-[560px] mt-10 rounded-[30px] p-5 pb-0">
                         <div className="item-List flex flex-col gap-4">
                             {getMessages?.map(
-                                (mail: MessageTypes, i: number) => (
+                                (mailContent: MessageTypes, i: number) => (
                                     <div
-                                        key={mail.id}
+                                        key={mailContent.id}
                                         className="bg-gradient-to-r hover:from-blue-400/80 hover:to-[#8bebff]/60 border-2 hover:border-[#8bebff] shadow hover:shadow-[#8bebff]/50 transition-all duration-300 ease-in-out rounded-3xl hover:scale-105 hover:bg-[#8bebff]/60"
                                     >
                                         <button
                                             className="flex items-center justify-between w-full h-[115px] gap-3 rounded-3xl p-3 cursor-pointer bg-cover bg-right bg-[url('/assets/item-cover.png')]"
                                             onClick={() => {
+                                                setMailContent(mailContent);
                                                 handleMailClick();
                                             }}
                                         >
@@ -67,20 +71,20 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                                 <div className="flex flex-col">
                                                     <div className="max-w-[20em] w-fit px-3 pt-1 bg-[#1E1E1E] rounded-xl text-left flex items-center">
                                                         <p className="text-white font-noto text-lg font-bold">
-                                                            {mail.title}
+                                                            {mailContent.title}
                                                         </p>
                                                     </div>
                                                     <div className="max-w-[20em] w-fit px-3 pt-1 rounded-xl text-left flex items-center">
                                                         <div className="space-x-2">
                                                             <span className="text-white font-noto text-lg font-bold">
                                                                 {fromNow(
-                                                                    mail.date
+                                                                    mailContent.date
                                                                 )}
                                                                 ,
                                                             </span>
                                                             <span className="text-white font-noto text-lg font-bold">
                                                                 {time(
-                                                                    mail.date
+                                                                    mailContent.date
                                                                 )}
                                                             </span>
                                                         </div>
@@ -154,25 +158,14 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                         <div className="border w-1/4 rounded-full"></div>
                                         <div className="w-2/4 h-[41px] bg-[#1E1E1E] border-2 border-white rounded-3xl flex items-center justify-center">
                                             <p className="text-white font-noto text-base">
-                                                รายละเอียดสินค้า
+                                                รายละเอียด
                                             </p>
                                         </div>
                                         <div className="border w-1/4 rounded-full"></div>
                                     </div>
                                     <div className="max-h-[12em] min-h-[8em] overflow-x-hidden overflow-y-auto">
                                         <p className="mt-3 text-left text-white font-noto">
-                                            Lorem ipsum, dolor sit amet
-                                            consectetur adipisicing elit. Cum,
-                                            doloremque. Error temporibus, ab ea
-                                            illo non quasi eaque accusamus eius
-                                            modi quaerat itaque deserunt odit
-                                            harum alias eum? Laudantium,
-                                            deleniti. Lorem, ipsum dolor sit
-                                            amet consectetur adipisicing elit.
-                                            Nam rem non consectetur, laborum vel
-                                            ducimus eaque atque dicta quasi
-                                            velit ipsum cum? Laborum quo minima
-                                            ratione, omnis rem mollitia sint!
+                                            {mailContent?.content}
                                         </p>
                                     </div>
                                     <div className="flex items-center gap-3">
@@ -193,12 +186,12 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                         </div>
                                         <div className="ml-4">
                                             <div className="w-[120px] h-[27px] border-2 border-white bg-[#1E1E1E] rounded-xl flex items-center justify-center">
-                                                <p className="text-white font-noto">
-                                                    DIAMOND
+                                                <p className="text-white font-noto uppercase">
+                                                    {mailContent?.reward_name}
                                                 </p>
                                             </div>
                                             <p className="mt-2 text-white text-left">
-                                                X100
+                                                X{mailContent?.reward_qty}
                                             </p>
                                         </div>
                                     </div>
