@@ -23,7 +23,8 @@ end)
 RegisterNUICallback('getMessagesEvt', function(data, cb)
   debugPrint('>> Data sent by React', json.encode(data))
 
-  TriggerServerEvent('getMailboxMessages')
+  local page = data.page or 1
+  TriggerServerEvent('getMailboxMessages', page)
 
   RegisterNetEvent('receiveMailboxMessages')
   AddEventHandler('receiveMailboxMessages', function(mailboxData)

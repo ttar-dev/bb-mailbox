@@ -25,6 +25,7 @@ const App: React.FC = () => {
     const [isMailOpen, setIsMailOpen] = useState(false);
     const [isMailOpenAnimation, setIsMailOpenAnimation] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
 
     const getMessages = useMemo(() => {
         if (!messages) {
@@ -63,7 +64,7 @@ const App: React.FC = () => {
 
     const handleGetClientData = () => {
         setLoading(true);
-        fetchNui<FetchNuiResponse>("getMessagesEvt")
+        fetchNui<FetchNuiResponse>("getMessagesEvt", {page: currentPage})
             .then(retData => {
                 console.log("Got return data from client scripts:");
                 if (retData && Array.isArray(retData.mailboxData)) {
@@ -99,6 +100,11 @@ const App: React.FC = () => {
         }
     }, [isOpen]);
 
+    const handlePageChange = (newPage: number) => {
+        setCurrentPage(newPage);
+        handleGetClientData();
+    };
+
     return (
         <div className="nui-wrapper">
             <div className="bg-[url(/assets/bg.png)] bg-no-repeat bg-center w-screen h-screen flex justify-center items-center flex-col -mt-16">
@@ -114,7 +120,10 @@ const App: React.FC = () => {
                         handleAnimationComplete={handleAnimationComplete}
                         setLoading={setLoading}
                     />
-                    <PaginationBar />
+                    <PaginationBar
+                        currentPage={currentPage}
+                        onPageChange={handlePageChange}
+                    />
                     <button
                         onClick={handleAddMessage}
                         className="absolute bottom-0 right-0 bg-gray-800 text-white p-2 rounded-md"

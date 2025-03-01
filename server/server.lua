@@ -9,9 +9,12 @@ local function getDiscordIdentifier(source)
     return nil
 end
 
-local function getMailboxMessagesService(playerId, cb)
-    MySQL.Async.fetchAll('SELECT * FROM mailbox WHERE discord_id = @player_id', {
-        ['@player_id'] = playerId
+local function getMailboxMessagesService(playerId, page, rowsPerPage, cb)
+    local offset = (page - 1) * rowsPerPage
+    MySQL.Async.fetchAll('SELECT * FROM mailbox WHERE discord_id = @player_id LIMIT @rowsPerPage OFFSET @offset', {
+        ['@player_id'] = playerId,
+        ['@rowsPerPage'] = rowsPerPage,
+        ['@offset'] = offset
     }, function(result)
         if result then
             cb(result)
@@ -43,12 +46,13 @@ end
 
 -- Handlers
 RegisterNetEvent('getMailboxMessages')
-AddEventHandler('getMailboxMessages', function()
+AddEventHandler('getMailboxMessages', function(page)
     local source = source
     local discordIdentifier = getDiscordIdentifier(source)
+    local rowsPerPage = 4
 
     if discordIdentifier then
-        getMailboxMessagesService(discordIdentifier, function(mailboxData)
+        getMailboxMessagesService(discordIdentifier, page, rowsPerPage, function(mailboxData)
             TriggerClientEvent('receiveMailboxMessages', source, mailboxData)
         end)
     else
