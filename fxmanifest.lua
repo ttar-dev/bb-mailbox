@@ -3,7 +3,7 @@ fx_version "cerulean"
 description 'Mailbox system for FiveM'
 author "@ttar-dev"
 version '1.0.0'
-repository 'https://github.com/ttar-dev/fivem-mailbox'
+repository 'https://github.com/ttar-dev/bb-mailbox'
 
 lua54 'yes'
 
