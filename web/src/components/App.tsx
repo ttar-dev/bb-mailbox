@@ -5,6 +5,7 @@ import {debugData} from "../utils/debugData";
 import {HiOutlineEnvelopeOpen} from "react-icons/hi2";
 import {fetchNui} from "../utils/fetchNui";
 import {useVisibility} from "../providers/VisibilityProvider";
+import {PiMailboxDuotone} from "react-icons/pi";
 
 debugData([
     {
@@ -112,13 +113,13 @@ const App: React.FC = () => {
                             </div>
                         </div>
                         <div className="col-span-1">
-                            <div className="bg-header-mail-box mt-[20px] text-white text-3xl -ml-3">
-                                <img
-                                    src={"/assets/mailbox.png"}
-                                    style={{marginRight: "10px"}}
-                                    alt="Mailbox"
-                                />
-                                <p className="mt-1">MAILBOX</p>
+                            <div className="bg-header-mail-box gap-2 items-center mt-[20px] text-white text-3xl -ml-3">
+                                <span className="text-4xl text-[#56c0fb]">
+                                    <PiMailboxDuotone />
+                                </span>
+                                <p className="mt-1 bg-gradient-to-r from-[#56c0fb] to-[#80ddff] bg-clip-text text-transparent">
+                                    MAILBOX
+                                </p>
                             </div>
                             <div className="pr-8 -mt-1 -ml-2">
                                 <div className="bg-[#1b1b1b] w-full h-[560px] mt-5 rounded-[30px] p-5 pb-0 text-center">
