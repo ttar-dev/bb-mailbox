@@ -3,7 +3,7 @@ local function toggleNuiFrame(shouldShow)
   SendReactMessage('setOpen', shouldShow)
 end
 
-RegisterCommand('mailbox', function()
+RegisterCommand('onOpen', function()
     toggleNuiFrame(true)
 end, false)
 
@@ -13,7 +13,7 @@ RegisterNUICallback('onClose', function(_, cb)
   cb({})
 end)
 
-RegisterKeyMapping('mailbox', 'Toggle Mailbox', 'keyboard', 'F5')
+RegisterKeyMapping('onOpen', 'Toggle Mailbox', 'keyboard', 'F5')
 
 RegisterNUICallback('handleClaimReward', function(data, cb)
   debugPrint('>> Button was pressed on the NUI')

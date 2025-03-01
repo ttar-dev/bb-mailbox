@@ -31,7 +31,7 @@ const App: React.FC = () => {
     };
 
     useEffect(() => {
-        handleGetClientData();
+        if (isOpen) handleGetClientData();
     }, [isOpen]);
 
     // const [currentPage, setCurrentPage] = useState(1);
