@@ -120,7 +120,8 @@ end)
 RegisterNetEvent('claimReward')
 AddEventHandler('claimReward', function(message)
     local source = source
-    local xPlayer = ESX.GetPlayerFromId(source)
+    local identifier = GetPlayerIdentifiers(source)[1]
+    local xPlayer = ESX.GetPlayerFromId(identifier)
 
     debugPrint('>> xPlayer:', xPlayer)
 
