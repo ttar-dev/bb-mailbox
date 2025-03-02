@@ -154,8 +154,8 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                 <AnimatePresence>
                     <div className="pr-8 -mt-1 -ml-2 pt-[5em]">
                         <div className="bg-[#101010] relative w-full h-[560px] mt-5 rounded-[30px] p-5 pb-0 text-center">
-                            <PageWrapper>
-                                {isMailOpen && !!mailContent ? (
+                            {isMailOpen && !!mailContent ? (
+                                <PageWrapper>
                                     <div>
                                         <p className="py-1 mt-1 text-white font-noto text-2xl bg-gradient-to-r from-transparent via-[#4baaf8] to-transparent">
                                             ของรางวัลรายวัน
@@ -204,17 +204,18 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                             </div>
                                         </div>
                                     </div>
-                                ) : (
-                                    <div className="flex justify-center items-center w-full gap-4 h-full flex-col rounded-[30px]">
-                                        <span className="text-white text-[4em] opacity-50">
-                                            <HiOutlineEnvelopeOpen />
-                                        </span>
-                                        <p className="text-white font-noto text-2xl font-bold opacity-50">
-                                            ยังไม่ได้เปิดข้อความ
-                                        </p>
-                                    </div>
-                                )}
-                            </PageWrapper>
+                                </PageWrapper>
+                            ) : (
+                                <div className="flex justify-center items-center w-full gap-4 h-full flex-col rounded-[30px]">
+                                    <span className="text-white text-[4em] opacity-50">
+                                        <HiOutlineEnvelopeOpen />
+                                    </span>
+                                    <p className="text-white font-noto text-2xl font-bold opacity-50">
+                                        ยังไม่ได้เปิดข้อความ
+                                    </p>
+                                </div>
+                            )}
+
                             <div
                                 className={`absolute top-0 left-0 w-full h-full bg-[#101010] bg-opacity-50 backdrop-blur-2xl rounded-[30px] transition-opacity duration-500 ease-in-out ${
                                     loading.contentLoading
