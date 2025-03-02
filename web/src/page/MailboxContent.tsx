@@ -244,7 +244,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                             </div>
                                         </div>
 
-                                        {!loading.contentLoading ? (
+                                        {!loading.contentLoading && (
                                             <div
                                                 className={`z-20 absolute -bottom-10 left-0 w-full flex justify-center items-center fade-${
                                                     isDone ? "enter" : "exit"
@@ -260,10 +260,6 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                                         handleClaimReward
                                                     }
                                                 />
-                                            </div>
-                                        ) : (
-                                            <div className="flex justify-center items-center">
-                                                <VscLoading className="animate-spin text-white text-4xl" />
                                             </div>
                                         )}
                                     </div>
