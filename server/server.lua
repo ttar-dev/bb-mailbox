@@ -116,7 +116,8 @@ end)
 RegisterNetEvent('claimReward')
 AddEventHandler('claimReward', function(message)
     local source = source
-    local xPlayer = ESX.GetPlayerFromId(source)
+    local identifier = GetPlayerIdentifiers(source)[1]
+    local xPlayer = ESX.GetPlayerFromId(identifier)
 
     if xPlayer then
         if xPlayer.canCarryItem(message.reward_key, message.reward_qty) then
