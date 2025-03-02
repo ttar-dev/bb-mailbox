@@ -18,21 +18,21 @@ end)
 
 RegisterNUICallback('claimRewardEvt', function(data, cb)
   debugPrint('>> claimRewardEvt evt', json.encode(data))
-
+  
   TriggerServerEvent('claimReward', data.reward_name, data.reward_qty, data.id)
-end)
+  
+  RegisterNetEvent('claimRewardResp')
+  AddEventHandler('claimRewardResp', function(success)
+    debugPrint('>> claimReward Resp', success)
+    local retData = { success = success }
 
-RegisterNetEvent('claimRewardResp')
-AddEventHandler('claimRewardResp', function(success)
-  debugPrint('>> claimReward Resp', success)
-  local retData = { success = success }
+    SendNUIMessage({
+      type = "messageResp",
+      data = retData
+    })
 
-  SendNUIMessage({
-    type = "messageResp",
-    data = retData
-  })
-
-  cb(retData)
+    cb(retData)
+  end)
 end)
 
 RegisterNUICallback('getMessagesEvt', function(data, cb)
@@ -40,9 +40,8 @@ RegisterNUICallback('getMessagesEvt', function(data, cb)
 
   local page = data.page or 1
   TriggerServerEvent('getMailboxMessages', page)
-end)
 
-RegisterNetEvent('receiveMailboxMessages')
+  RegisterNetEvent('receiveMailboxMessages')
   AddEventHandler('receiveMailboxMessages', function(mailboxData, maxPage, totalMessages)
     local retData = { mailboxData = mailboxData or {}, maxPage = maxPage or 1, totalMessages = totalMessages or 0 }
 
@@ -53,25 +52,26 @@ RegisterNetEvent('receiveMailboxMessages')
 
     cb(retData)
   end)
+end)
 
 -- add message to mailbox
 RegisterNUICallback('addMailboxItem', function(data, cb)
   debugPrint('>> addMailboxItem Req payload', json.encode(data))
 
   TriggerServerEvent('addMailboxItem', data)
-end)
+  
+  RegisterNetEvent('mailboxMessageResp')
+  AddEventHandler('mailboxMessageResp', function(success)
+    debugPrint('>> addMailboxItem Resp', success)
+    local retData = { success = success }
 
-RegisterNetEvent('mailboxMessageResp')
-AddEventHandler('mailboxMessageResp', function(success)
-  debugPrint('>> addMailboxItem Resp', success)
-  local retData = { success = success }
+    SendNUIMessage({
+      type = "messageResp",
+      data = retData
+    })
 
-  SendNUIMessage({
-    type = "messageResp",
-    data = retData
-  })
-
-  cb(retData)
+    cb(retData)
+  end)
 end)
 
 -- test command

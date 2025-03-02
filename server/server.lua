@@ -125,6 +125,8 @@ AddEventHandler('claimReward', function(itemName, itemCount, messageId)
                 TriggerClientEvent('claimRewardResp', source, false)
             end
         end)
+    else
+        TriggerClientEvent('claimRewardResp', source, false)
     end
 end)
 
