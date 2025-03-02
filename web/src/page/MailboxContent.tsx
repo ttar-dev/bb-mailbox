@@ -47,6 +47,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
     handleGetClientData
 }) => {
     const handleClaimReward = (m: MessageTypes) => {
+        if (m.is_ack) return;
         setLoading({
             contentLoading: true,
             pageLoading: false
@@ -232,6 +233,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                                         ? "grayscale"
                                                         : "grayscale-0"
                                                 }`}
+                                                disabled={mailContent?.is_ack}
                                                 onClick={() => {
                                                     handleClaimReward(
                                                         mailContent
