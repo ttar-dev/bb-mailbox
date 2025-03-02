@@ -136,7 +136,7 @@ const App: React.FC = () => {
     }, [isOpen, currentPage]);
 
     useEffect(() => {
-        setMailContent(null);
+        if (!isOpen) setMailContent(null);
     }, [isOpen]);
 
     useEffect(() => {
