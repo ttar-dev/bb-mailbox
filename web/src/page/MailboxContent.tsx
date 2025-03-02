@@ -67,7 +67,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                 setIsDone(true);
                 setTimeout(() => {
                     setRerender(false);
-                }, 500);
+                }, 1000);
             });
     };
     return (
