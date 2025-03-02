@@ -37,7 +37,6 @@ interface MailboxContentProps {
 const MailboxContent: React.FC<MailboxContentProps> = ({
     getMessages,
     isMailOpen,
-    setIsMailOpen,
     loading,
     currentPage,
     messagesPerPage,
@@ -51,7 +50,6 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
     const [isDone, setIsDone] = useState<boolean>(false);
     const handleClaimReward = (m: MessageTypes) => {
         if (m.is_ack) return;
-        setIsMailOpen(false);
         setLoading({
             contentLoading: true,
             pageLoading: true
