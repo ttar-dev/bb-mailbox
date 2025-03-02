@@ -16,22 +16,23 @@ end)
 
 -- RegisterKeyMapping('openMailbox', 'Toggle Mailbox', 'keyboard', 'F5')
 
-RegisterNUICallback('claimReward', function(data, cb)
-  debugPrint('>> claimReward evt', json.encode(data))
+RegisterNUICallback('claimRewardEvt', function(data, cb)
+  debugPrint('>> claimRewardEvt evt', json.encode(data))
+
   TriggerServerEvent('claimReward', data.reward_name, data.reward_qty, data.id)
-  
-  RegisterNetEvent('claimRewardResp')
-  AddEventHandler('claimRewardResp', function(success)
-    debugPrint('>> claimReward Resp', success)
-    local retData = { success = success }
+end)
 
-    SendNUIMessage({
-      type = "messageResp",
-      data = retData
-    })
+RegisterNetEvent('claimRewardResp')
+AddEventHandler('claimRewardResp', function(success)
+  debugPrint('>> claimReward Resp', success)
+  local retData = { success = success }
 
-    cb(retData)
-  end)
+  SendNUIMessage({
+    type = "messageResp",
+    data = retData
+  })
+
+  cb(retData)
 end)
 
 RegisterNUICallback('getMessagesEvt', function(data, cb)
@@ -39,8 +40,9 @@ RegisterNUICallback('getMessagesEvt', function(data, cb)
 
   local page = data.page or 1
   TriggerServerEvent('getMailboxMessages', page)
+end)
 
-  RegisterNetEvent('receiveMailboxMessages')
+RegisterNetEvent('receiveMailboxMessages')
   AddEventHandler('receiveMailboxMessages', function(mailboxData, maxPage, totalMessages)
     local retData = { mailboxData = mailboxData or {}, maxPage = maxPage or 1, totalMessages = totalMessages or 0 }
 
@@ -51,26 +53,25 @@ RegisterNUICallback('getMessagesEvt', function(data, cb)
 
     cb(retData)
   end)
-end)
 
 -- add message to mailbox
 RegisterNUICallback('addMailboxItem', function(data, cb)
   debugPrint('>> addMailboxItem Req payload', json.encode(data))
 
   TriggerServerEvent('addMailboxItem', data)
-  
-  RegisterNetEvent('mailboxMessageResp')
-  AddEventHandler('mailboxMessageResp', function(success)
-    debugPrint('>> addMailboxItem Resp', success)
-    local retData = { success = success }
+end)
 
-    SendNUIMessage({
-      type = "messageResp",
-      data = retData
-    })
+RegisterNetEvent('mailboxMessageResp')
+AddEventHandler('mailboxMessageResp', function(success)
+  debugPrint('>> addMailboxItem Resp', success)
+  local retData = { success = success }
 
-    cb(retData)
-  end)
+  SendNUIMessage({
+    type = "messageResp",
+    data = retData
+  })
+
+  cb(retData)
 end)
 
 -- test command

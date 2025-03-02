@@ -51,12 +51,12 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
             contentLoading: true,
             pageLoading: false
         });
-        fetchNui("claimReward", m)
+        fetchNui("claimRewardEvt", m)
             .then(() => {
                 handleGetClientData();
             })
             .catch(e => {
-                console.error("claimReward", e);
+                console.error("claimRewardEvt", e);
             })
             .catch(() => {
                 setLoading({
