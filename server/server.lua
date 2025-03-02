@@ -57,16 +57,22 @@ AddEventHandler('addMailboxMessage', function(data)
     local discordIdentifier = getDiscordIdentifier(source)
     
     if discordIdentifier then
-        addMailboxMessageService({
-            identifier = GetPlayerIdentifiers(source)[1],
-            discord_id = discordIdentifier,
-            type = data.type,
-            title = data.title,
-            content = data.content,
-            campaign_id = data.campaign_id,
-            reward_name = data.reward_name,
-            reward_qty = data.reward_qty,
-        }, function(success)
+        local messages = {}
+        for _, message in ipairs(data) do
+            table.insert(messages, {
+                identifier = GetPlayerIdentifiers(source)[1],
+                discord_id = discordIdentifier,
+                type = message.type,
+                title = message.title,
+                content = message.content,
+                campaign_id = message.campaign_id,
+                reward_name = message.reward_name,
+                reward_qty = message.reward_qty,
+                is_ack = 0
+            })
+        end
+
+        addMailboxMessagesService(messages, function(success)
             if success then
                 TriggerClientEvent('mailboxMessageResp', source, true)
             else
@@ -78,23 +84,17 @@ AddEventHandler('addMailboxMessage', function(data)
     end
 end)
 
--- Exports
-exports('getMailboxMsgSv', getMailboxMessagesService)
-exports('getDiscordIdSv', getDiscordIdentifier)
-exports('addMailboxMdgSv', addMailboxMessageService)
+local function addMailboxMessagesService(messages, cb)
+    local values = {}
+    for _, message in ipairs(messages) do
+        table.insert(values, string.format("('%s', '%s', '%s', '%s', '%s', '%s', '%s', %d, %d)",
+            message.identifier, message.discord_id, message.type, message.title, message.content,
+            message.campaign_id, message.reward_name, message.reward_qty, message.is_ack))
+    end
 
-local function addMailboxMessageService(data, cb)
-    MySQL.Async.execute('INSERT INTO mailbox (identifier, discord_id, type, title, content, campaign_id, reward_name, reward_qty, is_ack) VALUES (@identifier, @discord_id, @type, @title, @content, @campaign_id, @reward_name, @reward_qty, @is_ack)', {
-        ['@identifier'] = data.identifier,
-        ['@discord_id'] = data.discord_id,
-        ['@type'] = data.type,
-        ['@title'] = data.title,
-        ['@content'] = data.content,
-        ['@campaign_id'] = data.campaign_id,
-        ['@reward_name'] = data.reward_name,
-        ['@reward_qty'] = data.reward_qty,
-        ['@is_ack'] = 0
-    }, function(rowsChanged)
+    local query = string.format("INSERT INTO mailbox (identifier, discord_id, type, title, content, campaign_id, reward_name, reward_qty, is_ack) VALUES %s", table.concat(values, ", "))
+
+    MySQL.Async.execute(query, {}, function(rowsChanged)
         if rowsChanged > 0 then
             cb(true)
         else

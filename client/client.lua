@@ -14,8 +14,6 @@ RegisterNUICallback('onCloseMailbox', function(_, cb)
   cb({})
 end)
 
-
-
 -- RegisterKeyMapping('openMailbox', 'Toggle Mailbox', 'keyboard', 'F5')
 
 RegisterNUICallback('handleClaimReward', function(data, cb)
