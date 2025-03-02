@@ -116,16 +116,26 @@ AddEventHandler('claimReward', function(itemName, itemCount, messageId)
     local xPlayer = ESX.GetPlayerFromId(source)
 
     debugPrint('>> claimReward Req', itemName, itemCount, messageId)
-    
-    if xPlayer.canCarryItem(itemName, itemCount) then
-        claimedReward(messageId, function(success)
-            if success then
-                TriggerClientEvent('claimRewardResp', source, true)
-            else
-                TriggerClientEvent('claimRewardResp', source, false)
-            end
-        end)
+    debugPrint('>> xPlayer:', xPlayer)
+
+    if xPlayer then
+        debugPrint('>> Checking if player can carry item:', itemName, itemCount)
+        if xPlayer.canCarryItem(itemName, itemCount) then
+            debugPrint('>> Player can carry item:', itemName, itemCount)
+            xPlayer.addInventoryItem(itemName, itemCount)
+            claimedReward(messageId, function(success)
+                if success then
+                    TriggerClientEvent('claimRewardResp', source, true)
+                else
+                    TriggerClientEvent('claimRewardResp', source, false)
+                end
+            end)
+        else
+            debugPrint('>> Player cannot carry item:', itemName, itemCount)
+            TriggerClientEvent('claimRewardResp', source, false)
+        end
     else
+        debugPrint('>> xPlayer is nil')
         TriggerClientEvent('claimRewardResp', source, false)
     end
 end)
