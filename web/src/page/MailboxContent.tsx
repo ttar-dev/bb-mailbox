@@ -72,8 +72,8 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                     pageLoading: false
                 });
                 _.delay(() => {
-                    setRerender(true);
-                }, 800);
+                    setRerender(false);
+                }, 500);
             });
     };
     return (
