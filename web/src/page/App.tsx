@@ -40,36 +40,33 @@ const App: React.FC = () => {
         return messages;
     }, [messages]);
 
-    const handleAddMessage = () => {
-        setLoading({
-            pageLoading: true,
-            contentLoading: false
-        });
-        fetchNui("addMailboxMessageEvt", {
-            type: "reward",
-            title: "New Message",
-            content: "This is a new message",
-            reward_name: "stone",
-            reward_qty: 1
-        })
-            .then(() => {
-                handleGetClientData();
-            })
-            .catch(e => {
-                console.error("addMailboxMessageEvt error", e);
-            })
-            .finally(() => {
-                delay();
-            });
-    };
+    // const handleAddMessage = () => {
+    //     setLoading({
+    //         pageLoading: true,
+    //         contentLoading: false
+    //     });
+    //     fetchNui("addMailboxMessageEvt", {
+    //         type: "reward",
+    //         title: "New Message",
+    //         content: "This is a new message",
+    //         reward_name: "stone",
+    //         reward_qty: 1
+    //     })
+    //         .then(() => {
+    //             handleGetClientData();
+    //         })
+    //         .catch(e => {
+    //             console.error("addMailboxMessageEvt error", e);
+    //         })
+    //         .finally(() => {
+    //             delay();
+    //         });
+    // };
 
     const delay = _.debounce(() => {
-        return new Promise<void>(resolve => {
-            setLoading({
-                pageLoading: false,
-                contentLoading: false
-            });
-            resolve();
+        setLoading({
+            pageLoading: false,
+            contentLoading: false
         });
     }, 800);
 
@@ -153,12 +150,12 @@ const App: React.FC = () => {
                         maxPage={maxPage}
                         onPageChange={setCurrentPage}
                     />
-                    <button
+                    {/* <button
                         onClick={handleAddMessage}
                         className="absolute bottom-0 right-0 bg-gray-800 text-white p-2 rounded-md"
                     >
                         test add message
-                    </button>
+                    </button> */}
                 </div>
             </div>
         </div>
