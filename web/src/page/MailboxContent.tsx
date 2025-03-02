@@ -237,22 +237,24 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                             </div>
                                         </div>
 
-                                        <div
-                                            className={`z-20 absolute -bottom-10 left-0 w-full flex justify-center items-center fade-${
-                                                isDone ? "enter" : "exit"
-                                            } ${
-                                                isDone
-                                                    ? "fade-enter-active"
-                                                    : "fade-exit-active"
-                                            }`}
-                                        >
-                                            <ClaimButton
-                                                mailContent={mailContent}
-                                                handleClaimReward={
-                                                    handleClaimReward
-                                                }
-                                            />
-                                        </div>
+                                        {!loading.contentLoading && (
+                                            <div
+                                                className={`z-20 absolute -bottom-10 left-0 w-full flex justify-center items-center fade-${
+                                                    isDone ? "enter" : "exit"
+                                                } ${
+                                                    isDone
+                                                        ? "fade-enter-active"
+                                                        : "fade-exit-active"
+                                                }`}
+                                            >
+                                                <ClaimButton
+                                                    mailContent={mailContent}
+                                                    handleClaimReward={
+                                                        handleClaimReward
+                                                    }
+                                                />
+                                            </div>
+                                        )}
                                     </div>
                                 </PageWrapper>
                             ) : (
