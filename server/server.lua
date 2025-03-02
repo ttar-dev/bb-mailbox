@@ -43,12 +43,12 @@ end
 local function addMailboxItemsService(messages, cb)
     local values = {}
     for _, message in ipairs(messages) do
-        table.insert(values, string.format("('%s', '%s', '%s', '%s', '%s', '%s', %d, %d)",
+        table.insert(values, string.format("('%s', '%s', '%s', '%s', '%s', '%s', '%s' %d, %d)",
             message.identifier, message.discord_id, message.type, message.title, message.content,
-            message.reward_name, message.reward_qty, message.is_ack))
+            message.reward_name, message.reward_key, message.reward_qty, message.is_ack))
     end
 
-    local query = string.format("INSERT INTO mailbox (identifier, discord_id, type, title, content, reward_name, reward_qty, is_ack) VALUES %s", table.concat(values, ", "))
+    local query = string.format("INSERT INTO mailbox (identifier, discord_id, type, title, content, reward_name, reward_key, reward_qty, is_ack) VALUES %s", table.concat(values, ", "))
 
     MySQL.Async.execute(query, {}, function(rowsChanged)
         if rowsChanged > 0 then
@@ -100,6 +100,7 @@ AddEventHandler('addMailboxItem', function(data)
                 title = message.title,
                 content = message.content,
                 reward_name = message.reward_name,
+                reward_key = message.reward_key,
                 reward_qty = message.reward_qty,
                 is_ack = 0
             })
@@ -125,8 +126,8 @@ AddEventHandler('claimReward', function(message)
     local targetXPlayer = ESX.GetPlayerFromId(identifier)
 
     if xPlayer then
-        if xPlayer.canCarryItem(message.reward_name, message.reward_qty) then
-            xPlayer.addInventoryItem(message.reward_name, message.reward_qty)
+        if xPlayer.canCarryItem(message.reward_key, message.reward_qty) then
+            xPlayer.addInventoryItem(message.reward_key, message.reward_qty)
             claimedReward(message.id, function(success)
                 if success then
                     TriggerClientEvent('claimRewardResp', source, true, "รับรางวัลสำเร็จ กรุณาตรวจสอบในกระเป๋าของท่าน")
