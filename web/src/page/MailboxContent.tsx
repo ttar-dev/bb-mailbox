@@ -51,10 +51,13 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
     const handleClaimReward = (m: MessageTypes) => {
         if (m.is_ack) return;
         setIsDone(false);
-        setLoading({
-            contentLoading: true,
-            pageLoading: true
-        });
+
+        const t1 = setTimeout(() => {
+            setLoading({
+                contentLoading: true,
+                pageLoading: true
+            });
+        }, 300);
 
         fetchNui("claimRewardEvt", m)
             .then(() => {
@@ -69,12 +72,13 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                     contentLoading: false,
                     pageLoading: false
                 });
-                const m = setTimeout(() => {
+                const t2 = setTimeout(() => {
                     setIsDone(true);
                 }, 1000);
 
                 return () => {
-                    clearTimeout(m);
+                    clearTimeout(t1);
+                    clearTimeout(t2);
                 };
             });
     };
