@@ -72,7 +72,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                 });
                 const t1 = setTimeout(() => {
                     setIsDone(true);
-                }, 800);
+                }, 400);
 
                 return () => {
                     clearTimeout(t1);
