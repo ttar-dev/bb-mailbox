@@ -158,7 +158,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                 <PageWrapper>
                                     <div>
                                         <p className="py-1 mt-1 text-white font-noto text-2xl bg-gradient-to-r from-transparent via-[#4baaf8] to-transparent">
-                                            ของรางวัลรายวัน
+                                            {mailContent?.title}
                                         </p>
                                         <div className="mt-6 flex items-center gap-3">
                                             <div className="border w-1/4 rounded-full"></div>
