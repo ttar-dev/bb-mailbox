@@ -7,6 +7,7 @@ import {AnimatePresence} from "framer-motion";
 import {fromNow, time} from "../utils/transform";
 import LoadingIcon from "/public/assets/logo.png";
 import DiamondIcon from "/public/assets/Diamond.png";
+import {PiMailboxDuotone} from "react-icons/pi";
 
 interface MailboxContentProps {
     getMessages: MessageTypes[];
@@ -110,7 +111,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                         {getMessages?.length === 0 && (
                             <div className="flex justify-center flex-col gap-3 items-center h-full">
                                 <span className="text-white text-[4em] opacity-50">
-                                    <HiOutlineEnvelopeOpen />
+                                    <PiMailboxDuotone />
                                 </span>
                                 <p className="text-white font-noto text-2xl font-bold opacity-50">
                                     ไม่มีข้อความ
