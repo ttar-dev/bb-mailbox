@@ -206,16 +206,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                     </div>
                                 </PageWrapper>
                             ) : (
-                                <PageWrapper>
-                                    <div className="flex justify-center items-center w-full gap-4 flex-col rounded-[30px]">
-                                        <span className="text-white text-[4em] opacity-50">
-                                            <HiOutlineEnvelopeOpen />
-                                        </span>
-                                        <p className="text-white font-noto text-2xl font-bold opacity-50">
-                                            ยังไม่ได้เปิดข้อความ
-                                        </p>
-                                    </div>
-                                </PageWrapper>
+                                <BlankContent />
                             )}
 
                             <div
@@ -244,3 +235,18 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
 };
 
 export default MailboxContent;
+
+const BlankContent: React.FC = () => {
+    return (
+        <PageWrapper>
+            <div className="flex justify-center items-center w-full gap-4 h-full flex-col rounded-[30px]">
+                <span className="text-white text-[4em] opacity-50">
+                    <HiOutlineEnvelopeOpen />
+                </span>
+                <p className="text-white font-noto text-2xl font-bold opacity-50">
+                    ยังไม่ได้เปิดข้อความ
+                </p>
+            </div>
+        </PageWrapper>
+    );
+};
