@@ -213,8 +213,11 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                                     X{mailContent?.reward_qty}
                                                 </p>
                                             </div>
+                                        </div>
+
+                                        <div>
                                             <button
-                                                className="ml-auto bg-blue-500 text-white px-4 py-2 rounded"
+                                                className="ml-auto bg-blue-500 text-white px-4 py-2 rounded w-full rounded-xl"
                                                 onClick={() => {
                                                     handleClaimReward(
                                                         mailContent

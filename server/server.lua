@@ -52,6 +52,14 @@ local function addMailboxItemsService(messages, cb)
     end)
 end
 
+local function claimedReward(messageId, cb)
+    MySQL.Async.execute('UPDATE mailbox SET is_ack = 1 WHERE id = @id', {
+        ['@id'] = messageId
+    }, function(rowsChanged)
+        cb(rowsChanged > 0)
+    end)
+end
+
 -- Handlers
 RegisterNetEvent('getMailboxMessages')
 AddEventHandler('getMailboxMessages', function(page)
@@ -108,10 +116,13 @@ AddEventHandler('claimReward', function(itemName, itemCount)
     local xPlayer = ESX.GetPlayerFromId(source)
     
     if xPlayer.canCarryItem(itemName, itemCount) then
-        xPlayer.addInventoryItem(itemName, itemCount)
-        TriggerClientEvent('esx:showNotification', source, 'รับของรางวัลสำเร็จ 🎉🥳')
-    else
-        TriggerClientEvent('esx:showNotification', source, 'กระเป๋าเต็มแล้ว ไม่สามารถรับของรางวัลได้')
+        claimedReward(itemName, function(success)
+            if success then
+                TriggerClientEvent('mailboxMessageResp', source, true)
+            else
+                TriggerClientEvent('mailboxMessageResp', source, false)
+            end
+        end)
     end
 end)
 
