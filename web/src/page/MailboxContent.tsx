@@ -225,16 +225,24 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                             </div>
                                         </div>
 
-                                        <div>
+                                        <div className="mt-[60px]">
                                             <button
-                                                className="relative px-6 py-2 text-white text-lg font-bold rounded-lg shadow-lg bg-blue-500 hover:bg-blue-600 active:scale-95 before:absolute before:inset-0 before:bg-[url('/assets/collect-bg.png')] before:bg-cover before:rounded-lg before:opacity-50"
+                                                className={`h-20 w-[200px] relative px-6 py-2 text-white text-2xl font-noto font-bold bg-[url('/assets/collect-bg.png')] bg-cover ${
+                                                    mailContent?.is_ack
+                                                        ? "grayscale"
+                                                        : "grayscale-0"
+                                                }`}
                                                 onClick={() => {
                                                     handleClaimReward(
                                                         mailContent
                                                     );
                                                 }}
                                             >
-                                                รับรางวัล
+                                                <span>
+                                                    {mailContent?.is_ack
+                                                        ? "รับแล้ว"
+                                                        : "รับรางวัล"}
+                                                </span>
                                             </button>
                                         </div>
                                     </div>

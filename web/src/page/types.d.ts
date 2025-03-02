@@ -9,4 +9,5 @@ type MessageTypes = {
     reward_name: string;
     reward_qty: number;
     date: string;
+    is_ack?: boolean;
 };
