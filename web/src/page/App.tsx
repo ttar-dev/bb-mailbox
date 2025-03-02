@@ -108,6 +108,10 @@ const App: React.FC = () => {
 
         await delay();
         if (m.id === mailContent?.id) {
+            // setLoading({
+            //     pageLoading: false,
+            //     contentLoading: true
+            // });
             setMailContent(null);
         }
     };
