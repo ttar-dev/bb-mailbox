@@ -77,6 +77,10 @@ const App: React.FC = () => {
         delay();
     }, [isMailOpen]);
 
+    useEffect(() => {
+        setMailContent(null);
+    }, [isOpen]);
+
     const handleGetClientData = () => {
         setLoading({
             pageLoading: true,
