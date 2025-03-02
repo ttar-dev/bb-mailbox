@@ -92,11 +92,11 @@ const App: React.FC = () => {
                         const findMail = retData.mailboxData.find(
                             m => m.id === mailContent.id
                         );
+
                         if (findMail) {
                             setMailContent(findMail);
                         } else {
                             setMailContent(null);
-                            setIsMailOpen(false);
                         }
                     }
                 } else {
