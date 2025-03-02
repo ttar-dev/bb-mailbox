@@ -21,7 +21,7 @@ interface MailboxContentProps {
     currentPage: number;
     messagesPerPage: number;
     mailContent: MessageTypes | null;
-    setMailContent: (mail: MessageTypes) => void;
+    setMailContent: (mail: MessageTypes | null) => void;
     handleContentOpen: (m: MessageTypes) => void;
     handleGetClientData: () => void;
     setLoading: ({
@@ -49,7 +49,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
     const [isDone, setIsDone] = useState<boolean>(false);
     const handleClaimReward = (m: MessageTypes) => {
         if (m.is_ack) return;
-
+        setMailContent(null);
         setLoading({
             contentLoading: true,
             pageLoading: true
@@ -59,20 +59,22 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
             .then(() => {
                 handleGetClientData();
             })
+            .then(() => {
+                const findMessage = getMessages.find(
+                    (message: MessageTypes) => message.id === m.id
+                );
+
+                setMailContent(findMessage as MessageTypes);
+            })
             .catch(e => {
                 console.error("claimRewardEvt", e);
+                setMailContent(null);
             })
             .catch(() => {
                 setLoading({
                     contentLoading: false,
                     pageLoading: false
                 });
-
-                const findMessage = getMessages.find(
-                    (message: MessageTypes) => message.id === m.id
-                );
-
-                setMailContent(findMessage as MessageTypes);
             });
     };
     return (
