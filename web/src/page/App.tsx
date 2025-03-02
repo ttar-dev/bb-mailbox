@@ -45,13 +45,16 @@ const App: React.FC = () => {
     //         pageLoading: true,
     //         contentLoading: false
     //     });
-    //     fetchNui("addMailboxMessageEvt", {
-    //         type: "reward",
-    //         title: "New Message",
-    //         content: "This is a new message",
-    //         reward_name: "stone",
-    //         reward_qty: 1
-    //     })
+    //     fetchNui("addMailboxMessageEvt", [
+    //         {
+    //             type: "reward",
+    //             title: "ของรางวัล",
+    //             content:
+    //                 "แข็งที่เกิดขึ้นตามธรรมชาติ ซึ่งเป็นสารผสมที่เกิดจากการเกาะตัวกันแน่นของแร่ตั้งแต่ 1 ชนิดขึ้นไป หรือ เป็นสารผสมของแร่กับแก้วภูเขาไฟ หรือ แร่กับซากดึกดำบรรพ์ หรือของแข็งอื่น ๆ",
+    //             reward_name: "stone",
+    //             reward_qty: 1
+    //         }
+    //     ])
     //         .then(() => {
     //             handleGetClientData();
     //         })

@@ -60,3 +60,19 @@ RegisterNUICallback('addMailboxMessageEvt', function(data, cb)
   end)
   
 end)
+
+-- test command
+RegisterCommand('test-add-mailbox', function()
+  local messageData = {
+      {
+          type = "reward",
+          title = "ของรางวัล",
+          content = "แข็งที่เกิดขึ้นตามธรรมชาติ ซึ่งเป็นสารผสมที่เกิดจากการเกาะตัวกันแน่นของแร่ตั้งแต่ 1 ชนิดขึ้นไป หรือ เป็นสารผสมของแร่กับแก้วภูเขาไฟ หรือ แร่กับซากดึกดำบรรพ์ หรือของแข็งอื่น ๆ",
+          reward_name = "stone",
+          reward_qty = 1
+      }
+  }
+
+  TriggerServerEvent('addMailboxMessage', messageData)
+  debugPrint('>> addMailboxMessage command executed')
+end, false)
