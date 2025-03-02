@@ -3,8 +3,9 @@ local function toggleNuiFrame(shouldShow)
   SendReactMessage('setMailboxOpen', shouldShow)
 end
 
-RegisterCommand('handleOpenMailbox', function()
+RegisterCommand('openMailbox', function()
     toggleNuiFrame(true)
+    debugPrint('>> Show Mailbox')
 end, false)
 
 RegisterNUICallback('onCloseMailbox', function(_, cb)
@@ -13,15 +14,17 @@ RegisterNUICallback('onCloseMailbox', function(_, cb)
   cb({})
 end)
 
-RegisterKeyMapping('handleOpenMailbox', 'Toggle Mailbox', 'keyboard', 'F5')
+
+
+RegisterKeyMapping('openMailbox', 'Toggle Mailbox', 'keyboard', 'F5')
 
 RegisterNUICallback('handleClaimReward', function(data, cb)
-  debugPrint('>> Button was pressed on the NUI')
+  debugPrint('>> handleClaimReward evt')
   cb({})
 end)
 
 RegisterNUICallback('getMessagesEvt', function(data, cb)
-  debugPrint('>> Data sent by React', json.encode(data))
+  debugPrint('>> getMessagesEvt Req payload', json.encode(data))
 
   local page = data.page or 1
   TriggerServerEvent('getMailboxMessages', page)
@@ -41,14 +44,13 @@ end)
 
 -- add message to mailbox
 RegisterNUICallback('addMailboxMessageEvt', function(data, cb)
-  debugPrint('>> Req payload', json.encode(data))
+  debugPrint('>> addMailboxMessageEvt Req payload', json.encode(data))
 
   TriggerServerEvent('addMailboxMessage', data)
 
   RegisterNetEvent('mailboxMessageResp')
   AddEventHandler('mailboxMessageResp', function(success)
-    debugPrint('>> Res payload', json.encode(success))
-    debugPrint('>> Resp', success)
+    debugPrint('>> addMailboxMessageEvt Resp', success)
     local retData = { success = success }
   
     SendNUIMessage({
