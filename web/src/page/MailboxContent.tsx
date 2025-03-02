@@ -69,7 +69,13 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                     contentLoading: false,
                     pageLoading: false
                 });
-                setIsDone(true);
+                const m = setTimeout(() => {
+                    setIsDone(true);
+                }, 1000);
+
+                return () => {
+                    clearTimeout(m);
+                };
             });
     };
     return (
