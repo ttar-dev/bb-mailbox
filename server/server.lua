@@ -111,12 +111,12 @@ AddEventHandler('addMailboxItem', function(data)
 end)
 
 RegisterNetEvent('claimReward')
-AddEventHandler('claimReward', function(itemName, itemCount)
+AddEventHandler('claimReward', function(itemName, itemCount, messageId)
     local source = source
     local xPlayer = ESX.GetPlayerFromId(source)
     
     if xPlayer.canCarryItem(itemName, itemCount) then
-        claimedReward(itemName, function(success)
+        claimedReward(messageId, function(success)
             if success then
                 TriggerClientEvent('claimRewardResp', source, true)
             else

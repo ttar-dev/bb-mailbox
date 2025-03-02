@@ -18,13 +18,13 @@ end)
 
 RegisterNUICallback('claimReward', function(data, cb)
   debugPrint('>> claimReward evt', json.encode(data))
-  TriggerServerEvent('claimReward', data.reward_name, data.reward_qty)
-
+  TriggerServerEvent('claimReward', data.reward_name, data.reward_qty, data.id)
+  
   RegisterNetEvent('claimRewardResp')
   AddEventHandler('claimRewardResp', function(success)
     debugPrint('>> claimReward Resp', success)
     local retData = { success = success }
-  
+
     SendNUIMessage({
       type = "messageResp",
       data = retData
@@ -58,12 +58,12 @@ RegisterNUICallback('addMailboxItem', function(data, cb)
   debugPrint('>> addMailboxItem Req payload', json.encode(data))
 
   TriggerServerEvent('addMailboxItem', data)
-
+  
   RegisterNetEvent('mailboxMessageResp')
   AddEventHandler('mailboxMessageResp', function(success)
     debugPrint('>> addMailboxItem Resp', success)
     local retData = { success = success }
-  
+
     SendNUIMessage({
       type = "messageResp",
       data = retData
@@ -71,7 +71,6 @@ RegisterNUICallback('addMailboxItem', function(data, cb)
 
     cb(retData)
   end)
-  
 end)
 
 -- test command
