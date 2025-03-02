@@ -43,7 +43,7 @@ end
 local function addMailboxItemsService(messages, cb)
     local values = {}
     for _, message in ipairs(messages) do
-        table.insert(values, string.format("('%s', '%s', '%s', '%s', '%s', '%s', '%s' %d, %d)",
+        table.insert(values, string.format("('%s', '%s', '%s', '%s', '%s', '%s', '%s', %d, %d)",
             message.identifier, message.discord_id, message.type, message.title, message.content,
             message.reward_name, message.reward_key, message.reward_qty, message.is_ack))
     end
