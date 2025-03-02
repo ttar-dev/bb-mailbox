@@ -49,10 +49,12 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
     const [isDone, setIsDone] = useState<boolean>(false);
     const handleClaimReward = (m: MessageTypes) => {
         if (m.is_ack) return;
+
         setLoading({
             contentLoading: true,
-            pageLoading: false
+            pageLoading: true
         });
+
         fetchNui("claimRewardEvt", m)
             .then(() => {
                 handleGetClientData();
@@ -65,6 +67,12 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                     contentLoading: false,
                     pageLoading: false
                 });
+
+                const findMessage = getMessages.find(
+                    (message: MessageTypes) => message.id === m.id
+                );
+
+                setMailContent(findMessage as MessageTypes);
             });
     };
     return (
