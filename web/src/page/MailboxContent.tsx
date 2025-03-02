@@ -9,6 +9,7 @@ import LoadingIcon from "/public/assets/logo.png";
 import DiamondIcon from "/public/assets/Diamond.png";
 import {PiMailboxDuotone} from "react-icons/pi";
 import {fetchNui} from "../utils/fetchNui";
+import _ from "lodash";
 
 interface MailboxContentProps {
     getMessages: MessageTypes[];
@@ -51,8 +52,8 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
     const handleClaimReward = (m: MessageTypes) => {
         if (m.is_ack) return;
         setIsDone(false);
-        setTimeout(() => {
-            setRerender(true);
+        _.delay(() => {
+            setRerender(false);
         }, 500);
 
         fetchNui("claimRewardEvt", m)
@@ -64,11 +65,9 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                 setMailContent(null);
             })
             .finally(() => {
-                setTimeout(() => {
+                setRerender(false);
+                _.delay(() => {
                     setIsDone(true);
-                }, 500);
-                setTimeout(() => {
-                    setRerender(false);
                 }, 800);
             });
     };
