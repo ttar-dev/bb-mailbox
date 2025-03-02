@@ -8,6 +8,7 @@ import {fromNow, time} from "../utils/transform";
 import LoadingIcon from "/public/assets/logo.png";
 import DiamondIcon from "/public/assets/Diamond.png";
 import {PiMailboxDuotone} from "react-icons/pi";
+import {fetchNui} from "../utils/fetchNui";
 
 interface MailboxContentProps {
     getMessages: MessageTypes[];
@@ -40,10 +41,20 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
     messagesPerPage,
     mailContent,
     totalMessages,
+    setLoading,
     setMailContent,
     handleContentOpen,
     handleGetClientData
 }) => {
+    const handleClaimReward = (m: MessageTypes) => {
+        setLoading({
+            contentLoading: true,
+            pageLoading: false
+        });
+        fetchNui("claimReward", m).finally(() => {
+            handleGetClientData();
+        });
+    };
     return (
         <div className="grid grid-cols-3 p-6 pt-10 mx-auto mt-[42px]">
             <div
@@ -202,6 +213,16 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                                     X{mailContent?.reward_qty}
                                                 </p>
                                             </div>
+                                            <button
+                                                className="ml-auto bg-blue-500 text-white px-4 py-2 rounded"
+                                                onClick={() => {
+                                                    handleClaimReward(
+                                                        mailContent
+                                                    );
+                                                }}
+                                            >
+                                                รับของรางวัล
+                                            </button>
                                         </div>
                                     </div>
                                 </PageWrapper>

@@ -17,7 +17,8 @@ end)
 -- RegisterKeyMapping('openMailbox', 'Toggle Mailbox', 'keyboard', 'F5')
 
 RegisterNUICallback('claimReward', function(data, cb)
-  debugPrint('>> claimReward evt')
+  debugPrint('>> claimReward evt', json.encode(data))
+  TriggerServerEvent('claimReward', data.reward_name, data.reward_qty)
   cb({})
 end)
 

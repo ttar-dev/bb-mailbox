@@ -11,7 +11,7 @@ end
 
 local function getMailboxMessagesService(identifier, discord_id, page, rowsPerPage, cb)
     local offset = (page - 1) * rowsPerPage
-    MySQL.Async.fetchAll('SELECT COUNT(*) as total FROM mailbox WHERE identifier = @identifier AND discord_id = @discord_id AND is_ack = 0', {
+    MySQL.Async.fetchAll('SELECT COUNT(*) as total FROM mailbox WHERE identifier = @identifier AND discord_id = @discord_id', {
         ['@discord_id'] = discord_id,
         ['@identifier'] = identifier
     }, function(countResult)
@@ -102,6 +102,18 @@ AddEventHandler('addMailboxItem', function(data)
     end
 end)
 
+RegisterNetEvent('claimReward')
+AddEventHandler('claimReward', function(itemName, itemCount)
+    local source = source
+    local xPlayer = ESX.GetPlayerFromId(source)
+    
+    if xPlayer.canCarryItem(itemName, itemCount) then
+        xPlayer.addInventoryItem(itemName, itemCount)
+        TriggerClientEvent('esx:showNotification', source, 'รับของรางวัลสำเร็จ 🎉🥳')
+    else
+        TriggerClientEvent('esx:showNotification', source, 'กระเป๋าเต็มแล้ว ไม่สามารถรับของรางวัลได้')
+    end
+end)
 
 -- Exports
 exports('getMailboxMsgSv', getMailboxMessagesService)
