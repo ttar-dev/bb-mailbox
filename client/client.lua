@@ -22,9 +22,9 @@ RegisterNUICallback('claimRewardEvt', function(data, cb)
   TriggerServerEvent('claimReward', data)
   
   RegisterNetEvent('claimRewardResp')
-  AddEventHandler('claimRewardResp', function(success)
-    debugPrint('>> claimReward Resp', success)
-    local retData = { success = success }
+  AddEventHandler('claimRewardResp', function(success, message)
+    debugPrint('>> Claim Reward Status', success, message)
+    local retData = { success = success, message = message }
 
     SendNUIMessage({
       type = "messageResp",

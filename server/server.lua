@@ -129,16 +129,16 @@ AddEventHandler('claimReward', function(message)
             xPlayer.addInventoryItem(message.reward_name, message.reward_qty)
             claimedReward(message.id, function(success)
                 if success then
-                    TriggerClientEvent('claimRewardResp', source, true)
+                    TriggerClientEvent('claimRewardResp', source, true, "รับรางวัลสำเร็จ กรุณาตรวจสอบในกระเป๋าของท่าน")
                 else
-                    TriggerClientEvent('claimRewardResp', source, false)
+                    TriggerClientEvent('claimRewardResp', source, false, "ไม่สามารถรับรางวัลได้ กรุณาลองใหม่อีกครั้ง")
                 end
             end)
         else
-            TriggerClientEvent('claimRewardResp', source, false)
+            TriggerClientEvent('claimRewardResp', source, false, "ไม่สามารถรับรางวัลได้ เนื่องจากช่องเก็บของเต็ม")
         end
     else
-        TriggerClientEvent('claimRewardResp', source, false)
+        TriggerClientEvent('claimRewardResp', source, false, "ไม่พบผู้เล่น กรุณาล็อกอินใหม่")
     end
 end)
 
