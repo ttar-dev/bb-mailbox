@@ -118,19 +118,18 @@ AddEventHandler('addMailboxItem', function(data)
 end)
 
 RegisterNetEvent('claimReward')
-AddEventHandler('claimReward', function(itemName, itemCount, messageId)
+AddEventHandler('claimReward', function(message)
     local source = source
     local xPlayer = ESX.GetPlayerFromId(source)
 
-    debugPrint('>> claimReward Req', itemName, itemCount, messageId)
     debugPrint('>> xPlayer:', xPlayer)
 
     if xPlayer then
-        debugPrint('>> Checking if player can carry item:', itemName, itemCount)
-        if xPlayer.canCarryItem(itemName, itemCount) then
-            debugPrint('>> Player can carry item:', itemName, itemCount)
-            xPlayer.addInventoryItem(itemName, itemCount)
-            claimedReward(messageId, function(success)
+        debugPrint('>> Checking if player can carry item:', message.reward_name, message.reward_qty)
+        if xPlayer.canCarryItem(message.reward_name, message.reward_qty) then
+            debugPrint('>> Player can carry item:', message.reward_name, message.reward_qty)
+            xPlayer.addInventoryItem(message.reward_name, message.reward_qty)
+            claimedReward(message.id, function(success)
                 if success then
                     TriggerClientEvent('claimRewardResp', source, true)
                 else
@@ -138,7 +137,7 @@ AddEventHandler('claimReward', function(itemName, itemCount, messageId)
                 end
             end)
         else
-            debugPrint('>> Player cannot carry item:', itemName, itemCount)
+            debugPrint('>> Player cannot carry item:', message.reward_name, message.reward_qty)
             TriggerClientEvent('claimRewardResp', source, false)
         end
     else
