@@ -201,7 +201,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                             </div>
                                             <div className="border w-1/4 rounded-full"></div>
                                         </div>
-                                        <div className="max-h-[14em] min-h-[14em] overflow-x-hidden overflow-y-auto">
+                                        <div className="max-h-[13em] min-h-[13em] overflow-x-hidden overflow-y-auto">
                                             <p className="mt-3 text-left text-white font-noto">
                                                 {mailContent?.content}
                                             </p>
