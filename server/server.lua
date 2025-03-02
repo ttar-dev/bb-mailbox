@@ -1,3 +1,10 @@
+ESX = nil
+
+TriggerEvent('esx:getSharedObject', function(obj) 
+    ESX = obj 
+    print('ESX object has been set') -- Debug print to check if ESX is set
+end)
+
 -- Functions
 local function getDiscordIdentifier(source)
     local identifiers = GetPlayerIdentifiers(source)
