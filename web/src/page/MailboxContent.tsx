@@ -49,16 +49,14 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
     handleGetClientData
 }) => {
     const [isDone, setIsDone] = useState<boolean>(false);
+    const [rerender, setRerender] = useState<boolean>(false);
     const handleClaimReward = (m: MessageTypes) => {
         if (m.is_ack) return;
         setIsDone(false);
 
         _.delay(() => {
-            setLoading({
-                contentLoading: true,
-                pageLoading: false
-            });
-        }, 1000);
+            setRerender(true);
+        }, 500);
 
         fetchNui("claimRewardEvt", m)
             .then(() => {
@@ -74,7 +72,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                     pageLoading: false
                 });
                 _.delay(() => {
-                    setIsDone(true);
+                    setRerender(true);
                 }, 800);
             });
     };
@@ -243,7 +241,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                             </div>
                                         </div>
 
-                                        {!loading.contentLoading && (
+                                        {!rerender && (
                                             <div
                                                 className={`z-20 absolute -bottom-10 left-0 w-full flex justify-center items-center fade-${
                                                     isDone ? "enter" : "exit"
