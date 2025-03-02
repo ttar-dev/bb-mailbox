@@ -42,7 +42,6 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
     messagesPerPage,
     mailContent,
     totalMessages,
-    setLoading,
     setMailContent,
     handleContentOpen,
     handleGetClientData
@@ -52,9 +51,10 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
     const handleClaimReward = (m: MessageTypes) => {
         if (m.is_ack) return;
         setIsDone(false);
-        const t1 = setTimeout(() => {
+        setTimeout(() => {
             setRerender(true);
         }, 500);
+
         fetchNui("claimRewardEvt", m)
             .then(() => {
                 handleGetClientData();
@@ -64,18 +64,10 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                 setMailContent(null);
             })
             .finally(() => {
-                setLoading({
-                    contentLoading: false,
-                    pageLoading: false
-                });
-                const t2 = setTimeout(() => {
+                setIsDone(true);
+                setTimeout(() => {
                     setRerender(false);
                 }, 500);
-
-                return () => {
-                    clearTimeout(t1);
-                    clearTimeout(t2);
-                };
             });
     };
     return (
