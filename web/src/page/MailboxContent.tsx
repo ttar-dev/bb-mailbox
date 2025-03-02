@@ -58,6 +58,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
         fetchNui("claimRewardEvt", m)
             .then(() => {
                 handleGetClientData();
+                setIsDone(true);
             })
             .catch(e => {
                 console.error("claimRewardEvt", e);
@@ -65,7 +66,6 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
             })
             .finally(() => {
                 setTimeout(() => {
-                    setIsDone(true);
                     setRerender(false);
                 }, 1000);
             });
