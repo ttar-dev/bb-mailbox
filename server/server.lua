@@ -35,7 +35,15 @@ local function getMailboxMessagesService(identifier, discord_id, page, rowsPerPa
     end)
 end
 
-local function addMailboxItemsService(messages, cb)
+local function claimedRewardService(messageId, cb)
+    MySQL.Async.execute('UPDATE mailbox SET is_ack = 1 WHERE id = @id', {
+        ['@id'] = messageId
+    }, function(rowsChanged)
+        cb(rowsChanged > 0)
+    end)
+end
+
+function addMailboxItemsService(messages, cb)
     local values = {}
     for _, message in ipairs(messages) do
         table.insert(values, string.format("('%s', '%s', '%s', '%s', '%s', '%s', '%s', %d, %d)",
@@ -54,17 +62,9 @@ local function addMailboxItemsService(messages, cb)
     end)
 end
 
-local function claimedReward(messageId, cb)
-    MySQL.Async.execute('UPDATE mailbox SET is_ack = 1 WHERE id = @id', {
-        ['@id'] = messageId
-    }, function(rowsChanged)
-        cb(rowsChanged > 0)
-    end)
-end
-
 -- Handlers
-RegisterNetEvent('getMailboxMessages')
-AddEventHandler('getMailboxMessages', function(page)
+RegisterNetEvent('server:mailbox:message:all')
+AddEventHandler('server:mailbox:message:all', function(page)
     local source = source
     local discordIdentifier = getDiscordIdentifier(source)
     local identifier = GetPlayerIdentifiers(source)[1]
@@ -72,16 +72,16 @@ AddEventHandler('getMailboxMessages', function(page)
 
     if discordIdentifier then
         getMailboxMessagesService(identifier, discordIdentifier, page, rowsPerPage, function(mailboxData, maxPage, totalMessages)
-            TriggerClientEvent('receiveMailboxMessages', source, mailboxData, maxPage, totalMessages)
+            TriggerClientEvent('server:mailbox:resp:messages', source, mailboxData, maxPage, totalMessages)
         end)
     else
-        TriggerClientEvent('receiveMailboxMessages', source, nil, 0, 0)
+        TriggerClientEvent('server:mailbox:resp:messages', source, nil, 0, 0)
     end
 end)
 
 -- add a new message to the mailbox
-RegisterNetEvent('addMailboxItem')
-AddEventHandler('addMailboxItem', function(data)
+RegisterNetEvent('server:mailbox:message:add')
+AddEventHandler('server:mailbox:message:add', function(data)
     local source = source
     local discordIdentifier = getDiscordIdentifier(source)
     
@@ -103,40 +103,39 @@ AddEventHandler('addMailboxItem', function(data)
 
         addMailboxItemsService(messages, function(success)
             if success then
-                TriggerClientEvent('mailboxMessageResp', source, true)
+                TriggerClientEvent('server:mailbox:resp:message:add', source, true)
             else
-                TriggerClientEvent('mailboxMessageResp', source, false)
+                TriggerClientEvent('server:mailbox:resp:message:add', source, false)
             end
         end)
     else
-        TriggerClientEvent('mailboxMessageResp', source, false)
+        TriggerClientEvent('server:mailbox:resp:message:add', source, false)
     end
 end)
 
-RegisterNetEvent('claimReward')
-AddEventHandler('claimReward', function(message)
+RegisterNetEvent('server:mailbox:reward:claim')
+AddEventHandler('server:mailbox:reward:claim', function(message)
     local source = source
     local xPlayer = ESX.GetPlayerFromId(source)
 
     if xPlayer then
         if xPlayer.canCarryItem(message.reward_key, message.reward_qty) then
             xPlayer.addInventoryItem(message.reward_key, message.reward_qty)
-            claimedReward(message.id, function(success)
+            claimedRewardService(message.id, function(success)
                 if success then
-                    TriggerClientEvent('claimRewardResp', source, true, "รับรางวัลสำเร็จ กรุณาตรวจสอบในกระเป๋าของท่าน")
+                    TriggerClientEvent('server:mailbox:reward:resp:claimed', source, true, "รับรางวัลสำเร็จ กรุณาตรวจสอบในกระเป๋าของท่าน")
                 else
-                    TriggerClientEvent('claimRewardResp', source, false, "ไม่สามารถรับรางวัลได้ กรุณาลองใหม่อีกครั้ง")
+                    TriggerClientEvent('server:mailbox:reward:resp:claimed', source, false, "ไม่สามารถรับรางวัลได้ กรุณาลองใหม่อีกครั้ง")
                 end
             end)
         else
-            TriggerClientEvent('claimRewardResp', source, false, "ไม่สามารถรับรางวัลได้ เนื่องจากช่องเก็บของเต็ม")
+            TriggerClientEvent('server:mailbox:reward:resp:claimed', source, false, "ไม่สามารถรับรางวัลได้ เนื่องจากช่องเก็บของเต็ม")
         end
     else
-        TriggerClientEvent('claimRewardResp', source, false, "ไม่พบผู้เล่น กรุณาล็อกอินใหม่")
+        TriggerClientEvent('server:mailbox:reward:resp:claimed', source, false, "ไม่พบผู้เล่น กรุณาล็อกอินใหม่")
     end
 end)
 
 -- Exports
-exports('getMailboxMsgSv', getMailboxMessagesService)
-exports('getDiscordIdSv', getDiscordIdentifier)
-exports('addMailboxMsgSv', addMailboxItemsService)
+exports('mailbox:message:get', getMailboxMessagesService)
+exports('mailbox:message:add', addMailboxItemsService)

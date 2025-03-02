@@ -8,7 +8,7 @@ RegisterCommand('openMailbox', function()
     debugPrint('>> Show Mailbox')
 end, false)
 
-RegisterNUICallback('onCloseMailbox', function(_, cb)
+RegisterNUICallback('client:mailbox:close', function(_, cb)
   toggleNuiFrame(false)
   debugPrint('>> Hide Mailbox')
   cb({})
@@ -16,13 +16,13 @@ end)
 
 -- RegisterKeyMapping('openMailbox', 'Toggle Mailbox', 'keyboard', 'F5')
 
-RegisterNUICallback('claimRewardEvt', function(data, cb)
-  debugPrint('>> claimRewardEvt evt', json.encode(data))
+RegisterNUICallback('client:server:mailbox:reward:claim', function(data, cb)
+  debugPrint('>> client:server:mailbox:reward:claim evt', json.encode(data))
   
-  TriggerServerEvent('claimReward', data)
+  TriggerServerEvent('server:mailbox:reward:claim', data)
   
-  RegisterNetEvent('claimRewardResp')
-  AddEventHandler('claimRewardResp', function(success, message)
+  RegisterNetEvent('server:mailbox:reward:resp:claimed')
+  AddEventHandler('server:mailbox:reward:resp:claimed', function(success, message)
     debugPrint('>> Claim Reward Status', success, message)
     local retData = { success = success, message = message }
 
@@ -35,14 +35,14 @@ RegisterNUICallback('claimRewardEvt', function(data, cb)
   end)
 end)
 
-RegisterNUICallback('getMessagesEvt', function(data, cb)
-  debugPrint('>> getMessagesEvt Req payload', json.encode(data))
+RegisterNUICallback('client:server:mailbox:message:all', function(data, cb)
+  debugPrint('>> client:server:mailbox:message:all Req payload', json.encode(data))
 
   local page = data.page or 1
-  TriggerServerEvent('getMailboxMessages', page)
+  TriggerServerEvent('server:mailbox:message:all', page)
 
-  RegisterNetEvent('receiveMailboxMessages')
-  AddEventHandler('receiveMailboxMessages', function(mailboxData, maxPage, totalMessages)
+  RegisterNetEvent('server:mailbox:resp:messages')
+  AddEventHandler('server:mailbox:resp:messages', function(mailboxData, maxPage, totalMessages)
     local retData = { mailboxData = mailboxData or {}, maxPage = maxPage or 1, totalMessages = totalMessages or 0 }
 
     SendNUIMessage({
@@ -55,14 +55,14 @@ RegisterNUICallback('getMessagesEvt', function(data, cb)
 end)
 
 -- add message to mailbox
-RegisterNUICallback('addMailboxItem', function(data, cb)
-  debugPrint('>> addMailboxItem Req payload', json.encode(data))
+RegisterNUICallback('server:mailbox:message:add', function(data, cb)
+  debugPrint('>> server:mailbox:message:add Req payload', json.encode(data))
 
-  TriggerServerEvent('addMailboxItem', data)
+  TriggerServerEvent('server:mailbox:message:add', data)
   
-  RegisterNetEvent('mailboxMessageResp')
-  AddEventHandler('mailboxMessageResp', function(success)
-    debugPrint('>> addMailboxItem Resp', success)
+  RegisterNetEvent('server:mailbox:resp:message:add')
+  AddEventHandler('server:mailbox:resp:message:add', function(success)
+    debugPrint('>> server:mailbox:message:add Resp', success)
     local retData = { success = success }
 
     SendNUIMessage({
@@ -87,6 +87,6 @@ RegisterCommand('test-add-mailbox', function()
       }
   }
 
-  TriggerServerEvent('addMailboxItem', messageData)
-  debugPrint('>> addMailboxItem command executed')
+  TriggerServerEvent('server:mailbox:message:add', messageData)
+  debugPrint('>> server:mailbox:message:add command executed')
 end, false)

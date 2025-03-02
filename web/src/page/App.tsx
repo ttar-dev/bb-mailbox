@@ -45,7 +45,7 @@ const App: React.FC = () => {
     //         pageLoading: true,
     //         contentLoading: false
     //     });
-    //     fetchNui("addMailboxItem", [
+    //     fetchNui("server:mailbox:message:add", [
     //         {
     //             type: "reward",
     //             title: "ของรางวัล",
@@ -59,7 +59,7 @@ const App: React.FC = () => {
     //             handleGetClientData();
     //         })
     //         .catch(e => {
-    //             console.error("addMailboxItem error", e);
+    //             console.error("server:mailbox:message:add error", e);
     //         })
     //         .finally(() => {
     //             delay();
@@ -82,7 +82,9 @@ const App: React.FC = () => {
             pageLoading: true,
             contentLoading: false
         });
-        fetchNui<FetchNuiResponse>("getMessagesEvt", {page: currentPage})
+        fetchNui<FetchNuiResponse>("client:server:mailbox:message:all", {
+            page: currentPage
+        })
             .then(retData => {
                 if (retData && Array.isArray(retData.mailboxData)) {
                     setMessages(retData.mailboxData);
@@ -103,7 +105,7 @@ const App: React.FC = () => {
                 }
             })
             .catch(e => {
-                console.error("getMessagesEvt error", e);
+                console.error("client:server:mailbox:message:all error", e);
                 setMessages([]);
                 setMaxPage(1);
             })
