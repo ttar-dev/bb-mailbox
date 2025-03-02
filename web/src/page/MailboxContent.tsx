@@ -64,7 +64,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                 console.error("claimRewardEvt", e);
                 setMailContent(null);
             })
-            .catch(() => {
+            .finally(() => {
                 setLoading({
                     contentLoading: false,
                     pageLoading: false

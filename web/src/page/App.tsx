@@ -95,8 +95,6 @@ const App: React.FC = () => {
 
                         if (findMail) {
                             setMailContent(findMail);
-                        } else {
-                            setMailContent(null);
                         }
                     }
                 } else {
