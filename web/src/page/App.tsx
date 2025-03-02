@@ -88,6 +88,17 @@ const App: React.FC = () => {
                     setMessages(retData.mailboxData);
                     setMaxPage(retData.maxPage);
                     setTotalMessages(retData.totalMessages);
+                    if (mailContent) {
+                        const findMail = retData.mailboxData.find(
+                            m => m.id === mailContent.id
+                        );
+                        if (findMail) {
+                            setMailContent(findMail);
+                        } else {
+                            setMailContent(null);
+                            setIsMailOpen(false);
+                        }
+                    }
                 } else {
                     setMessages([]);
                     setMaxPage(1);
@@ -147,6 +158,7 @@ const App: React.FC = () => {
                         messagesPerPage={4}
                         isMailOpen={isMailOpen}
                         loading={loading}
+                        setIsMailOpen={setIsMailOpen}
                         setMailContent={setMailContent}
                         mailContent={mailContent}
                         handleContentOpen={handleContentOpen}

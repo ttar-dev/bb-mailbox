@@ -24,6 +24,7 @@ interface MailboxContentProps {
     setMailContent: (mail: MessageTypes | null) => void;
     handleContentOpen: (m: MessageTypes) => void;
     handleGetClientData: () => void;
+    setIsMailOpen: (isOpen: boolean) => void;
     setLoading: ({
         contentLoading,
         pageLoading
@@ -36,6 +37,7 @@ interface MailboxContentProps {
 const MailboxContent: React.FC<MailboxContentProps> = ({
     getMessages,
     isMailOpen,
+    setIsMailOpen,
     loading,
     currentPage,
     messagesPerPage,
@@ -49,7 +51,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
     const [isDone, setIsDone] = useState<boolean>(false);
     const handleClaimReward = (m: MessageTypes) => {
         if (m.is_ack) return;
-        setMailContent(null);
+        setIsMailOpen(false);
         setLoading({
             contentLoading: true,
             pageLoading: true
@@ -58,13 +60,6 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
         fetchNui("claimRewardEvt", m)
             .then(() => {
                 return handleGetClientData();
-            })
-            .then(() => {
-                const findMessage = getMessages.find(
-                    (message: MessageTypes) => message.id === m.id
-                );
-
-                setMailContent(findMessage as MessageTypes);
             })
             .catch(e => {
                 console.error("claimRewardEvt", e);
