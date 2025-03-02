@@ -114,6 +114,8 @@ RegisterNetEvent('claimReward')
 AddEventHandler('claimReward', function(itemName, itemCount, messageId)
     local source = source
     local xPlayer = ESX.GetPlayerFromId(source)
+
+    debugPrint('>> claimReward Req', itemName, itemCount, messageId)
     
     if xPlayer.canCarryItem(itemName, itemCount) then
         claimedReward(messageId, function(success)

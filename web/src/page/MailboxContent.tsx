@@ -51,9 +51,19 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
             contentLoading: true,
             pageLoading: false
         });
-        fetchNui("claimReward", m).finally(() => {
-            handleGetClientData();
-        });
+        fetchNui("claimReward", m)
+            .then(() => {
+                handleGetClientData();
+            })
+            .catch(e => {
+                console.error("claimReward", e);
+            })
+            .catch(() => {
+                setLoading({
+                    contentLoading: false,
+                    pageLoading: false
+                });
+            });
     };
     return (
         <div className="grid grid-cols-3 p-6 pt-10 mx-auto mt-[42px]">
