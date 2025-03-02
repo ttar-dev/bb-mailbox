@@ -227,14 +227,14 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
 
                                         <div>
                                             <button
-                                                className="ml-auto bg-blue-500 text-white px-4 py-2 rounded w-full rounded-xl"
+                                                className="relative px-6 py-2 text-white text-lg font-bold rounded-lg shadow-lg bg-blue-500 hover:bg-blue-600 active:scale-95 before:absolute before:inset-0 before:bg-[url('/assets/collect-bg.png')] before:bg-cover before:rounded-lg before:opacity-50"
                                                 onClick={() => {
                                                     handleClaimReward(
                                                         mailContent
                                                     );
                                                 }}
                                             >
-                                                รับของรางวัล
+                                                รับรางวัล
                                             </button>
                                         </div>
                                     </div>
