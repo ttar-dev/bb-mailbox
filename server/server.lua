@@ -131,7 +131,7 @@ AddEventHandler('claimReward', function(message)
                     TriggerClientEvent('claimRewardResp', source, false)
                 end
             end)
-
+TriggerClientEvent('claimRewardResp', source, true)
     -- if xPlayer then
     --     debugPrint('>> Checking if player can carry item:', message.reward_name, message.reward_qty)
     --     if xPlayer.canCarryItem(message.reward_name, message.reward_qty) then
