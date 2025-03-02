@@ -57,7 +57,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
 
         fetchNui("claimRewardEvt", m)
             .then(() => {
-                handleGetClientData();
+                return handleGetClientData();
             })
             .then(() => {
                 const findMessage = getMessages.find(

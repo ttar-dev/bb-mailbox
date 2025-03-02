@@ -101,6 +101,7 @@ const App: React.FC = () => {
             .finally(() => {
                 delay();
             });
+        return messages;
     };
 
     const handleContentOpen = async (m: MessageTypes) => {
