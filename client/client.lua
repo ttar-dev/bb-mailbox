@@ -16,7 +16,7 @@ end)
 
 
 
--- RegisterKeyMapping('openMailbox', 'Toggle Mailbox', 'keyboard', 'F5')
+RegisterKeyMapping('openMailbox', 'Toggle Mailbox', 'keyboard', 'F5')
 
 RegisterNUICallback('handleClaimReward', function(data, cb)
   debugPrint('>> handleClaimReward evt')

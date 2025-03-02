@@ -100,10 +100,10 @@ const App: React.FC = () => {
             });
     };
 
-    const handleMailClick = async (m: MessageTypes) => {
-        setIsMailOpen(true);
-
+    const handleContentOpen = async (m: MessageTypes) => {
+        setIsMailOpen(false);
         await delay();
+        setIsMailOpen(true);
         if (m.id === mailContent?.id) {
             // setLoading({
             //     pageLoading: false,
@@ -141,7 +141,7 @@ const App: React.FC = () => {
                         loading={loading}
                         setMailContent={setMailContent}
                         mailContent={mailContent}
-                        handleMailClick={handleMailClick}
+                        handleContentOpen={handleContentOpen}
                         handleGetClientData={handleGetClientData}
                         setLoading={setLoading}
                     />
