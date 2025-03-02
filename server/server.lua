@@ -121,31 +121,25 @@ RegisterNetEvent('claimReward')
 AddEventHandler('claimReward', function(message)
     local source = source
     local identifier = GetPlayerIdentifiers(source)[1]
-    -- local xPlayer = ESX.GetPlayerFromId(identifier)
+    local xPlayer = ESX.GetPlayerFromId(source)
+    local targetXPlayer = ESX.GetPlayerFromId(identifier)
 
-    debugPrint('>> xPlayer:', identifier)
-     claimedReward(message.id, function(success)
+    if xPlayer then
+        if xPlayer.canCarryItem(message.reward_name, message.reward_qty) then
+            xPlayer.addInventoryItem(message.reward_name, message.reward_qty)
+            claimedReward(message.id, function(success)
                 if success then
                     TriggerClientEvent('claimRewardResp', source, true)
                 else
                     TriggerClientEvent('claimRewardResp', source, false)
                 end
             end)
-TriggerClientEvent('claimRewardResp', source, true)
-    -- if xPlayer then
-    --     debugPrint('>> Checking if player can carry item:', message.reward_name, message.reward_qty)
-    --     if xPlayer.canCarryItem(message.reward_name, message.reward_qty) then
-    --         debugPrint('>> Player can carry item:', message.reward_name, message.reward_qty)
-    --         xPlayer.addInventoryItem(message.reward_name, message.reward_qty)
-           
-    --     else
-    --         debugPrint('>> Player cannot carry item:', message.reward_name, message.reward_qty)
-    --         TriggerClientEvent('claimRewardResp', source, false)
-    --     end
-    -- else
-    --     debugPrint('>> xPlayer is nil')
-    --     TriggerClientEvent('claimRewardResp', source, false)
-    -- end
+        else
+            TriggerClientEvent('claimRewardResp', source, false)
+        end
+    else
+        TriggerClientEvent('claimRewardResp', source, false)
+    end
 end)
 
 -- Exports
