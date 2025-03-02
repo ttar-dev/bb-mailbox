@@ -45,7 +45,7 @@ const App: React.FC = () => {
     //         pageLoading: true,
     //         contentLoading: false
     //     });
-    //     fetchNui("addMailboxMessageEvt", [
+    //     fetchNui("addMailboxItem", [
     //         {
     //             type: "reward",
     //             title: "ของรางวัล",
@@ -59,7 +59,7 @@ const App: React.FC = () => {
     //             handleGetClientData();
     //         })
     //         .catch(e => {
-    //             console.error("addMailboxMessageEvt error", e);
+    //             console.error("addMailboxItem error", e);
     //         })
     //         .finally(() => {
     //             delay();

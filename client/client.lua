@@ -16,8 +16,8 @@ end)
 
 -- RegisterKeyMapping('openMailbox', 'Toggle Mailbox', 'keyboard', 'F5')
 
-RegisterNUICallback('handleClaimReward', function(data, cb)
-  debugPrint('>> handleClaimReward evt')
+RegisterNUICallback('claimReward', function(data, cb)
+  debugPrint('>> claimReward evt')
   cb({})
 end)
 
@@ -41,14 +41,14 @@ RegisterNUICallback('getMessagesEvt', function(data, cb)
 end)
 
 -- add message to mailbox
-RegisterNUICallback('addMailboxMessageEvt', function(data, cb)
-  debugPrint('>> addMailboxMessageEvt Req payload', json.encode(data))
+RegisterNUICallback('addMailboxItem', function(data, cb)
+  debugPrint('>> addMailboxItem Req payload', json.encode(data))
 
-  TriggerServerEvent('addMailboxMessage', data)
+  TriggerServerEvent('addMailboxItem', data)
 
   RegisterNetEvent('mailboxMessageResp')
   AddEventHandler('mailboxMessageResp', function(success)
-    debugPrint('>> addMailboxMessageEvt Resp', success)
+    debugPrint('>> addMailboxItem Resp', success)
     local retData = { success = success }
   
     SendNUIMessage({
@@ -73,6 +73,6 @@ RegisterCommand('test-add-mailbox', function()
       }
   }
 
-  TriggerServerEvent('addMailboxMessage', messageData)
-  debugPrint('>> addMailboxMessage command executed')
+  TriggerServerEvent('addMailboxItem', messageData)
+  debugPrint('>> addMailboxItem command executed')
 end, false)

@@ -51,8 +51,8 @@ AddEventHandler('getMailboxMessages', function(page)
 end)
 
 -- add a new message to the mailbox
-RegisterNetEvent('addMailboxMessage')
-AddEventHandler('addMailboxMessage', function(data)
+RegisterNetEvent('addMailboxItem')
+AddEventHandler('addMailboxItem', function(data)
     local source = source
     local discordIdentifier = getDiscordIdentifier(source)
     
@@ -72,7 +72,7 @@ AddEventHandler('addMailboxMessage', function(data)
             })
         end
 
-        addMailboxMessagesService(messages, function(success)
+        addMailboxItemsService(messages, function(success)
             if success then
                 TriggerClientEvent('mailboxMessageResp', source, true)
             else
@@ -84,7 +84,7 @@ AddEventHandler('addMailboxMessage', function(data)
     end
 end)
 
-local function addMailboxMessagesService(messages, cb)
+local function addMailboxItemsService(messages, cb)
     local values = {}
     for _, message in ipairs(messages) do
         table.insert(values, string.format("('%s', '%s', '%s', '%s', '%s', '%s', '%s', %d, %d)",
@@ -120,13 +120,13 @@ AddEventHandler('getMailboxMessages', function(page)
 end)
 
 -- add a new message to the mailbox
-RegisterNetEvent('addMailboxMessage')
-AddEventHandler('addMailboxMessage', function(data)
+RegisterNetEvent('addMailboxItem')
+AddEventHandler('addMailboxItem', function(data)
     local source = source
     local discordIdentifier = getDiscordIdentifier(source)
     
     if discordIdentifier then
-        addMailboxMessageService({
+        addMailboxItemService({
             identifier = GetPlayerIdentifiers(source)[1],
             discord_id = discordIdentifier,
             type = data.type,
@@ -150,4 +150,4 @@ end)
 -- Exports
 exports('getMailboxMsgSv', getMailboxMessagesService)
 exports('getDiscordIdSv', getDiscordIdentifier)
-exports('addMailboxMdgSv', addMailboxMessageService)
+exports('addMailboxMdgSv', addMailboxItemService)
