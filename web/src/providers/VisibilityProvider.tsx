@@ -30,7 +30,6 @@ export const VisibilityProvider: React.FC<{children: React.ReactNode}> = ({
                     fetchNui("onCloseMailbox");
                     setOpen(false);
                 }
-                // else ;
             }
         };
 
