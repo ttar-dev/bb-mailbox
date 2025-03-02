@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {HiOutlineEnvelopeOpen} from "react-icons/hi2";
 import {TfiReload} from "react-icons/tfi";
 import {VscLoading} from "react-icons/vsc";
@@ -46,6 +46,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
     handleContentOpen,
     handleGetClientData
 }) => {
+    const [isDone, setIsDone] = useState<boolean>(false);
     const handleClaimReward = (m: MessageTypes) => {
         if (m.is_ack) return;
         setLoading({
@@ -90,6 +91,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                         onClick={() => {
                                             setMailContent(m);
                                             handleContentOpen(m);
+                                            setIsDone(false);
                                         }}
                                     >
                                         <div className="flex items-center gap-4">
@@ -177,7 +179,11 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                     <div className="pr-8 -mt-1 -ml-2 pt-[5em]">
                         <div className="bg-[#101010] relative w-full h-[560px] mt-5 rounded-[30px] p-5 pb-0 text-center">
                             {isMailOpen && !!mailContent ? (
-                                <PageWrapper>
+                                <PageWrapper
+                                    onAnimationComplete={() => {
+                                        setIsDone(true);
+                                    }}
+                                >
                                     <div>
                                         <p className="py-1 mt-1 text-white font-noto text-2xl bg-gradient-to-r from-transparent via-[#4baaf8] to-transparent">
                                             {mailContent?.title}
@@ -191,7 +197,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                             </div>
                                             <div className="border w-1/4 rounded-full"></div>
                                         </div>
-                                        <div className="max-h-[12em] min-h-[12em] overflow-x-hidden overflow-y-auto">
+                                        <div className="max-h-[14em] min-h-[14em] overflow-x-hidden overflow-y-auto">
                                             <p className="mt-3 text-left text-white font-noto">
                                                 {mailContent?.content}
                                             </p>
@@ -226,26 +232,21 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                                             </div>
                                         </div>
 
-                                        <div className="mt-[60px]">
-                                            <button
-                                                className={`h-20 w-[200px] relative px-6 py-2 text-white text-2xl font-noto font-bold bg-[url('/assets/collect-bg.png')] bg-cover ${
-                                                    mailContent?.is_ack
-                                                        ? "grayscale"
-                                                        : "grayscale-0"
-                                                }`}
-                                                disabled={mailContent?.is_ack}
-                                                onClick={() => {
-                                                    handleClaimReward(
-                                                        mailContent
-                                                    );
-                                                }}
-                                            >
-                                                <span>
-                                                    {mailContent?.is_ack
-                                                        ? "รับแล้ว"
-                                                        : "รับรางวัล"}
-                                                </span>
-                                            </button>
+                                        <div
+                                            className={`z-20 absolute -bottom-10 left-0 w-full flex justify-center items-center fade-${
+                                                isDone ? "enter" : "exit"
+                                            } ${
+                                                isDone
+                                                    ? "fade-enter-active"
+                                                    : "fade-exit-active"
+                                            }`}
+                                        >
+                                            <ClaimButton
+                                                mailContent={mailContent}
+                                                handleClaimReward={
+                                                    handleClaimReward
+                                                }
+                                            />
                                         </div>
                                     </div>
                                 </PageWrapper>
@@ -296,3 +297,27 @@ const BlankContent: React.FC = () => {
         </div>
     );
 };
+
+function ClaimButton({
+    mailContent,
+    handleClaimReward
+}: {
+    mailContent: MessageTypes;
+    handleClaimReward: (m: MessageTypes) => void;
+}) {
+    return (
+        <button
+            className={`h-20 w-52 px-6 py-2 text-white text-2xl font-noto font-bold bg-[url('/assets/collect-bg.png')] bg-cover bg-top ${
+                mailContent?.is_ack
+                    ? "grayscale cursor-not-allowed"
+                    : "grayscale-0 cursor-pointer"
+            }`}
+            disabled={mailContent?.is_ack}
+            onClick={() => {
+                handleClaimReward(mailContent);
+            }}
+        >
+            <span>{mailContent?.is_ack ? "รับรางวัลแล้ว" : "รับรางวัล"}</span>
+        </button>
+    );
+}
