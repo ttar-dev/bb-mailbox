@@ -19,7 +19,19 @@ end)
 RegisterNUICallback('claimReward', function(data, cb)
   debugPrint('>> claimReward evt', json.encode(data))
   TriggerServerEvent('claimReward', data.reward_name, data.reward_qty)
-  cb({})
+
+  RegisterNetEvent('claimRewardResp')
+  AddEventHandler('claimRewardResp', function(success)
+    debugPrint('>> claimReward Resp', success)
+    local retData = { success = success }
+  
+    SendNUIMessage({
+      type = "messageResp",
+      data = retData
+    })
+
+    cb(retData)
+  end)
 end)
 
 RegisterNUICallback('getMessagesEvt', function(data, cb)

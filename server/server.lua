@@ -118,9 +118,9 @@ AddEventHandler('claimReward', function(itemName, itemCount)
     if xPlayer.canCarryItem(itemName, itemCount) then
         claimedReward(itemName, function(success)
             if success then
-                TriggerClientEvent('mailboxMessageResp', source, true)
+                TriggerClientEvent('claimRewardResp', source, true)
             else
-                TriggerClientEvent('mailboxMessageResp', source, false)
+                TriggerClientEvent('claimRewardResp', source, false)
             end
         end)
     end
