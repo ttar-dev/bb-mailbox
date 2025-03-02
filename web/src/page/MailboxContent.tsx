@@ -50,6 +50,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
     const [isDone, setIsDone] = useState<boolean>(false);
     const handleClaimReward = (m: MessageTypes) => {
         if (m.is_ack) return;
+        setIsDone(false);
         setLoading({
             contentLoading: true,
             pageLoading: true
@@ -64,6 +65,7 @@ const MailboxContent: React.FC<MailboxContentProps> = ({
                 setMailContent(null);
             })
             .catch(() => {
+                setIsDone(true);
                 setLoading({
                     contentLoading: false,
                     pageLoading: false
